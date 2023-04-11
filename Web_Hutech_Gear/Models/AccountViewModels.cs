@@ -68,7 +68,7 @@ namespace Web_Hutech_Gear.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = " Stay logged in")]
         public bool RememberMe { get; set; }
     }
 

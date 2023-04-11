@@ -182,13 +182,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Migrations\202304071317490_CreatedDatabase.cs" />
-    <Compile Include="Migrations\202304071317490_CreatedDatabase.designer.cs">
-      <DependentUpon>202304071317490_CreatedDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202304110416335_CreateDatabase.cs" />
+    <Compile Include="Migrations\202304110416335_CreateDatabase.designer.cs">
+      <DependentUpon>202304110416335_CreateDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304081727189_AddSupplier.cs" />
-    <Compile Include="Migrations\202304081727189_AddSupplier.designer.cs">
-      <DependentUpon>202304081727189_AddSupplier.cs</DependentUpon>
+    <Compile Include="Migrations\202304110421387_Supplier.cs" />
+    <Compile Include="Migrations\202304110421387_Supplier.designer.cs">
+      <DependentUpon>202304110421387_Supplier.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
@@ -225,12 +225,115 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login\css\main.css" />
+    <Content Include="Content\login\css\util.css" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\login\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="Content\login\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\login\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\login\images\bg-01.jpg" />
+    <Content Include="Content\login\images\icons\favicon.ico" />
+    <Content Include="Content\login\js\main.js" />
+    <Content Include="Content\login\vendor\animate\animate.css" />
+    <Content Include="Content\login\vendor\animsition\css\animsition.css" />
+    <Content Include="Content\login\vendor\animsition\css\animsition.min.css" />
+    <Content Include="Content\login\vendor\animsition\js\animsition.js" />
+    <Content Include="Content\login\vendor\animsition\js\animsition.min.js" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\login\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\login\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\login\vendor\bootstrap\js\popper.js" />
+    <Content Include="Content\login\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Content\login\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="Content\login\vendor\countdowntime\countdowntime.js" />
+    <Content Include="Content\login\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="Content\login\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Content\login\vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\login\vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\login\vendor\daterangepicker\moment.js" />
+    <Content Include="Content\login\vendor\daterangepicker\moment.min.js" />
+    <Content Include="Content\login\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Content\login\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="Content\login\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Content\login\vendor\select2\select2.css" />
+    <Content Include="Content\login\vendor\select2\select2.js" />
+    <Content Include="Content\login\vendor\select2\select2.min.css" />
+    <Content Include="Content\login\vendor\select2\select2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\login\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\login\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\login\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\login\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\login\vendor\bootstrap\css\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -295,11 +398,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304071317490_CreatedDatabase.resx">
-      <DependentUpon>202304071317490_CreatedDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304110416335_CreateDatabase.resx">
+      <DependentUpon>202304110416335_CreateDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304081727189_AddSupplier.resx">
-      <DependentUpon>202304081727189_AddSupplier.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304110421387_Supplier.resx">
+      <DependentUpon>202304110421387_Supplier.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
