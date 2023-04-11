@@ -3,63 +3,170 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/login/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('@Url.Content("~/Content/login/images/bg-01.jpg")');">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <span class="login100-form-title p-b-49">
+                        Register
+                    </span>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="FullName is required">
+                        <span class="label-input100">Fullname</span>
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "input100", placeholder = "Type your fullname" })
+                        <span class="focus-input100" data-symbol="&#9998;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Address is required">
+                        <span class="label-input100">Address</span>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "input100", placeholder = "Type your address" })
+                        <span class="focus-input100" data-symbol="&#x1F3D8;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Email is required">
+                        <span class="label-input100">Email</span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input100", placeholder = "Type your Email" })
+                        <span class="focus-input100" data-symbol="&#9993;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="PhoneNumber is required">
+                        <span class="label-input100">PhoneNumber</span>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input100", placeholder = "Type your PhoneNumber" })
+                        <span class="focus-input100" data-symbol="&#9990;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="UserName is required">
+                        <span class="label-input100">UserName</span>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "input100", placeholder = "Type your UserName" })
+                        <span class="focus-input100" data-symbol="&#xf206;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
+                        <span class="label-input100">Password</span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Type your Password" })
+                        <span class="focus-input100" data-symbol="&#xf190;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="ConfirmPassword is required">
+                        <span class="label-input100">ConfirmPassword</span>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input100", placeholder = "Type your ConfirmPassword" })
+                        <span class="focus-input100" data-symbol="&#xf190;"></span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button type="submit" class="login100-form-btn">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <div id="dropDownSelect1"></div>
 
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/login/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/login/js/main.js"></script>
+
+</body>
+</html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

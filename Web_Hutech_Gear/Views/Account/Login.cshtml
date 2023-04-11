@@ -4,60 +4,98 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Account, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Account, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/login/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('@Url.Content("~/Content/login/images/bg-01.jpg")');">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                        if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">@TempData["ErrorMessage"].ToString()</div>
+                        }
+                        <span class="login100-form-title p-b-49">
+                            Login
+                        </span>
+                        <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                            <span class="label-input100">Username</span>
+                            @Html.TextBoxFor(m => m.Account, new { @class = "input100", placeholder = "Type your username" })
+                            <span class="focus-input100" data-symbol="&#xf206;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <span class="label-input100">Password</span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Type your password" })
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        <div class="text-right p-t-8 p-b-31">
+                            <button onclick="location.href='@Url.Action("ForgotPassword", "Account")'">Forgot Password ?</button>
+                        </div>
+                        <div class="text-left p-t-8 p-b-31">
                             @Html.CheckBoxFor(m => m.RememberMe)
                             @Html.LabelFor(m => m.RememberMe)
                         </div>
-                    </div>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" class="login100-form-btn">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+            </div>
+        </div>
+        <div id="dropDownSelect1"></div>
 
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/bootstrap/js/popper.js"></script>
+        <script src="~/Content/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/daterangepicker/moment.min.js"></script>
+        <script src="~/Content/login/vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/Content/login/js/main.js"></script>
+
+</body>
+</html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

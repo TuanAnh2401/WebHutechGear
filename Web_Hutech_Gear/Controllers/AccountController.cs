@@ -100,7 +100,9 @@ namespace Web_Hutech_Gear.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    //ModelState.AddModelError("", "Tài Khoản Hoặc Mật Khẩu Không Đúng!");
+                    TempData["ErrorMessage"] = "Tài khoản hoặc mật khẩu không đúng";
+
                     return View(model);
             }
         }
