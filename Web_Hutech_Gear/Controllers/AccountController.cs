@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity.Utilities;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -149,7 +150,48 @@ namespace Web_Hutech_Gear.Controllers
                     return View(model);
             }
         }
+        // GET: /Account/Update
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Update()
+        {
+            return View();
+        }
+        //
+        // POST: /Account/Update
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Update(UpDate model, HttpPostedFileBase ImageFile)
+        {
+            if (ImageFile != null && ImageFile.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var filePath = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                ImageFile.SaveAs(filePath);
+                model.Avatar = fileName;
+            }
 
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+
+                    user.FullName = model.FullName;
+                    user.PhoneNumber = model.Phone;
+                    user.Address = model.Address;
+                    user.Avatar = model.Avatar;
+
+                    IdentityResult result = await UserManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(model);
+        }
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -171,6 +213,7 @@ namespace Web_Hutech_Gear.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

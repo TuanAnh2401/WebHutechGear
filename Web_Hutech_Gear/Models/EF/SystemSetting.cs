@@ -15,7 +15,5 @@ namespace Web_Hutech_Gear.Models.EF
         public string SettingKey { get; set; }
         [StringLength(4000)]
         public string SettingValue { get; set; }
-        [StringLength(4000)]
-        public string SettingDescription { get; set; }
     }
 }

@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Web_Hutech_Gear.Models.Support;
 
 namespace Web_Hutech_Gear.Models.EF
 {
     [Table("tb_Status")]
 
-    public class Status
+    public class Status:CommonAbstract
     {
         public Status()
         {
@@ -18,9 +19,7 @@ namespace Web_Hutech_Gear.Models.EF
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public bool IsHome { get; set; }
-        public bool IsSale { get; set; }
-        public bool IsHot { get; set; }
+        public string Title { get; set; }
         public ICollection<Product> Products { get; set; }
 
     }

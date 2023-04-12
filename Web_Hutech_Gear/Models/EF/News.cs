@@ -18,13 +18,14 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Bạn không để trống tiêu đề tin")]
         [StringLength(150)]
         public string Title { get; set; }
-        public string Alias { get; set; }
         public string Description { get; set; }
         [AllowHtml]
         public string Detail { get; set; }
         public string Image { get; set; }
-        public int CategoryId { get; set; }
-        public bool IsActive { get; set; }
+        public int NewsCategoryId { get; set; }
+        public bool IsHome { get; set; }
+        public bool IsSale { get; set; }
+        public bool IsHot { get; set; }
         public virtual NewsCategory NewsCategory { get; set; }
 
     }

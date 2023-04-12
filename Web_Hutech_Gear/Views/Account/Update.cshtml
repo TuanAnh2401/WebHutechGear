@@ -1,0 +1,132 @@
+﻿@model Web_Hutech_Gear.Models.UpDate
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Web_Hutech_Gear.Models
+@{
+    ViewBag.Title = "Updata";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        textarea {
+            height: 100px;
+        }
+        img{
+            height:150px;
+            width:150px;
+            border-radius:50%;
+            object-fit: cover;
+            background: #dfdfdf; 
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>User Information</h1>
+    <form action="/Account/Update" method="post" role="form" class="signup-form" enctype="multipart/form-data">
+        @{
+            @Html.AntiForgeryToken()
+            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
+            var ID = User.Identity.GetUserId();
+            var find = context.Users.FirstOrDefault(p => p.Id == ID);
+            <label for="avatar">Avatar:</label>
+            if (!string.IsNullOrEmpty(find.Avatar))
+            {
+                <img alt="User Image" src="~/Content/Images/@find.Avatar" />
+            }
+            else
+            {
+                <img alt="User Image" src="~/Content/Images/avt.jpg" />
+            }
+            <label></label>
+            <input type="file" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg" />
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="FullName" name="FullName" value="@find.FullName">
+            @Html.ValidationMessageFor(row => row.FullName)
+            <label for="username">User Name:</label>
+            <input type="text" id="UserName" name="UserName" value="@find.UserName" readonly>
+            <label for="email">Email:</label>
+            <input type="email" id="Email" name="Email" value="@find.Email" readonly>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="Phone" name="Phone" value="@find.PhoneNumber">
+            @Html.ValidationMessageFor(row => row.Phone)
+            <label for="address">Address:</label>
+            <input type="text" id="Address" name="Address" value="@find.Address">
+            @Html.ValidationMessageFor(row => row.Address)
+            <input type="submit" value="Submit">
+        }
+        <hr />
+        <div style="float:right">
+            @Html.ActionLink("Tính năng khác!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
+
+        </div>
+    </form>
+    <script src="~/Content/Register/js/bootstrap.min.js"></script>
+    <script src="~/Content/Register/js/jquery.min.js"></script>
+    <script src="~/Content/Register/js/main.js"></script>
+    <script src="~/Content/Register/js/popper.js"></script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>

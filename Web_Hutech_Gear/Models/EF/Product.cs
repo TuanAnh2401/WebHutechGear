@@ -40,7 +40,9 @@ namespace Web_Hutech_Gear.Models.EF
         public int SupplierId { get; set; }
 
         public int StatusId { get; set; }
-
+        public bool IsHome { get; set; }
+        public bool IsSale { get; set; }
+        public bool IsHot { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual Supplier Supplier { get; set; }
 

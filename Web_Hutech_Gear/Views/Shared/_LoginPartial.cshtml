@@ -16,7 +16,7 @@
                     var find = context.Users.FirstOrDefault(p => p.Id == ID);
                     if (find.FullName != null)
                     {
-                        @Html.ActionLink("Xin Chào " + find.FullName.ToString() + "!", "Updata", "Account", new { area = "" }, htmlAttributes: new { title = "Manage", @class = "rd-nav-link" })
+                        @Html.ActionLink("Xin Chào " + find.FullName.ToString() + "!", "Update", "Account", new { area = "" }, htmlAttributes: new { title = "Manage", @class = "rd-nav-link" })
                     }
                 }
             </li>
