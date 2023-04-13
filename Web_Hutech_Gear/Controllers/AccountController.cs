@@ -440,7 +440,6 @@ namespace Web_Hutech_Gear.Controllers
                 }
                 AddErrors(result);
             }
-
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
