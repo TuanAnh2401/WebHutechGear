@@ -261,7 +261,7 @@ namespace Web_Hutech_Gear.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -273,7 +273,7 @@ namespace Web_Hutech_Gear.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                Common.SendMail("HutechGear", "Confirm your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>", user.Email);
+                Common.SendMail("HutechGear", "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>", user.Email);
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -308,7 +308,7 @@ namespace Web_Hutech_Gear.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

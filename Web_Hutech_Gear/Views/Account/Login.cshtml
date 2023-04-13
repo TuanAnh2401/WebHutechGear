@@ -56,7 +56,7 @@
                             <span class="focus-input100" data-symbol="&#xf190;"></span>
                         </div>
                         <div class="text-right p-t-8 p-b-31">
-                            <button onclick="location.href='@Url.Action("ForgotPassword", "Account")'">Forgot Password ?</button>
+                            <h6>@Html.ActionLink("ForgotPassword?", "ForgotPassword")</h6>
                         </div>
                         <div class="text-left p-t-8 p-b-31">
                             @Html.CheckBoxFor(m => m.RememberMe)

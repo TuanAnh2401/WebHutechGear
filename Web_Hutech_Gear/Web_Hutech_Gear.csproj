@@ -295,6 +295,10 @@
     <Compile Include="Migrations\202304121058123_editAVT.designer.cs">
       <DependentUpon>202304121058123_editAVT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304130403376_RemoveRating.cs" />
+    <Compile Include="Migrations\202304130403376_RemoveRating.designer.cs">
+      <DependentUpon>202304130403376_RemoveRating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
@@ -308,7 +312,6 @@
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
-    <Compile Include="Models\EF\Rating.cs" />
     <Compile Include="Models\EF\Status.cs" />
     <Compile Include="Models\EF\Subsribe.cs" />
     <Compile Include="Models\EF\Supplier.cs" />
@@ -3351,6 +3354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304121058123_editAVT.resx">
       <DependentUpon>202304121058123_editAVT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304130403376_RemoveRating.resx">
+      <DependentUpon>202304130403376_RemoveRating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

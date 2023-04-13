@@ -11,7 +11,7 @@ namespace Web_Hutech_Gear.Models.EF
 {
     [Table("tb_Comment")]
 
-    public class Comment:CommonAbstract
+    public class Comment
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -20,6 +20,8 @@ namespace Web_Hutech_Gear.Models.EF
         public string UserId { get; set; }
         public int ProductId { get; set; }
         public string Content { get; set; }
+        public int Rating { get; set; }
+        public DateTime CreatedDate { get; set; }
         public virtual Product Product { get; set; }
         public virtual ApplicationUser User { get; set; }
 

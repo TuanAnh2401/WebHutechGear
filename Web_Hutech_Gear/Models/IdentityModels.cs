@@ -15,7 +15,6 @@ namespace Web_Hutech_Gear.Models
         public string Avatar { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
-        public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Messages> Messages { get; set; }
@@ -42,7 +41,6 @@ namespace Web_Hutech_Gear.Models
         public DbSet<Posts> Posts { get; set; }
         public DbSet<NewsCategory> NewsCategory { get; set; }
         public DbSet<Adv> Advs { get; set; }
-        public DbSet<Rating> Rating { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Messages> Messages { get; set; }
         public DbSet<News> News { get; set; }
