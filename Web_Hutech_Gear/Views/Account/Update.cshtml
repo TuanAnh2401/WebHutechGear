@@ -5,128 +5,110 @@
 @{
     ViewBag.Title = "Updata";
 }
-
-<!DOCTYPE html>
-<html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f2f2f2;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="tel"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        input[type="file"] {
-            margin-bottom: 20px;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-            input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-
-        textarea {
-            height: 100px;
-        }
-        img{
-            height:150px;
-            width:150px;
-            border-radius:50%;
-            object-fit: cover;
-            background: #dfdfdf; 
-        }
-    </style>
-    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fyqhj4Ik/yJ0H45pICTxAPDH3eY6zQDkhp/n49" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-TI0DjOoZPqvW8UEv6+VKj9YIc6l+OgQ2RCvLtbF6DUZc0wDPdR8sJP6ee/+ac6UyT6T1L0U8wb6qfpJngMnZng==" crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/profile/userProfile.css" />
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
-    <h1>User Information</h1>
+
     <form action="/Account/Update" method="post" role="form" class="signup-form" enctype="multipart/form-data">
-        @{
-            @Html.AntiForgeryToken()
-            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
-            var ID = User.Identity.GetUserId();
-            var find = context.Users.FirstOrDefault(p => p.Id == ID);
-            <label for="avatar">Avatar:</label>
-            if (!string.IsNullOrEmpty(find.Avatar))
-            {
-                <img alt="User Image" src="~/Content/Images/@find.Avatar" />
-            }
-            else
-            {
-                <img alt="User Image" src="~/Content/Images/avt.jpg" />
-            }
-            <label></label>
-            <input type="file" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg" />
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="FullName" name="FullName" value="@find.FullName">
-            @Html.ValidationMessageFor(row => row.FullName)
-            <label for="username">User Name:</label>
-            <input type="text" id="UserName" name="UserName" value="@find.UserName" readonly>
-            <label for="email">Email:</label>
-            <input type="email" id="Email" name="Email" value="@find.Email" readonly>
-            <label for="phone">Phone:</label>
-            <input type="tel" id="Phone" name="Phone" value="@find.PhoneNumber">
-            @Html.ValidationMessageFor(row => row.Phone)
-            <label for="address">Address:</label>
-            <input type="text" id="Address" name="Address" value="@find.Address">
-            @Html.ValidationMessageFor(row => row.Address)
-            <input type="submit" value="Submit">
-        }
-        <hr />
-        <div style="float:right">
-            @Html.ActionLink("Tính năng khác!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
+        @Html.AntiForgeryToken()
+        <div class="avatar-container">
+            <div class="avatar-preview">
+                @{
+                    IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
+                    var ID = User.Identity.GetUserId();
+                    var find = context.Users.FirstOrDefault(p => p.Id == ID);
+                    if (!string.IsNullOrEmpty(find.Avatar))
+                    {
+                        <img alt="User Image" src="~/Content/Images/@find.Avatar" />
+                    }
+                    else
+                    {
+                        <img alt="User Image" src="~/Content/Images/avt.jpg" />
+                    }
+                }
+            </div>
+            <div class="avatar-upload">
+                <input type="file" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg" />
+            </div>
+        </div>
+        <div class="form-fields">
+            <div class="form-field">
+                <label for="fullname">Họ và tên:</label>
+                <i class='fas fa-pencil-alt' style='font-size:24px'></i>
+                <input type="text" id="FullName" name="FullName" value="@find.FullName">
+                @Html.ValidationMessageFor(row => row.FullName)
+            </div>
+            <div class="form-field">
+                <label for="username">Tên tài khoản:</label>
+                <i class='fas fa-user-circle' style='font-size:24px'></i>
+                <input type="text" id="UserName" name="UserName" value="@find.UserName" readonly>
+            </div>
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <i class="material-icons" style="font-size:24px">email</i>
+                <input type="email" id="Email" name="Email" value="@find.Email" readonly>
+            </div>
+            <div class="form-field">
+                <label for="phone">Số điện thoại:</label>
+                <i class='fas fa-phone-square-alt' style='font-size:24px'></i>
+                <input type="tel" id="Phone" name="Phone" value="@find.PhoneNumber">
+                @Html.ValidationMessageFor(row => row.Phone)
+            </div>
+            <div class="form-field">
+                <label for="address">Địa chỉ:</label>
+                <i class="fa fa-home" style="font-size:24px"></i>
+                <input type="text" id="Address" name="Address" value="@find.Address">
+                @Html.ValidationMessageFor(row => row.Address)
+            </div>
+            <div class="submit-button">
+                <input type="submit" value="Lưu Thay Đổi" class="custom-submit">
+            </div>
 
         </div>
     </form>
-    <script src="~/Content/Register/js/bootstrap.min.js"></script>
-    <script src="~/Content/Register/js/jquery.min.js"></script>
-    <script src="~/Content/Register/js/main.js"></script>
-    <script src="~/Content/Register/js/popper.js"></script>
+    <hr />
+    <div class="other-features">
+        <div class="manage-link">
+            @Html.ActionLink("Tính năng khác!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
+        </div>
+    </div>
+
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 </body>
 </html>
+ @*<script>
+     $(document).ready(function () {
+         $("#submitButton").click(function (event) {
+             event.preventDefault(); // Ngăn chặn hành vi submit mặc định của trình duyệt
+
+             // Lấy dữ liệu từ các trường input và gửi lên phía máy chủ
+             $.ajax({
+                 type: "POST",
+                 url: "/Account/Update",
+                 data: $("#myForm").serialize(),
+                 success: function (result) {
+                     // Cập nhật thông tin mới nhận được từ phía máy chủ vào trang
+                     $("#resultDiv").html(result);
+                 },
+                 error: function () {
+                     alert("Lỗi xử lý!");
+                 }
+             });
+
+             return false; // Hủy bỏ các sự kiện khác trên trang
+         });
+     });
+
+</script>*@

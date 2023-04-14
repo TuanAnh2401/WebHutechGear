@@ -3122,6 +3122,7 @@
     <Content Include="Content\Images\avt.jpg" />
     <Content Include="Content\Images\th.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\profile\userProfile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

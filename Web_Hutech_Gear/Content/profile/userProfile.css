@@ -1,0 +1,91 @@
+﻿/* CSS cho avatar */
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 30px 0;
+}
+
+.avatar-preview img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/* CSS cho form đăng ký */
+.signup-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px #ddd;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+    .form-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="email"],
+    .form-field input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+.submit-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .submit-button input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .submit-button input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+
+.validation-error {
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.other-features {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.manage-link a {
+    padding: 10px 30px;
+    background-color: #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+    .manage-link a:hover {
+        background-color: #333;
+        color: #fff;
+    }
