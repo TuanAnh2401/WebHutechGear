@@ -39,6 +39,12 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             var item = db.ProductImages.Find(id);
             db.ProductImages.Remove(item);
+            if (item.IsDefault)
+            {
+                var findProc = db.Products.Find(tmp);
+                findProc.Image = null;
+                db.Entry(findProc).State = System.Data.Entity.EntityState.Modified;
+            }
             db.SaveChanges();
             return Json(new { success = true });
         }
@@ -46,13 +52,15 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         public ActionResult DeleteAll()
         {
             var items = db.ProductImages.Where(x => x.ProductId == tmp).ToList();
-
             foreach (var item in items)
             {
                 var obj = db.ProductImages.Find(item.Id);
                 db.ProductImages.Remove(obj);
-                db.SaveChanges();
             }
+            var findProc = db.Products.Find(tmp);
+            findProc.Image = null;
+            db.Entry(findProc).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
             return Json(new { Success = true });
         }
         [HttpPost]
@@ -69,7 +77,14 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                         items.IsDefault = false;
                         db.Entry(items).State = System.Data.Entity.EntityState.Modified;
                     }
-                }    
+                }
+                if(item.IsDefault)
+                {
+                    var findProc = db.Products.Find(tmp);
+                    findProc.Image = item.Image;
+                    db.Entry(findProc).State = System.Data.Entity.EntityState.Modified;
+                }
+
                 item.IsDefault = !item.IsDefault;
                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();

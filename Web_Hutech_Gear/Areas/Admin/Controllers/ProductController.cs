@@ -56,6 +56,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                 Image = Images[i],
                                 IsDefault = true
                             });
+                            model.Image = Images[i];
                         }
                         else
                         {
