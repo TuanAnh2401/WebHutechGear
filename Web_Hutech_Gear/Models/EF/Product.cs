@@ -35,8 +35,11 @@ namespace Web_Hutech_Gear.Models.EF
         public decimal Price { get; set; }
         public decimal? PriceSale { get; set; }
         public int Quantity { get; set; }
+        [Required(ErrorMessage = "Tên không được để trống")]
         public int ProductCategoryId { get; set; }
+        [Required(ErrorMessage = "Tên không được để trống")]
         public int SupplierId { get; set; }
+        [Required(ErrorMessage = "Tên không được để trống")]
 
         public int StatusId { get; set; }
         public bool IsHome { get; set; }
