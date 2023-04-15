@@ -29,11 +29,11 @@
                     var find = context.Users.FirstOrDefault(p => p.Id == ID);
                     if (!string.IsNullOrEmpty(find.Avatar))
                     {
-                        <img alt="User Image" src="~/Content/Images/@find.Avatar" />
+                        <img alt="User Image" src="~/Content/Images/@find.Avatar" id="preview-image" />
                     }
                     else
                     {
-                        <img alt="User Image" src="~/Content/Images/avt.jpg" />
+                        <img alt="User Image" src="~/Content/Images/avt.jpg" id="preview-image" />
                     }
                 }
             </div>
@@ -73,7 +73,6 @@
             <div class="submit-button">
                 <input type="submit" value="Lưu Thay Đổi" class="custom-submit">
             </div>
-
         </div>
     </form>
     <hr />
@@ -88,27 +87,28 @@
     }
 </body>
 </html>
- @*<script>
-     $(document).ready(function () {
-         $("#submitButton").click(function (event) {
-             event.preventDefault(); // Ngăn chặn hành vi submit mặc định của trình duyệt
+<script>
+    // Lấy phần tử đầu vào hình ảnh và phần tử hình ảnh xem trước
+    const input = document.getElementById("ImageFile");
+    const preview = document.getElementById("preview-image");
 
-             // Lấy dữ liệu từ các trường input và gửi lên phía máy chủ
-             $.ajax({
-                 type: "POST",
-                 url: "/Account/Update",
-                 data: $("#myForm").serialize(),
-                 success: function (result) {
-                     // Cập nhật thông tin mới nhận được từ phía máy chủ vào trang
-                     $("#resultDiv").html(result);
-                 },
-                 error: function () {
-                     alert("Lỗi xử lý!");
-                 }
-             });
+    // Đăng ký một sự kiện để lắng nghe khi người dùng chọn tệp hình ảnh mới
+    input.addEventListener("change", () => {
+        // Nếu không có tệp được chọn, hãy giữ hình ảnh hiện có
+        if (!input.files || !input.files[0]) {
+            return;
+        }
 
-             return false; // Hủy bỏ các sự kiện khác trên trang
-         });
-     });
+        // Tạo một đối tượng FileReader để đọc nội dung của tệp hình ảnh
+        const reader = new FileReader();
 
-</script>*@
+        // Đăng ký một sự kiện để lắng nghe khi FileReader đã hoàn thành việc đọc tệp
+        reader.addEventListener("load", () => {
+            // Cập nhật hình ảnh xem trước với nội dung của tệp hình ảnh mới
+            preview.src = reader.result;
+        });
+
+        // Đọc tệp hình ảnh
+        reader.readAsDataURL(input.files[0]);
+    });
+</script>

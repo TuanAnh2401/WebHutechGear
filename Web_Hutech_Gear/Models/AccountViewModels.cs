@@ -187,8 +187,8 @@ namespace Web_Hutech_Gear.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Xin vui lòng nhập địa chỉ Email của bạn")]
+        [EmailAddress(ErrorMessage = "Xin vui lòng nhập đúng định dạng địa chỉ email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

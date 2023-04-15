@@ -17,6 +17,7 @@
 
 /* CSS cho form đăng ký */
 .signup-form {
+    
     max-width: 500px;
     margin: 0 auto;
     padding: 30px;
@@ -27,10 +28,14 @@
 }
 
 .form-field {
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    text-align: center;
+
+
 }
 
     .form-field label {
+        margin-right: 250px;
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
