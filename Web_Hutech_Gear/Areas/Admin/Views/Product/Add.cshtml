@@ -60,6 +60,11 @@
                                 </ul>
                             </div>
                         </div><!-- /.card-header -->
+                        @{ 
+                            List<SelectListItem> productCategoryList = ((SelectList)ViewBag.ProductCategory).ToList();
+                            List<SelectListItem> suppliersList = ((SelectList)ViewBag.Suppliers).ToList();
+                            List<SelectListItem> statusList = ((SelectList)ViewBag.Status).ToList();
+                        }
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity">
@@ -71,17 +76,39 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Loại sản phẩm</label>
-                                        @Html.DropDownListFor(x => x.ProductCategoryId, ViewBag.ProductCategory as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+
+                                        @if (productCategoryList.Count() != 0)
+                                        {
+                                            @Html.DropDownListFor(x => x.ProductCategoryId, ViewBag.ProductCategory as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="ProductCategoryId" name="ProductCategoryId" class="form-control" readonly placeholder = "Vui lòng nhập danh sách loại sản phâm">
+                                        }
                                         @Html.ValidationMessageFor(x => x.ProductCategoryId, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nhà cung cấp</label>
-                                        @Html.DropDownListFor(x => x.SupplierId, ViewBag.Suppliers as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                                        @if (suppliersList.Count() != 0)
+                                        {
+                                            @Html.DropDownListFor(x => x.SupplierId, ViewBag.Suppliers as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="SupplierId" name="SupplierId" class="form-control" readonly placeholder = "Vui lòng nhập danh sách nhà cung cấp">
+                                        }
                                         @Html.ValidationMessageFor(x => x.SupplierId, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Trạng thái</label>
-                                        @Html.DropDownListFor(x => x.StatusId, ViewBag.Status as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                                        @if (statusList.Count() != 0)
+                                        {
+                                            @Html.DropDownListFor(x => x.StatusId, ViewBag.Status as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="ProductCategoryId" name="ProductCategoryId" class="form-control" readonly placeholder = "Vui lòng nhập danh sách trạng thái">
+                                        }
                                         @Html.ValidationMessageFor(x => x.StatusId, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">

@@ -3,7 +3,19 @@
 @{
     ViewBag.Title = "Log in";
 }
+<style>
+    .input-icon {
+        position: relative;
+    }
 
+    .input-icon-toggle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        cursor: pointer;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +41,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
+
 <body>
         <div class="limiter">
             <div class="container-login100" style="background-image: url('@Url.Content("~/Content/login/images/bg-01.jpg")');">
@@ -43,20 +57,25 @@
                             <div class="alert alert-danger">@TempData["ErrorMessage"].ToString()</div>
                         }
                         <span class="login100-form-title p-b-49">
-                            Login
+                            LOGIN
                         </span>
-                        <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-                            <span class="label-input100">Username</span>
-                            @Html.TextBoxFor(m => m.Account, new { @class = "input100", placeholder = "Type your username" })
+                        <div class="wrap-input100 input m-b-23">
+                            <span class="label-input100">Tên tài khoản</span>
+                            @Html.TextBoxFor(m => m.Account, new { @class = "input100", placeholder = "Nhập tài khoản của bạn" })
+                            @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
                             <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
-                        <div class="wrap-input100 validate-input" data-validate="Password is required">
-                            <span class="label-input100">Password</span>
-                            @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Type your password" })
+                        <div class="wrap-input100 input">
+                            <span class="label-input100">Mật Khẩu</span>
+                            <div class="input-icon">
+                                <input type="password" class="input100" id="id_password" name="Password" placeholder="Nhập mật khẩu của bạn" />
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                <i class="far fa-eye input-icon-toggle" id="togglePassword"></i>
+                            </div>
                             <span class="focus-input100" data-symbol="&#xf190;"></span>
                         </div>
                         <div class="text-right p-t-8 p-b-31">
-                            <h6>@Html.ActionLink("ForgotPassword?", "ForgotPassword")</h6>
+                            <h6>@Html.ActionLink("Quên mật khẩu ?", "ForgotPassword")</h6>
                         </div>
                         <div class="text-left p-t-8 p-b-31">
                             @Html.CheckBoxFor(m => m.RememberMe)
@@ -66,7 +85,7 @@
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
                                 <button type="submit" class="login100-form-btn">
-                                    Login
+                                    Đăng nhập
                                 </button>
                             </div>
                         </div>
@@ -99,3 +118,18 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    $(document).ready(function () {
+        const togglePassword = $('#togglePassword');
+        const password = $('#id_password');
+
+        togglePassword.on('click', function (e) {
+            // toggle the type attribute
+            const type = password.attr('type') === 'password' ? 'text' : 'password';
+            password.attr('type', type);
+            // toggle the eye slash icon
+            togglePassword.toggleClass('fa-eye fa-eye-slash');
+        });
+    });
+
+</script>

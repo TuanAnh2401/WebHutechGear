@@ -91,23 +91,19 @@
     // Lấy phần tử đầu vào hình ảnh và phần tử hình ảnh xem trước
     const input = document.getElementById("ImageFile");
     const preview = document.getElementById("preview-image");
-
     // Đăng ký một sự kiện để lắng nghe khi người dùng chọn tệp hình ảnh mới
     input.addEventListener("change", () => {
         // Nếu không có tệp được chọn, hãy giữ hình ảnh hiện có
         if (!input.files || !input.files[0]) {
             return;
         }
-
         // Tạo một đối tượng FileReader để đọc nội dung của tệp hình ảnh
         const reader = new FileReader();
-
         // Đăng ký một sự kiện để lắng nghe khi FileReader đã hoàn thành việc đọc tệp
         reader.addEventListener("load", () => {
             // Cập nhật hình ảnh xem trước với nội dung của tệp hình ảnh mới
             preview.src = reader.result;
         });
-
         // Đọc tệp hình ảnh
         reader.readAsDataURL(input.files[0]);
     });

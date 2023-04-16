@@ -59,16 +59,16 @@ namespace Web_Hutech_Gear.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Vui lòng nhập tài khoản")]
         [Display(Name = "Account")]
         public string Account { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = " Stay logged in")]
+        [Display(Name = " Nhớ tài khoản")]
         public bool RememberMe { get; set; }
     }
     public class UpdateAccountViewModel
@@ -157,7 +157,7 @@ namespace Web_Hutech_Gear.Models
         [DataType(DataType.Password, ErrorMessage = "Mật khẩu phải có kí tự chữ số, chữ hoa, chữ thường và 1 kí tự đặc biệt")]
         [Display(Name = "Mật Khẩu")]
         public string Password { get; set; }
-
+        [Required(ErrorMessage = "Xin vui lòng nhập lại mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Mật khẩu và mật khẩu xác nhận không khớp.")]
@@ -166,20 +166,21 @@ namespace Web_Hutech_Gear.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Xin vui lòng nhập địa chỉ Email của bạn")]
+        [EmailAddress(ErrorMessage = "Xin vui lòng nhập đúng định dạng địa chỉ email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Xin vui lòng nhập mật khẩu")]
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} ký tự.", MinimumLength = 6)]
+        [DataType(DataType.Password, ErrorMessage = "Mật khẩu phải có kí tự chữ số, chữ hoa, chữ thường và 1 kí tự đặc biệt")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Xin vui lòng nhập lại mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Mật khẩu và mật khẩu xác nhận không khớp.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
