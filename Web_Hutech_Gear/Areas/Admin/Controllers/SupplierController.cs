@@ -8,6 +8,7 @@ using Web_Hutech_Gear.Models;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers
 {
+
     [Authorize(Roles = "Admin")]
     public class SupplierController : Controller
     {
