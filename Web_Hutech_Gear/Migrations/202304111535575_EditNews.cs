@@ -1,8 +1,7 @@
 ﻿namespace Web_Hutech_Gear.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class EditNews : DbMigration
     {
         public override void Up()
@@ -15,7 +14,7 @@
             AddForeignKey("dbo.tb_News", "NewsCategoryId", "dbo.tb_NewsCategory", "Id", cascadeDelete: true);
             DropColumn("dbo.tb_News", "CategoryId");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.tb_News", "CategoryId", c => c.Int(nullable: false));

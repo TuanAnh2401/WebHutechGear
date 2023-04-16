@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 using Web_Hutech_Gear.Models.Support;
 
 namespace Web_Hutech_Gear.Models.EF
 {
     [Table("tb_Status")]
 
-    public class Status:CommonAbstract
+    public class Status : CommonAbstract
     {
         public Status()
         {

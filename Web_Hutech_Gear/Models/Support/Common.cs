@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 
 namespace Web_Hutech_Gear.Models.Support
 {
@@ -25,9 +22,10 @@ namespace Web_Hutech_Gear.Models.Support
                     smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
 
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential() { 
-                        UserName=Email,
-                        Password=password
+                    smtp.Credentials = new NetworkCredential()
+                    {
+                        UserName = Email,
+                        Password = password
                     };
                 }
                 MailAddress fromAddress = new MailAddress(Email, name);

@@ -1,8 +1,7 @@
 ﻿namespace Web_Hutech_Gear.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class EditProduct : DbMigration
     {
         public override void Up()
@@ -19,7 +18,7 @@
             DropColumn("dbo.tb_Status", "IsSale");
             DropColumn("dbo.tb_Status", "IsHot");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.tb_Status", "IsHot", c => c.Boolean(nullable: false));

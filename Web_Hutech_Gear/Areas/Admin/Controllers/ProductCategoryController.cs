@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Web_Hutech_Gear.Models.EF;
 using Web_Hutech_Gear.Models;
+using Web_Hutech_Gear.Models.EF;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers
 {

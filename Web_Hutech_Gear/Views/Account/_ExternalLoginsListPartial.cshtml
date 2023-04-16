@@ -1,6 +1,17 @@
 ﻿@model Web_Hutech_Gear.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .btn-facebook {
+        background-color: #3b5998;
+        color: #fff;
+    }
 
+    .btn-google {
+        background-color: #dd4b39;
+        color: #fff;
+    }
+</style>
 @*<h4>Use another service to log in.</h4>*@
 <hr />
 @{
@@ -18,27 +29,30 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>Sign in using:</p>
-                <div class="btn-group" role="group" aria-label="External Logins">
-                    @foreach (AuthenticationDescription p in loginProviders)
-                    {
-                        var iconClass = "";
-                        switch (p.AuthenticationType)
-                        {
-                            case "Facebook":
-                                iconClass = "fa fa-facebook";
+                    <div class="btn-group" role="group" aria-label="External Logins">
+                        @foreach (AuthenticationDescription p in loginProviders)
+                         {
+                            var iconClass = "";
+                            var buttonClass = "";
+                            switch (p.AuthenticationType)
+                            {
+                                case "Facebook":
+                                    iconClass = "fa fa-facebook";
+                                    buttonClass = "btn-facebook";
                                 break;
-                            case "Google":
-                                iconClass = "fa fa-google";
+                                case "Google":
+                                    iconClass = "fa fa-google";
+                                    buttonClass = "btn-google";
                                 break;
-                            default:
-                                iconClass = "fa fa-external-link";
+                                default:
+                                    iconClass = "fa fa-external-link";
                                 break;
-                        }
-                        <button type="submit" class="btn btn-outline-secondary" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
-                            <i class="@iconClass"></i> @p.Caption
-                        </button>
-                    }
-                </div>
+                            }
+                                <button type="submit" class="btn btn-outline-secondary @buttonClass" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
+                                <i class="@iconClass"></i> @p.Caption
+                                </button>
+                         }
+                    </div>
             </div>
         }
     }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Web_Hutech_Gear.Models.EF;
 using Web_Hutech_Gear.Models;
+using Web_Hutech_Gear.Models.EF;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers
 {
@@ -70,7 +67,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             if (item != null)
             {
                 var find = db.ProductImages.Where(x => x.ProductId == tmp).ToList();
-                if(!(item.IsDefault))
+                if (!(item.IsDefault))
                 {
                     foreach (var items in find)
                     {
@@ -78,7 +75,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                         db.Entry(items).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
-                if(item.IsDefault)
+                if (item.IsDefault)
                 {
                     var findProc = db.Products.Find(tmp);
                     findProc.Image = item.Image;

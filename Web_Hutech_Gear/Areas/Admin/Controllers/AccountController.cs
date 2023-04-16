@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.Support;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity;
-using System.Web.Security;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers
 {
@@ -66,7 +64,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Update(string id)
         {
-             
+
             var item = db.Users.Find(id);
             UpdateAccountViewModel model = new UpdateAccountViewModel
             {
