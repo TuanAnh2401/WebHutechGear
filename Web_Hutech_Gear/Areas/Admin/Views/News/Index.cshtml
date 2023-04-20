@@ -46,7 +46,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách @ViewBag.Title</h3>
-
+            @using (Html.BeginForm("Index", "News", FormMethod.Get))
+            {
+                <input class="form-control form-control-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tài khoản" />
+                <input type="submit" value="Search" />
+            }
             <div class="card-tools">
                 <a href="/admin/News/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
@@ -114,7 +118,7 @@
             <div class="row">
                 <div class="col-6"></div>
                 <div class="col-6" style="text-align:right;">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
                 </div>
             </div>
 

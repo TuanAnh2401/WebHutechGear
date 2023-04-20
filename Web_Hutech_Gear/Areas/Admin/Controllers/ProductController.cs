@@ -13,8 +13,12 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/Products
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchString, string currentFilter)
         {
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
             IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
             var pageSize = 10;
             if (page == null)
@@ -22,7 +26,11 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 page = 1;
             }
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            items = items.ToPagedList(pageIndex, pageSize);
+            if (!string.IsNullOrEmpty(searchString))
+                items = items.Where(p => p.Title.ToLower().Contains(searchString.ToLower())).ToList().ToPagedList(pageIndex, pageSize);
+            else
+                items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.CurrentFilter = searchString;
             ViewBag.PageSize = pageSize;
             ViewBag.Page = page;
             return View(items);
@@ -108,41 +116,72 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var item = db.Products.Find(id);
-            if (item != null)
+            using (var transaction = db.Database.BeginTransaction())
             {
-                var checkImg = item.ProductImage.Where(x => x.ProductId == item.Id);
-                if (checkImg != null)
+                try
                 {
-                    foreach (var img in checkImg)
+                    var item = db.Products.Find(id);
+                    if (item != null)
                     {
-                        db.ProductImages.Remove(img);
+                        var checkImg = item.ProductImage.Where(x => x.ProductId == item.Id).ToList();
+                        if (checkImg != null)
+                        {
+                            foreach (var img in checkImg)
+                            {
+                                db.ProductImages.Remove(img);
+                            }
+                        }
+                        db.Products.Remove(item);
                         db.SaveChanges();
-                    }
+                        transaction.Commit();
+                        return Json(new { success = true });
+                    }  
                 }
-                db.Products.Remove(item);
-                db.SaveChanges();
-                return Json(new { success = true });
-            }
-
+                catch
+                {
+                    transaction.Rollback();
+                }
+            }            
             return Json(new { success = false });
         }
         [HttpPost]
         public ActionResult DeleteAll(string ids)
         {
-            if (!string.IsNullOrEmpty(ids))
+            using (var transaction = db.Database.BeginTransaction())
             {
-                var items = ids.Split(',');
-                if (items != null && items.Any())
+                try
                 {
-                    foreach (var item in items)
+                    if (!string.IsNullOrEmpty(ids))
                     {
-                        var obj = db.Products.Find(Convert.ToInt32(item));
-                        db.Products.Remove(obj);
+                        var items = ids.Split(',');
+                        if (items != null && items.Any())
+                        {
+                            foreach (var item in items)
+                            {
+                                var obj = db.Products.Find(Convert.ToInt32(item));
+                                if (obj != null)
+                                {
+                                    var checkImg = obj.ProductImage.Where(x => x.ProductId == obj.Id).ToList();
+                                    if (checkImg != null)
+                                    {
+                                        foreach (var img in checkImg)
+                                        {
+                                            db.ProductImages.Remove(img);
+                                        }
+                                    }
+                                }
+                                db.Products.Remove(obj);
+                            }
+                        }
                         db.SaveChanges();
+                        transaction.Commit();
+                        return Json(new { success = true });
                     }
                 }
-                return Json(new { success = true });
+                catch
+                {
+                    transaction.Rollback();
+                }
             }
             return Json(new { success = false });
         }

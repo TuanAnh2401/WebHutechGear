@@ -46,8 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CKFinder">
-      <HintPath>..\..\..\..\Downloads\ckfinder\ckfinder\bin\Debug\CKFinder.dll</HintPath>
+    <Reference Include="CKFinder, Version=2.4.0.2631, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -659,6 +660,7 @@
     <Content Include="Content\ckfinder\config.ascx" />
     <Content Include="Content\ckfinder\config.js" />
     <Content Include="Content\ckfinder\core\connector\aspx\connector.aspx" />
+    <Content Include="Content\ckfinder\core\connector\aspx\Images\samsung\ss29.jpg" />
     <Content Include="Content\ckfinder\core\connector\aspx\lang\bg.xml" />
     <Content Include="Content\ckfinder\core\connector\aspx\lang\ca.xml" />
     <Content Include="Content\ckfinder\core\connector\aspx\lang\cs.xml" />
@@ -3271,18 +3273,6 @@
     <Content Include="Areas\Admin\Views\Status\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Status\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Status\Index.cshtml" />
-    <Content Include="Content\ckeditor\CHANGES.md" />
-    <Content Include="Content\ckeditor\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
-    <Content Include="Content\ckeditor\README.md" />
-    <Content Include="Content\ckeditor\samples\assets\posteddata.php" />
-    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
-    <Content Include="Content\ckeditor\skins\moono\readme.md" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\Admin\Views\Adv\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Index.cshtml" />
@@ -3367,6 +3357,18 @@
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\ckeditor\CHANGES.md" />
+    <Content Include="Content\ckeditor\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\ckeditor\README.md" />
+    <Content Include="Content\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="Content\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PagedList;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
@@ -11,9 +13,25 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/Posts
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchString, string currentFilter)
         {
-            var items = db.Posts.ToList();
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+            IEnumerable<Posts> items = db.Posts.OrderByDescending(x => x.Id); var pageSize = 10;
+            if (page == null)
+            {
+                page = 1;
+            }
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (!string.IsNullOrEmpty(searchString))
+                items = items.Where(p => p.Title.ToLower().Contains(searchString.ToLower())).ToList().ToPagedList(pageIndex, pageSize);
+            else
+                items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = page;
             return View(items);
         }
         public ActionResult Add()
@@ -26,6 +44,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(Posts model)
         {
+            ViewBag.NewsCategory = new SelectList(db.NewsCategory.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;
@@ -62,6 +81,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+
             var item = db.Posts.Find(id);
             if (item != null)
             {

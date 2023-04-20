@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web_Hutech_Gear.Models.ApplicationUser>
+﻿@model PagedList.PagedList<Web_Hutech_Gear.Models.ApplicationUser>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Danh mục tài khoản";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -42,7 +43,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách: @ViewBag.Title</h3>
-
+            @using (Html.BeginForm("Index", "Account", FormMethod.Get))
+            {
+                <input class="form-control form-control-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tài khoản" />
+                <input type="submit" value="Search" />
+            }
             <div class="card-tools">
                 <a href="/Admin/Account/Create" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
@@ -90,8 +95,12 @@
                 </tbody>
             </table>
 
-
-
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6" style="text-align:right;">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -169,7 +178,7 @@
                     });
                 }
             });
- 
+
         });
     </script>
 }

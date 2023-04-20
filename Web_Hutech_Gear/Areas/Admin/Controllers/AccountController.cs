@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
+using Web_Hutech_Gear.Models.EF;
 using Web_Hutech_Gear.Models.Support;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers
@@ -54,10 +57,29 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         }
 
         // GET: Admin/Account
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchString, string currentFilter)
         {
-            var ítems = db.Users.ToList();
-            return View(ítems);
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+            IEnumerable<ApplicationUser> items = db.Users.ToList();
+            var pageSize = 10;
+            if (page == null)
+            {
+                page = 1;
+            }
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            if (!string.IsNullOrEmpty(searchString))
+                items = items.Where(p => p.Email.ToLower().Contains(searchString.ToLower()) 
+                                    || p.UserName.ToLower().Contains(searchString.ToLower())
+                                    || p.FullName.ToLower().Contains(searchString.ToLower())).ToList().ToPagedList(pageIndex, pageSize);
+            else
+                items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = page;
+            return View(items);
         }
         //
         // GET: /Account/Update

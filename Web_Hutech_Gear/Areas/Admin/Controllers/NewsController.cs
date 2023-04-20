@@ -14,21 +14,27 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         // GET: Admin/News
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/Products
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchString, string currentFilter)
         {
-            IEnumerable<News> items = db.News.OrderByDescending(x => x.Id);
-            var pageSize = 10;
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+            IEnumerable<News> items = db.News.OrderByDescending(x => x.Id); var pageSize = 10;
             if (page == null)
             {
                 page = 1;
             }
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            items = items.ToPagedList(pageIndex, pageSize);
+            if (!string.IsNullOrEmpty(searchString))
+                items = items.Where(p => p.Title.ToLower().Contains(searchString.ToLower())).ToList().ToPagedList(pageIndex, pageSize);
+            else
+                items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.CurrentFilter = searchString;
             ViewBag.PageSize = pageSize;
             ViewBag.Page = page;
             return View(items);
         }
-
         public ActionResult Add()
         {
             ViewBag.NewsCategory = new SelectList(db.NewsCategory.ToList(), "Id", "Title");
@@ -39,6 +45,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(News model)
         {
+            ViewBag.NewsCategory = new SelectList(db.NewsCategory.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;

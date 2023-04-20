@@ -49,6 +49,9 @@
         <div class="card-header">
             <h3 class="card-title">Thông tin thêm mới Bài viết</h3>
         </div>
+        @{
+            List<SelectListItem> CategoryList = ((SelectList)ViewBag.NewsCategory).ToList();
+        }
         <div class="card-body">
             <div class="bs-stepper-content">
                 @using (Html.BeginForm("Add", "Posts", FormMethod.Post, new { }))
@@ -56,43 +59,50 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <!-- your steps content here -->
-                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tiêu đề</label>
-                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tiêu đề" })
-                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Chủ đề</label>
-                        @Html.DropDownListFor(x => x.NewsCategoryId, ViewBag.NewsCategory as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
-                        @Html.ValidationMessageFor(x => x.NewsCategoryId, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Ảnh đại diện</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
-                            </div>
-                            <div class="input-group-append">
-                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tiêu đề</label>
+                            @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tiêu đề" })
+                            @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Chủ đề</label>
+                            @if (CategoryList.Count() != 0)
+                            {
+                                @Html.DropDownListFor(x => x.NewsCategoryId, ViewBag.NewsCategory as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
+                            }
+                            else
+                            {
+                                <input type="text" id="NewsCategoryId" name="NewsCategoryId" class="form-control" readonly placeholder="Vui lòng nhập danh sách chủ đề bài viết">
+                            }                            
+                            @Html.ValidationMessageFor(x => x.NewsCategoryId, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ảnh đại diện</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
+                                </div>
+                                <div class="input-group-append">
+                                    <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Mô tả</label>
-                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Chi tiết</label>
-                        @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @id = "txtDetail" })
-                    </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mô tả</label>
+                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chi tiết</label>
+                            @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @id = "txtDetail" })
+                        </div>
 
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        <button type="submit" class="btn btn-primary">Lưu</button>
-                        <a href="/admin/posts" class="btn btn-danger">Quay lại</a>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <a href="/admin/posts" class="btn btn-danger">Quay lại</a>
+                        </div>
                     </div>
-                </div>
 
                 }
 

@@ -60,33 +60,92 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var item = db.NewsCategory.Find(id);
-            if (item != null)
+            using (var transaction = db.Database.BeginTransaction())
             {
-                db.NewsCategory.Remove(item);
-                db.SaveChanges();
-                return Json(new { success = true });
+                try
+                {
+                    var item = db.NewsCategory.Find(id);
+                    if (item != null)
+                    {
+                        var findPost = db.Posts.Where(p => p.NewsCategoryId == item.Id).ToList();
+                        if (findPost != null)
+                        {
+                            foreach (var pos in findPost)
+                            {
+                               db.Posts.Remove(pos);
+                            }
+                        }
+                        var findNews = db.News.Where(p => p.NewsCategoryId == item.Id).ToList();
+                        if (findNews != null)
+                        {
+                            foreach (var news in findNews)
+                            {
+                                db.News.Remove(news);
+                            }
+                        }
+                        db.NewsCategory.Remove(item);
+                        db.SaveChanges();
+                        transaction.Commit();
+                        return Json(new { success = true });
+                    }
+                }
+                catch
+                {
+                    transaction.Rollback();
+                }
             }
-
             return Json(new { success = false });
         }
 
         [HttpPost]
         public ActionResult DeleteAll(string ids)
         {
-            if (!string.IsNullOrEmpty(ids))
+            using (var transaction = db.Database.BeginTransaction())
             {
-                var items = ids.Split(',');
-                if (items != null && items.Any())
+
+                try
                 {
-                    foreach (var item in items)
+                    if (!string.IsNullOrEmpty(ids))
                     {
-                        var obj = db.NewsCategory.Find(Convert.ToInt32(item));
-                        db.NewsCategory.Remove(obj);
-                        db.SaveChanges();
+                        var items = ids.Split(',');
+                        if (items != null && items.Any())
+                        {
+                            foreach (var item in items)
+                            {
+                                var sp = db.NewsCategory.Find(Convert.ToInt32(item));
+                                if (sp != null)
+                                {
+                                    var findPost = db.Posts.Where(p => p.NewsCategoryId == sp.Id).ToList();
+                                    if (findPost != null)
+                                    {
+                                        foreach (var pos in findPost)
+                                        {
+                                            db.Posts.Remove(pos);
+                                        }
+                                    }
+                                    var findNews = db.News.Where(p => p.NewsCategoryId == sp.Id).ToList();
+                                    if (findNews != null)
+                                    {
+                                        foreach (var news in findNews)
+                                        {
+                                            db.News.Remove(news);
+                                        }
+                                    }
+                                   
+                                }
+                                db.NewsCategory.Remove(sp);
+                            }
+                            db.SaveChanges();
+                            transaction.Commit();
+                            return Json(new { success = true });
+                        }
                     }
+
                 }
-                return Json(new { success = true });
+                catch
+                {
+                    transaction.Rollback();
+                }
             }
             return Json(new { success = false });
         }

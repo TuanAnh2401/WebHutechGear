@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Posts>
+﻿@model PagedList.PagedList<Web_Hutech_Gear.Models.EF.Posts>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -42,7 +43,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách @ViewBag.Title</h3>
-
+            @using (Html.BeginForm("Index", "Account", FormMethod.Get))
+            {
+                <input class="form-control form-control-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tài khoản" />
+                <input type="submit" value="Search" />
+            }
             <div class="card-tools">
                 <a href="/admin/posts/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
@@ -56,6 +61,7 @@
                         <th>STT</th>
                         <th>Hình ảnh</th>
                         <th>Tiêu đề</th>
+                        <th>Chủ đề</th>
                         <th>Ngày tạo</th>
                         <th></th>
                     </tr>
@@ -71,6 +77,7 @@
                                 <td>@i</td>
                                 <td><img src="@item.Image" width="50" /></td>
                                 <td>@item.Title</td>
+                                <td>@item.NewsCategory.Title</td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <a href="/admin/posts/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
@@ -88,7 +95,12 @@
                     }
                 </tbody>
             </table>
-
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6" style="text-align:right;">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
