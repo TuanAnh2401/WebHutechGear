@@ -3,19 +3,6 @@
 @{
     ViewBag.Title = "Log in";
 }
-<style>
-    .input-icon {
-        position: relative;
-    }
-
-    .input-icon-toggle {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 10px;
-        cursor: pointer;
-    }
-</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +28,19 @@
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
     <!--===============================================================================================-->
+    <style>
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon-toggle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
@@ -48,10 +48,9 @@
     <div class="limiter">
         <div class="container-login100" style="background-image: url('@Url.Content("~/Content/login/images/bg-01.jpg")');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login100-form validate-form" }))
                 {
                     @Html.AntiForgeryToken()
-                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                     if (TempData["ErrorMessage"] != null)
                     {
                         <div class="alert alert-danger">@TempData["ErrorMessage"].ToString()</div>
@@ -117,8 +116,7 @@
 </html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
-<script>
+    <script>
     $(document).ready(function () {
         const togglePassword = $('#togglePassword');
         const password = $('#id_password');
@@ -132,4 +130,5 @@
         });
     });
 
-</script>
+    </script>
+}

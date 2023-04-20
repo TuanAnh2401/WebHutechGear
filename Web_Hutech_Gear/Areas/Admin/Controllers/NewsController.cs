@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,8 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             ViewBag.NewsCategory = new SelectList(db.NewsCategory.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
+                model.CreatedBy = User.Identity.GetUserName();
+                model.Modifiedby = User.Identity.GetUserName();
                 model.CreatedDate = DateTime.Now;
                 model.ModifiedDate = DateTime.Now;
                 db.News.Add(model);
@@ -71,6 +74,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Modifiedby = User.Identity.GetUserName();
                 model.ModifiedDate = DateTime.Now;
                 db.News.Attach(model);
                 db.Entry(model).State = System.Data.Entity.EntityState.Modified;

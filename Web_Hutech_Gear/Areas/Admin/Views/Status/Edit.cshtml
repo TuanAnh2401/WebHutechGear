@@ -51,12 +51,13 @@
         </div>
         <div class="card-body">
             <div class="bs-stepper-content">
-                @using (Html.BeginForm("Edit", "ProductCategory", FormMethod.Post, new { }))
+                @using (Html.BeginForm("Edit", "Status", FormMethod.Post, new { }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(x => x.Id)
                     @Html.HiddenFor(x => x.CreatedDate)
+                    @Html.HiddenFor(x => x.CreatedBy)
                     <!-- your steps content here -->
                     <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">

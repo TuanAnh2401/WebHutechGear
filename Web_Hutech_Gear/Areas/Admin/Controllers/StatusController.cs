@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
@@ -29,6 +30,8 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.CreatedBy = User.Identity.GetUserName();
+                model.Modifiedby = User.Identity.GetUserName();
                 model.CreatedDate = DateTime.Now;
                 model.ModifiedDate = DateTime.Now;
                 db.Status.Add(model);
@@ -49,6 +52,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Modifiedby = User.Identity.GetUserName();
                 model.ModifiedDate = DateTime.Now;
                 db.Status.Attach(model);
                 db.Entry(model).State = System.Data.Entity.EntityState.Modified;
