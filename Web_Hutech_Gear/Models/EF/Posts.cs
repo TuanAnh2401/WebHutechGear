@@ -17,12 +17,14 @@ namespace Web_Hutech_Gear.Models.EF
 
         [StringLength(150)]
         public string Description { get; set; }
-
+        [Required(ErrorMessage = " The Description field is required.")]
         [AllowHtml]
         public string Detail { get; set; }
+        [Required(ErrorMessage = "The Detail field is required.")]
 
         [StringLength(250)]
         public string Image { get; set; }
+        [Required(ErrorMessage = "The Image field is required.")]
         public int NewsCategoryId { get; set; }
         public virtual NewsCategory NewsCategory { get; set; }
     }

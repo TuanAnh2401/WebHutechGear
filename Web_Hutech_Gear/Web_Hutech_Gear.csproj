@@ -263,41 +263,22 @@
     <Compile Include="Areas\Admin\Controllers\StatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Migrations\202304110416335_CreateDatabase.cs" />
-    <Compile Include="Migrations\202304110416335_CreateDatabase.designer.cs">
-      <DependentUpon>202304110416335_CreateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304110421387_Supplier.cs" />
-    <Compile Include="Migrations\202304110421387_Supplier.designer.cs">
-      <DependentUpon>202304110421387_Supplier.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202304091251357_EditProduct.cs" />
-    <Compile Include="Migrations\202304091251357_EditProduct.designer.cs">
+    <Compile Include="Migrations\202304091251357_EditProduct.Designer.cs">
       <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304111446251_AddDatabase.cs" />
-    <Compile Include="Migrations\202304111446251_AddDatabase.designer.cs">
-      <DependentUpon>202304111446251_AddDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304111535575_EditNews.cs" />
-    <Compile Include="Migrations\202304111535575_EditNews.designer.cs">
-      <DependentUpon>202304111535575_EditNews.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\202304111535575_EditNews.Designer.cs" />
     <Compile Include="Migrations\202304111537454_EditNews2.cs" />
-    <Compile Include="Migrations\202304111537454_EditNews2.designer.cs">
-      <DependentUpon>202304111537454_EditNews2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202304121045506_editData.cs" />
-    <Compile Include="Migrations\202304121045506_editData.designer.cs">
-      <DependentUpon>202304121045506_editData.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\202304121045506_editData.Designer.cs" />
     <Compile Include="Migrations\202304121058123_editAVT.cs" />
-    <Compile Include="Migrations\202304121058123_editAVT.designer.cs">
-      <DependentUpon>202304121058123_editAVT.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\202304121058123_editAVT.Designer.cs" />
     <Compile Include="Migrations\202304130403376_RemoveRating.cs" />
-    <Compile Include="Migrations\202304130403376_RemoveRating.designer.cs">
-      <DependentUpon>202304130403376_RemoveRating.cs</DependentUpon>
+    <Compile Include="Migrations\202304130403376_RemoveRating.Designer.cs" />
+    <Compile Include="Migrations\202304211201013_CreateDatabase.cs" />
+    <Compile Include="Migrations\202304211208289_AddDatabase.cs" />
+    <Compile Include="Migrations\202304211208289_AddDatabase.designer.cs">
+      <DependentUpon>202304211208289_AddDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
@@ -4438,32 +4419,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304110416335_CreateDatabase.resx">
-      <DependentUpon>202304110416335_CreateDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304110421387_Supplier.resx">
-      <DependentUpon>202304110421387_Supplier.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304091251357_EditProduct.resx">
       <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304111446251_AddDatabase.resx">
-      <DependentUpon>202304111446251_AddDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304111535575_EditNews.resx">
-      <DependentUpon>202304111535575_EditNews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304111537454_EditNews2.resx">
       <DependentUpon>202304111537454_EditNews2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304121045506_editData.resx">
-      <DependentUpon>202304121045506_editData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304121058123_editAVT.resx">
-      <DependentUpon>202304121058123_editAVT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304130403376_RemoveRating.resx">
-      <DependentUpon>202304130403376_RemoveRating.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304211208289_AddDatabase.resx">
+      <DependentUpon>202304211208289_AddDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,8 +15,10 @@ namespace Web_Hutech_Gear.Models.EF
         public string Title { get; set; }
         [StringLength(500)]
         public string Description { get; set; }
+        [Required(ErrorMessage = "The Description field is required.")]
         [StringLength(500)]
         public string Image { get; set; }
+        [Required(ErrorMessage = "The Image field is required.")]
         [StringLength(500)]
         public string Link { get; set; }
     }

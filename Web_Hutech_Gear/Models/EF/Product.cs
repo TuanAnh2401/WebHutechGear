@@ -22,7 +22,7 @@ namespace Web_Hutech_Gear.Models.EF
         [StringLength(250)]
         public string Title { get; set; }
         public string Description { get; set; }
-
+        [Required(ErrorMessage = "The Description field is required.")]
         [AllowHtml]
         public string Detail { get; set; }
 
