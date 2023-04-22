@@ -18,25 +18,37 @@ namespace Web_Hutech_Gear.Models.EF
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Tên không được để trống")]
         [StringLength(250)]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Nội dung không được để trống")]
         public string Description { get; set; }
-        [Required(ErrorMessage = "The Description field is required.")]
+        
         [AllowHtml]
+        [Required(ErrorMessage = "Chi tiết không được để trống.")]
         public string Detail { get; set; }
 
         [StringLength(250)]
         public string Image { get; set; }
+        [Required(ErrorMessage = "Giá nhập không được để trống")]
+        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Giá nhập phải lớn hơn 0.")]
         public decimal OriginalPrice { get; set; }
+
+        [Required(ErrorMessage = "Giá không được để trống")]
+        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Giá phải lớn hơn 0.")]
         public decimal Price { get; set; }
+        [Required(ErrorMessage = "Giá khuyến mãi không được để trống")]
+        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Giá khuyến mãi phải lớn hơn 0.")]
         public decimal? PriceSale { get; set; }
+
+        [Required(ErrorMessage = "Số lượng không được để trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0.")]
         public int Quantity { get; set; }
-        [Required(ErrorMessage = "Tên không được để trống")]
+        
         public int ProductCategoryId { get; set; }
-        [Required(ErrorMessage = "Tên không được để trống")]
+        [Required(ErrorMessage = "Nhà phân phối không được để trống")]
         public int SupplierId { get; set; }
-        [Required(ErrorMessage = "Tên không được để trống")]
+        [Required(ErrorMessage = "Trạng thái không được để trống")]
 
         public int StatusId { get; set; }
         public bool IsHome { get; set; }
