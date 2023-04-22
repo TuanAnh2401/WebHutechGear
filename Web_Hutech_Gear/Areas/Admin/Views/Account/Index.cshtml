@@ -67,17 +67,22 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @if (Model != null && Model.Any())
                     {
                         var i = 1;
                         foreach (var item in Model)
                         {
+                            var strCheckLock = item.LockoutEnabled ? "<i class='fa fa-unlock text-success'></i>" : "<i class='fas fa-lock text-danger'></i>";
                             <tr id="trow_@item.Id">
                                 <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td>@i</td>
                                 <td>@item.UserName</td>
                                 <td>@item.FullName</td>
                                 <td>@item.Email</td>
+                                <td>
+                                    <a href='#' data-id="@item.Id" class="btn btn-sm btnLock">@Html.Raw(strCheckLock)</a>
+                                </td>
                                 <td>
                                     <a href="/Admin/Account/Update/@item.Id" class="btn btn-sm btn-primary">Cập Nhật</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
@@ -178,7 +183,26 @@
                     });
                 }
             });
+            $('body').on('click', '.btnLock', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/Account/IsLock',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.IsLock) {
+                                btn.html("<i class='fa  fa-unlock text-success'></i>");
+                            } else {
+                                btn.html("<i class='fas fa-lock text-danger'></i>");
+                            }
+                        }
 
+                    }
+                });
+            });
         });
     </script>
 }

@@ -80,7 +80,7 @@ namespace Web_Hutech_Gear.Controllers
             }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Account, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Account, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -89,9 +89,13 @@ namespace Web_Hutech_Gear.Controllers
                     {
                         AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                         return View("NotificationEmailConfim");
-                    }
-                    else
-                        return RedirectToLocal(returnUrl);
+                    }else if(!findUser.LockoutEnabled)
+                    {
+                        TempData["ErrorMessage"] = "Tài khoản của bạn đã bị khóa";
+                        return View(model);
+                    }    
+                    else 
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

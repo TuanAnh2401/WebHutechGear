@@ -135,6 +135,29 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             }
             return View(model);
         }
+        //POST: /Account/IsLock
+        [HttpPost]
+        public async Task<ActionResult> IsLock(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                if( user.LockoutEnabled)
+                {
+                    await UserManager.SetLockoutEnabledAsync(user.Id, false);
+                    await UserManager.SetLockoutEndDateAsync(user.Id, DateTimeOffset.MaxValue);
+                }
+                else
+                {
+                    await UserManager.SetLockoutEnabledAsync(user.Id, true);
+                    await UserManager.SetLockoutEndDateAsync(user.Id, DateTimeOffset.UtcNow);
+                    await UserManager.ResetAccessFailedCountAsync(user.Id);
+                }
+                return Json(new { success = true, IsLock = user.LockoutEnabled });
+            }
+
+            return Json(new { success = false });
+        }
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Create()
