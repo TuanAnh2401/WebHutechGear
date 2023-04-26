@@ -24,6 +24,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         public ActionResult AddSetting(SettingSystemViewModel req)
         {
             SystemSetting set = null;
+            //Title
             var checkTitle = db.SystemSettings.FirstOrDefault(x => x.SettingKey.Contains("SettingTitle"));
             if (checkTitle == null)
             {
@@ -78,6 +79,20 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             {
                 Hotline.SettingValue = req.SettingHotline;
                 db.Entry(Hotline).State = System.Data.Entity.EntityState.Modified;
+            }
+            //Address
+            var Address = db.SystemSettings.FirstOrDefault(x => x.SettingKey.Contains("SettingAddress"));
+            if (Address == null)
+            {
+                set = new SystemSetting();
+                set.SettingKey = "SettingAddress";
+                set.SettingValue = req.SettingAddress;
+                db.SystemSettings.Add(set);
+            }
+            else
+            {
+                Address.SettingValue = req.SettingAddress;
+                db.Entry(Address).State = System.Data.Entity.EntityState.Modified;
             }
             db.SaveChanges();
 
