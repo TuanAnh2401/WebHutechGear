@@ -21,9 +21,10 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Chi tiết bài viết không được để trống")]
         [AllowHtml]
         public string Detail { get; set; }
-
+        [Required(ErrorMessage = "Thêm ảnh bài viết")]
         [StringLength(250)]
-        public string Image { get; set; }        
+        public string Image { get; set; }
+        [Required(ErrorMessage = "Bạn không được để trống chủ đề")]
         public int NewsCategoryId { get; set; }
         public virtual NewsCategory NewsCategory { get; set; }
     }

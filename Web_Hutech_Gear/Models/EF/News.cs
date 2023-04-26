@@ -19,9 +19,9 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Chi tiết tin tức không được để trống")]
         [AllowHtml]
         public string Detail { get; set; }
-        
+        [Required(ErrorMessage = "Thêm ảnh tin tức.")]
         public string Image { get; set; }
-       
+        [Required(ErrorMessage = "Bạn không được để trống chủ đề")]
         public int NewsCategoryId { get; set; }
         public bool IsHome { get; set; }
         public bool IsSale { get; set; }

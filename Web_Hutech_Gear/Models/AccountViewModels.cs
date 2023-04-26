@@ -108,7 +108,7 @@ namespace Web_Hutech_Gear.Models
         [DataType(DataType.Password, ErrorMessage = "Mật khẩu phải có kí tự chữ số, chữ hoa, chữ thường và 1 kí tự đặc biệt")]
         [Display(Name = "Mật Khẩu")]
         public string Password { get; set; }
-
+        [Required(ErrorMessage = "Vui lòng nhập lại mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Mật khẩu và mật khẩu xác nhận không khớp.")]

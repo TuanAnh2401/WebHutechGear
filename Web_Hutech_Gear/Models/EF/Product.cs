@@ -44,12 +44,11 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Số lượng không được để trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0.")]
         public int Quantity { get; set; }
-        
+        [Required(ErrorMessage = "Loại sản phẩm không được để trống")]
         public int ProductCategoryId { get; set; }
         [Required(ErrorMessage = "Nhà phân phối không được để trống")]
         public int SupplierId { get; set; }
         [Required(ErrorMessage = "Trạng thái không được để trống")]
-
         public int StatusId { get; set; }
         public bool IsHome { get; set; }
         public bool IsSale { get; set; }

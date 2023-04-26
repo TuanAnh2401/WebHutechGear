@@ -41,15 +41,17 @@
 
 <!-- Main content -->
 <section class="content">
-
+<link href="~/Content/clients/dist/css/search.css" rel="stylesheet" />
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách @ViewBag.Title</h3>
             @using (Html.BeginForm("Index", "News", FormMethod.Get))
             {
-                <input class="form-control form-control-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tài khoản" />
-                <input type="submit" value="Search" />
+                <div class="form-container">
+                    <input class="form-controll form-controll-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tin tức" />
+                    <input type="submit" value="Search" />
+                </div>
             }
             <div class="card-tools">
                 <a href="/admin/News/add" class="btn btn-primary">Thêm mới</a>

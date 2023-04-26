@@ -187,7 +187,7 @@ namespace Web_Hutech_Gear.Controllers
 
                     IdentityResult result = await UserManager.UpdateAsync(user);
                     if (result.Succeeded)
-                        return RedirectToAction("Index", "Home");
+                        return View(model);
                 }
             }
 

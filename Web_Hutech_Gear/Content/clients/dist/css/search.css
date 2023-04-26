@@ -1,0 +1,25 @@
+﻿.form-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    margin-right: 10px;
+}
+
+.form-container input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+    .form-container input[type="submit"]:hover {
+        background-color: #0069d9;
+    }

@@ -52,12 +52,13 @@
                 @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { }))
                 {
                     @Html.AntiForgeryToken()
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                   
                     <!-- your steps content here -->
                     <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Họ tên</label>
                             @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Địa chỉ</label>
@@ -66,26 +67,31 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số điện thoại</label>
                             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label>Quyền</label>
-                            @Html.DropDownListFor(m => m.Role, ViewBag.Role as SelectList, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Role, ViewBag.Role as SelectList, new { @class = "form-control" })                         
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên tài khoản</label>
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mật khẩu</label>
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nhập lại mật khẩu</label>
                             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
 

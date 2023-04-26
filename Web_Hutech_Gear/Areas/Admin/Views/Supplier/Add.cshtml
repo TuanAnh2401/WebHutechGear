@@ -73,6 +73,7 @@
                                     <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
                                 </div>
                             </div>
+                            @Html.ValidationMessageFor(x => x.Image, null, new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
 
