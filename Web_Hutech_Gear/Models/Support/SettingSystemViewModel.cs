@@ -6,5 +6,7 @@
         public string SettingLogo { get; set; }
         public string SettingHotline { get; set; }
         public string SettingEmail { get; set; }
+        public string SettingAddress { get; set; }
+
     }
 }
