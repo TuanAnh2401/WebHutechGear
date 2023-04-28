@@ -15,6 +15,7 @@ namespace Web_Hutech_Gear.Models.EF
         public string UserId { get; set; }
         public int ProductId { get; set; }
         public string Content { get; set; }
+        [Required(ErrorMessage = "Tên không được để trống")]
         public int Rating { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual Product Product { get; set; }
