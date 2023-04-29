@@ -3150,6 +3150,7 @@
     <Content Include="Content\profile\all.min.css" />
     <Content Include="Content\profile\eye.css" />
     <Content Include="Content\profile\userProfile.css" />
+    <Content Include="Content\users\css\account.css" />
     <Content Include="Content\users\css\animate.css" />
     <Content Include="Content\users\css\bootstrap-grid.css" />
     <Content Include="Content\users\css\bootstrap-grid.min.css" />

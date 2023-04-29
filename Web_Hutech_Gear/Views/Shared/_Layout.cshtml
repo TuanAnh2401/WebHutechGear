@@ -72,8 +72,17 @@
                                 </ul>
                             </div>
                         </div>
+                        <link href="~/Content/users/css/account.css" rel="stylesheet" />
                         <div class="float-right">
-                            @Html.Partial("_LoginPartial")
+                            <li class="account">
+                                <a href="#">
+                                    My Account
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="account_selection">
+                                    <li>  @Html.Partial("_LoginPartial")</li>
+                                </ul>
+                            </li>
                         </div>
                     </div>
                 </div>
@@ -128,13 +137,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="it_shop.html">Shop</a>
-                                        <ul>
-                                            <li><a href="it_shop.html">Shop List</a></li>
-                                            <li><a href="it_shop_detail.html">Shop Detail</a></li>
-                                            <li><a href="it_cart.html">Shopping Cart</a></li>
-                                            <li><a href="it_checkout.html">Checkout</a></li>
-                                        </ul>
+                                        <a href="/home/detail">Shop</a>                                  
                                     </li>
                                     <li>
                                         <a href="/home/contact">Liên Hệ</a>
