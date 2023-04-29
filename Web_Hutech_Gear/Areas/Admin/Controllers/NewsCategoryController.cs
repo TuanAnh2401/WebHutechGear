@@ -10,7 +10,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class NewsCategoryController : Controller
     {
-        // GET: Admin/NewsCategory
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/ProductCategory
         public ActionResult Index()

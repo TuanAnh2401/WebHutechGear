@@ -249,6 +249,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
@@ -3470,6 +3471,8 @@
     <Content Include="Content\users\revolution\fonts\revicons\revicons.eot" />
     <Content Include="Content\users\revolution\fonts\revicons\revicons.ttf" />
     <Content Include="Content\users\revolution\fonts\revicons\revicons.woff" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

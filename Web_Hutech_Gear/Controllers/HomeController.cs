@@ -22,12 +22,24 @@ namespace Web_Hutech_Gear.Controllers
 
             return View();
         }
-
+        [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+        [HttpPost]
+        public ActionResult Contact(Contact model)
+        {
+            if(ModelState.IsValid)
+            {
+                model.CreatedBy = model.Name;
+                model.CreatedDate = DateTime.Now;
+                model.ModifiedDate = DateTime.Now;
+                db.Contacts.Add(model);
+                db.SaveChanges();
+                return View();
+            }
+            return View(model);
         }
 
         public ActionResult Detail(int id)
@@ -47,13 +59,9 @@ namespace Web_Hutech_Gear.Controllers
         {
             int rating = int.Parse(f["rate"].ToString()); ;
             string content = f["content"].ToString();
-
             var ID = User.Identity.GetUserId();
-            var find = db.Users.FirstOrDefault(p => p.Id == ID);
-            string userId = find.Id;
-
             Comment cm = new Comment();
-            cm.UserId = userId;
+            cm.UserId = ID;
             cm.ProductId = productId;
             cm.Content = content;
             cm.Rating = rating;
