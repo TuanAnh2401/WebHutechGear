@@ -1,0 +1,31 @@
+﻿@model PagedList.PagedList<Web_Hutech_Gear.Models.EF.Product>
+@using PagedList.Mvc
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+
+            <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                <div class="product_list">
+                    <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
+                    <div class="product_detail_btm">
+                        <div class="center">
+                            <h4 style="width: auto; height: 100px; overflow: hidden; word-wrap: break-word; "><a href="~/Home/Detail?id=@item.Id">@item.Title</a></h4>
+                        </div>
+                        <div class="starratin">
+                            <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
+                        </div>
+                        <div class="product_price">
+                            <p><span class="old_price">@item.PriceSale VND </span><span class="new_price"> @item.Price VND</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="row" style="justify-content: center">
+    <div class="col-6" style="text-align:right;">
+        @Html.PagedListPager(Model, page => Url.Action("Partial_Procducts", new { page, currentFilter = ViewBag.CurrentFilter, currentId = ViewBag.CurrentId, supplierId = ViewBag.currentSpId, min = ViewBag.currentMin, max = ViewBag.currentMax }), new PagedListRenderOptions { DisplayLinkToIndividualPages = true })
+    </div>
+</div>

@@ -16,10 +16,10 @@
                 <div class="full">
                     <div class="title-holder">
                         <div class="title-holder-cell text-left">
-                            <h1 class="page-title">Shop Detail</h1>
+                            <h1 class="page-title">Chi tiết sản phẩm</h1>
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="active">Shop Detail (@Model.Title)</li>
+                                <li><a href="/home/index">Trang chủ</a></li>
+                                <li class="active">@Model.Title</li>
                             </ol>
                         </div>
                     </div>
@@ -31,22 +31,19 @@
 <!-- #endregion -->
 <!-- #region chi tiết sản phẩm -->
 <div class="section padding_layout_1 product_detail">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9" style="margin:0px auto">
                 <div class="row">
                     <div class="col-xl-6 col-lg-12 col-md-12">
                         <div class="product_detail_feature_img hizoom hi2" style="width: 400px; height: 400px;">
                             <div class="hizoom hi2" style="width: 400px; height: 400px;">
                                 <div class="small" style="width: 400px; height: 400px;">
                                     <div class="magnifier" style="width: 200px; height: 200px; opacity: 0.7; background: rgb(255, 255, 255); display: none; left: 200px; top: 113px;"></div>
-                                    <img src="@Model.Image" alt="" style="width: 400px; height: 400px;">
+                                    <img src="@Model.Image" alt="" style="width: 690px; height: 400px;">
                                 </div>
                                 <div class="big" style="width: 400px; height: 400px; right: -420px; display: none;">
                                     @*<img src="@Model.Image" alt="#" style="width: 800px; height: 800px; left: -400px; top: -226px;">*@
                                 </div>
                             </div>
-                            <div class="small" style="width: 400px; height: 400px;"><div class="magnifier" style="width: 200px; height: 200px; opacity: 0.7; background: rgb(255, 255, 255);"></div><img src="images/it_service/1.jpg" alt="#" style="width: 400px; height: 400px;"></div><div class="big" style="width: 400px; height: 400px; right: -420px;"><img src="images/it_service/1.jpg" alt="#" style="width: 800px; height: 800px;"></div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-12 col-md-12 product_detail_side detail_style1">
@@ -80,19 +77,23 @@
                         <div class="full">
                             <div class="tab_bar_section">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Description</a> </li>
-                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Comment</a> </li>
+                                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Chi Tiết</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Đánh giá</a> </li>
                                 </ul>
                                 <!-- Tab panes -->
-                                <div class="tab-content">
+                                <style>
+                                    ol, ul {
+                                       padding-left: 30px;
+                                    }
+                                </style>
+                                <div class="tab-content" style="padding:0px">
                                     <div id="description" class="tab-pane active">
                                         <div class="product_desc">
-                                            <p>@Html.Raw(Model.Detail)</p>
+                                            @Html.Raw(Model.Detail)
                                         </div>
                                     </div>
                                     <div id="reviews" class="tab-pane fade">
                                         <div class="product_review">
-                                            <h3>Comment</h3>
                                             <!-- #region Bình luận -->
                                             @foreach (var item in listCommnet)
                                             {
@@ -164,11 +165,14 @@
                                                         <div class="float-right">
                                                             @if (Request.IsAuthenticated)
                                                             {
-                                                                <a class="btn sqaure_bt" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a Review</a>
+                                                                <a class="btn sqaure_bt" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Để lại đánh giá</a>
                                                             }
                                                             else
                                                             {
-                                                                <a class="btn sqaure_bt" href="/Account/Login">Login To Comment</a>
+                                                                string returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
+                                                                string encodedReturnUrl = HttpUtility.UrlEncode(returnUrl);
+                                                                string loginUrl = "/Account/Login?ReturnUrl=" + encodedReturnUrl;
+                                                                <a class="btn sqaure_bt" href="@loginUrl">Đăng nhập để đánh giá</a>
                                                                 <a url=""></a>
                                                             }
                                                         </div>
@@ -192,9 +196,9 @@
                                                                 </div>
                                                                 <!-- #endregion -->
                                                                 <input id="ratings-hidden" name="rating" type="hidden">
-                                                                <textarea class="form-control animated" cols="50" id="new-review" name="content" placeholder="Enter your review here..." required=""></textarea>
+                                                                <textarea class="form-control animated" cols="50" id="new-review" name="content" placeholder="Nhập đánh giá của bạn ở đây..." required=""></textarea>
                                                                 <div class="full_bt center">
-                                                                    <button class="btn sqaure_bt" type="submit">Save</button>
+                                                                    <button class="btn sqaure_bt" type="submit">Gửi</button>
                                                                 </div>
                                                             }
                                                         </div>
@@ -212,7 +216,7 @@
                     <div class="col-md-12">
                         <div class="full">
                             <div class="main_heading text_align_left" style="margin-bottom: 35px;">
-                                <h3>Related products</h3>
+                                <h3>Những sảm phẩm tương tự</h3>
                             </div>
                         </div>
                     </div>
@@ -221,77 +225,29 @@
                     <!-- #region Sản phẩm liên quan -->
                     @foreach (var item in listProduct)
                     {
-                        if (item.IsHome)
-                        {
-                            <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
-                                <div class="product_list">
-                                    <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
-                                    <div class="product_detail_btm">
+                        <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                            <div class="product_list">
+                                <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="~/Home/Detail?id=@item.Id">@item.Title</a></h4>
+                                    </div>
+                                    <div class="starratin">
                                         <div class="center">
-                                            <h4><a href="~/Home/Detail?id=@item.Id">@item.Title</a></h4>
+                                            <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
                                         </div>
-                                        <div class="starratin">
-                                            <div class="center">
-                                                <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="product_price">
-                                            <p><span class="old_price">@item.PriceSale</span> – <span class="new_price">@item.Price</span></p>
-                                        </div>
+                                    </div>
+                                    <div class="product_price">
+                                        <p><span class="old_price">@item.PriceSale</span> – <span class="new_price">@item.Price</span></p>
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                     }
                     <!-- #endregion -->
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="side_bar">
-                    <div class="side_bar_blog">
-                        <h4>SEARCH</h4>
-                        <div class="side_bar_search">
-                            <div class="input-group stylish-input-group">
-                                <input class="form-control" placeholder="Search" type="text">
-                                <span class="input-group-addon">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="side_bar_blog">
-                        <h4>GET A QUOTE</h4>
-                        <p>An duo lorem altera gloriatur. No imperdiet adver sarium pro. No sit sumo lorem. Mei ea eius elitr consequ unturimperdiet.</p>
-                        <a class="btn sqaure_bt" href="it_service.html">View Service</a>
-                    </div>
-                    <div class="side_bar_blog">
-                        <h4>OUR SERVICE</h4>
-                        <div class="categary">
-                            <ul>
-                                <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Data recovery</a></li>
-                                <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Computer repair</a></li>
-                                <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Mobile service</a></li>
-                                <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Network solutions</a></li>
-                                <li><a href="it_techn_support.html"><i class="fa fa-angle-right"></i> Technical support</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="side_bar_blog">
-                        <h4>RECENT NEWS</h4>
-                        <div class="categary">
-                            <ul>
-                                <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Land lights let be divided</a></li>
-                                <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Seasons over bearing air</a></li>
-                                <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Greater open after grass</a></li>
-                                <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Gathered was divide second</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-</div>
 <!-- #endregion -->

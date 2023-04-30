@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "Trang sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/users/price.css" rel="stylesheet" />
+</head>
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Trang sản phẩm</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="/home/index">Trang chủ</a></li>
+                                <li class="active">Sản phẩm</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section padding_layout_1 product_list_main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 ">
+                <div id="loading" style="display: none;">
+                    <img src="~/Content/users/images/loading.gif" style="background-color: transparent" alt="Loading..." />
+                </div>
+                <div class="product-list">
+                    @Html.Action("Partial_Procducts", "Products")
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="side_bar">
+                    <div class="side_bar_blog">
+                        <h4>Tìm kiếm</h4>
+
+                        <div class="side_bar_search">
+                            @using (Html.BeginForm("Partial_Procducts", "Products", FormMethod.Get, new { @class = "search-form" }))
+                            {<div class="input-group stylish-input-group">
+                                    <input class="form-control" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm sản phẩm" type="text">
+                                    <span class="input-group-addon">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="side_bar_blog">
+                        <h4>Khoảng giá</h4>
+                        <div class="price-input">
+                            <div class="field">
+                                <span>Min</span>
+                                <input type="number" class="input-min" id="myInput" value="0" />
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <span>Max</span>
+                                <input type="number" class="input-max" id="myInput" value="@ViewBag.Max" />
+                            </div>
+                        </div>
+                        <div class="sliders">
+                            <div class="progresss"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="range-min" min="0" max="@ViewBag.Max" value="0" step="100" />
+                            <input type="range" class="range-max" min="0" max="@ViewBag.Max" value="@ViewBag.Max" step="100" />
+                        </div>
+                    </div>
+                    <div class="side_bar_blog">
+                        <h4>Loại sản phẩm</h4>
+                        <div class="categary">
+                            @Html.Action("Partial_GetCategory", "Products")
+                        </div>
+                    </div>
+                    <div class="side_bar_blog">
+                        <h4>Nhà cung cấp</h4>
+                        <div class="categary">
+                            @Html.Action("Partial_GetSupplier", "Products")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- end section -->
+@section scripts{
+
+    <!-- js range price -->
+    <script src="~/Content/users/price.js"></script>
+
+    <!-- ajax Tìm kiếm -->
+    <script>
+        $(document).ready(function () {
+            $('.search-form').submit(function (event) {
+                event.preventDefault();
+                searchProducts();
+            });
+
+            $('.input-min, .input-max, .range-min, .range-max').on('input', function () {
+                searchProducts();
+            });
+            $('.cbkCategory').change(function () {
+                searchProducts();
+            });
+            $('.cbkSupplier').change(function () {
+                searchProducts();
+            });
+        });
+
+        function searchProducts() {
+            var form = $('.search-form');
+            var searchString = form.find('input[name="searchString"]').val();
+            var min = parseFloat($('.input-min').val());
+            var max = parseFloat($('.input-max').val());
+            var categoryIds = []; // Mảng chứa các id loại sản phẩm đã chọn
+            var supplierIds = []; // Mảng chứa các id nha cung cap đã chọn
+            $('.cbkCategory:checked').each(function () {
+                categoryIds.push($(this).val());
+            });
+
+            $('.cbkSupplier:checked').each(function () {
+                supplierIds.push($(this).val());
+            });
+
+            $('#loading').show();
+            $('.product-list').hide();
+
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: { searchString: searchString, categoryIds: categoryIds, supplierIds: supplierIds, min: min, max: max },
+                success: function (result) {
+                    $('#loading').hide();
+                    $('.product-list').show();
+                    $('.product-list').html(result);
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra!');
+                }
+            });
+        }
+        $(function () {
+            $('form').on('submit', function () {
+                $('#loading').show(); // Hiển thị hình đang load
+            });
+        });
+    </script>
+    <script>
+        $(document).on("click", ".pagination a", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+            $('.product-list').hide();
+            // Lấy đường dẫn href của nút phân trang
+            var url = $(this).attr("href");
+
+            // Gửi yêu cầu ajax đến server để lấy dữ liệu mới
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (result) {
+                    $('#loading').hide();
+                    $('.product-list').show();
+                    // Cập nhật lại nội dung của phần tử chứa dữ liệu
+                    $(".product-list").html(result);
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra!');
+                }
+            });
+        });
+    </script>
+    <script>
+        let inputMin = document.querySelector('.input-min');
+        let inputMax = document.querySelector('.input-max');
+
+        inputMin.addEventListener('input', function () {
+            if (parseInt(inputMin.value) < 0) {
+                inputMin.value = 0;
+            }
+            if (parseInt(inputMin.value) > parseInt(inputMax.value)) {
+                inputMin.value = inputMax.value;
+            }
+        });
+
+        inputMax.addEventListener('input', function () {
+            if (parseInt(inputMax.value) < 0) {
+                inputMax.value = 0;
+            }
+            if (parseInt(inputMax.value) < parseInt(inputMin.value)) {
+                inputMax.value = inputMin.value;
+            }
+        });
+
+    </script>
+}

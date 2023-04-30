@@ -263,6 +263,7 @@
     <Compile Include="Areas\Admin\Controllers\StatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Migrations\202304091251357_EditProduct.cs" />
     <Compile Include="Migrations\202304091251357_EditProduct.Designer.cs">
       <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
@@ -3174,6 +3175,7 @@
     <Content Include="Content\users\css\owl.theme.default.css" />
     <Content Include="Content\users\css\responsive.css" />
     <Content Include="Content\users\css\style.css" />
+    <Content Include="Content\users\custom.css" />
     <Content Include="Content\users\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\users\images\fevicon\fevicon.png" />
     <Content Include="Content\users\images\gradian_black.png" />
@@ -3232,6 +3234,7 @@
     <Content Include="Content\users\images\it_service\team-member-3.jpg" />
     <Content Include="Content\users\images\it_service\test_bg.png" />
     <Content Include="Content\users\images\loaders\loader_1.png" />
+    <Content Include="Content\users\images\loading.gif" />
     <Content Include="Content\users\images\logos\it_logo.png" />
     <Content Include="Content\users\images\logos\it_logo_white.png" />
     <Content Include="Content\users\js\bootstrap.min.js" />
@@ -3240,6 +3243,8 @@
     <Content Include="Content\users\js\jquery.min.js" />
     <Content Include="Content\users\js\menumaker.js" />
     <Content Include="Content\users\js\wow.js" />
+    <Content Include="Content\users\price.css" />
+    <Content Include="Content\users\price.js" />
     <Content Include="Content\users\revolution\assets\coloredbg.png" />
     <Content Include="Content\users\revolution\assets\gridtile.png" />
     <Content Include="Content\users\revolution\assets\gridtile_3x3.png" />
@@ -4524,6 +4529,10 @@
     <Content Include="Views\Account\NotificationEmailConfim.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Partial_Procducts.cshtml" />
+    <Content Include="Views\Products\Partial_GetCategory.cshtml" />
+    <Content Include="Views\Products\Partial_GetSupplier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
