@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Supplier>
+@using Web_Hutech_Gear.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+<ul>
+    @foreach (var item in Model)
+    {
+        int productCount = db.Products.Where(p => p.SupplierId == item.Id).Count();
+        if (productCount > 0)
+        {
+            <li>
+                <div class="row" style="cursor: pointer">
+                    <input type="checkbox" class="cbkSupplier" value="@item.Id" style="padding-right:5px" />
+                    @item.Title
+                </div>
+            </li>
+        }
+    }
+</ul>
+

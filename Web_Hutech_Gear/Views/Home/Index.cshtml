@@ -178,7 +178,7 @@
                     {
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
                             <div class="product_list">
-                                <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
+                                <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
                                 <div class="product_detail_btm">
                                     <div class="center">
                                         <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="~/Home/Detail?id=@item.Id">@item.Title</a></h4>
@@ -333,25 +333,28 @@
     </div>
 </div>
 <!-- end section -->
+<style>
+    .brand_list li img {
+        filter: grayscale(100%);
+    }
+
+        .brand_list li img:hover {
+            filter: grayscale(0);
+        }
+</style>
 <!-- section -->
 <div class="section padding_layout_1" style="padding: 50px 0;">
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="full">
                     <ul class="brand_list">
-                        @{
-                            foreach (var item in db.Suppliers)
-                            {
-
-                                <li style="margin-bottom:10px"><img src="@item.Image" style="width:200px;height:100px" alt="#" /></li>
-
-                            }
+                        @foreach (var item in db.Suppliers)
+                        {
+                            <li style="margin-bottom:10px"><img src="@item.Image" style="width:200px;height:100px" alt="#" /></li>
                         }
                     </ul>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 <!-- end section -->

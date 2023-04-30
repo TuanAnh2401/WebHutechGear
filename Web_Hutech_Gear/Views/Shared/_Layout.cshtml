@@ -31,12 +31,8 @@
     <link href="~/Content/users/revolution/css/layers.css" rel="stylesheet" />
     <link href="~/Content/users/revolution/css/navigation.css" rel="stylesheet" />
     <link href="~/Content/users/revolution/css/settings.css" rel="stylesheet" />
-    <link href="~/Content/users/revolution/css/style.css" rel="stylesheet" />
-
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-          <![endif]-->
+    <!-- Supplier css -->
+    <link href="~/Content/users/custom.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -103,44 +99,25 @@
                         <div class="menu_side">
                             <div id="navbar_menu">
                                 <ul class="first-ul">
-                                    <li>
-                                        <a class="active" href="/home/index">Trang Chủ</a>
-                                        <ul>
-                                            <li><a href="it_home.html">It Home Page</a></li>
-                                            <li><a href="it_home_dark.html">It Dark Home Page</a></li>
-                                        </ul>
+                                    <li >
+                                        <a class="@((ViewBag.ActiveMenu == "Home") ? "active" : "")" href="/home/index">Trang Chủ</a>
                                     </li>
                                     <li><a href="it_about.html">About Us</a></li>
                                     <li>
                                         <a href="it_service.html">Service</a>
-                                        <ul>
-                                            <li><a href="it_service_list.html">Services list</a></li>
-                                            <li><a href="it_service_detail.html">Services Detail</a></li>
-                                        </ul>
+
                                     </li>
                                     <li>
                                         <a href="it_blog.html">Blog</a>
-                                        <ul>
-                                            <li><a href="it_blog.html">Blog List</a></li>
-                                            <li><a href="it_blog_grid.html">Blog Grid</a></li>
-                                            <li><a href="it_blog_detail.html">Blog Detail</a></li>
-                                        </ul>
                                     </li>
                                     <li>
                                         <a href="#">Pages</a>
-                                        <ul>
-                                            <li><a href="it_career.html">Career</a></li>
-                                            <li><a href="it_price.html">Pricing</a></li>
-                                            <li><a href="it_faq.html">Faq</a></li>
-                                            <li><a href="it_privacy_policy.html">Privacy Policy</a></li>
-                                            <li><a href="it_error.html">Error 404</a></li>
-                                        </ul>
                                     </li>
                                     <li>
-                                        <a href="/home/detail">Shop</a>                                  
+                                        <a class="@((ViewBag.ActiveMenu == "Products") ? "active" : "")" href="/products/index">Sản Phẩm</a>
                                     </li>
                                     <li>
-                                        <a href="/home/contact">Liên Hệ</a>
+                                        <a class="@((ViewBag.ActiveMenu == "Contact") ? "active" : "")" href="/home/contact">Liên Hệ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -229,6 +206,7 @@
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.video.min.js"></script>
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

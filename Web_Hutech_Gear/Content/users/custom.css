@@ -1,0 +1,13 @@
+﻿.full .brand_list{
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px*14);
+}
+@keyframes scroll{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform:translateX(calc(-250px*7))
+    }
+}

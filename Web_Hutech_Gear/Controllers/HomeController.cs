@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.EF;
@@ -13,6 +14,7 @@ namespace Web_Hutech_Gear.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+            ViewBag.ActiveMenu = "Home";
             return View();
         }
 
@@ -25,6 +27,8 @@ namespace Web_Hutech_Gear.Controllers
         [HttpGet]
         public ActionResult Contact()
         {
+            ViewBag.ActiveMenu = "Contact";
+
             return View();
         }
         [HttpPost]
