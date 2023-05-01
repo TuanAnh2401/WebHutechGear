@@ -75,14 +75,13 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                         db.Entry(items).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
+                item.IsDefault = !item.IsDefault;
                 if (item.IsDefault)
                 {
                     var findProc = db.Products.Find(tmp);
                     findProc.Image = item.Image;
                     db.Entry(findProc).State = System.Data.Entity.EntityState.Modified;
                 }
-
-                item.IsDefault = !item.IsDefault;
                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true, IsDefault = item.IsDefault });

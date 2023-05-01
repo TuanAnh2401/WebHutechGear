@@ -33,6 +33,30 @@
     <link href="~/Content/users/revolution/css/settings.css" rel="stylesheet" />
     <!-- Supplier css -->
     <link href="~/Content/users/custom.css" rel="stylesheet" />
+    <!-- Account css -->
+    <link href="~/Content/users/css/account.css" rel="stylesheet" />
+    <!-- ShoppingCart css -->
+    <style>
+        .checkout_items {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0px;
+            left: 26px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fe4c50;
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+    </style>
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -44,7 +68,7 @@
     <header id="default_header" class="header_style_1">
         <!-- header top -->
         <div class="header_top">
-            <div class="container">
+            <div class="container" style="padding-left:0px;padding-right:0px">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="full">
@@ -56,9 +80,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 right_section_header_top">
-                        @*<div class="float-left">
-                            <div class="social_icon">
+                    <div class="col-md-4">
+                        <div class="float-right">
+                            <div class="social_icon" style="padding-top:12px">
                                 <ul class="list-inline">
                                     <li><a class="fa fa-facebook" href="https://www.facebook.com/" title="Facebook" target="_blank"></a></li>
                                     <li><a class="fa fa-google-plus" href="https://plus.google.com/" title="Google+" target="_blank"></a></li>
@@ -67,16 +91,13 @@
                                     <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
                                 </ul>
                             </div>
-                        </div>*@
-                        <link href="~/Content/users/css/account.css" rel="stylesheet" />
-                        <div class="float-right">
-                            <li class="account">
+                            <li class="account" id="account" style="width:200px; margin:0px auto">
                                 <a href="#">
                                     My Account
                                     <i class="fa fa-angle-down"></i>
                                 </a>
-                                <ul class="account_selection">
-                                    <li>  @Html.Partial("_LoginPartial")</li>
+                                <ul class="account_selection" id="account-selection">
+                                    @Html.Partial("_LoginPartial")
                                 </ul>
                             </li>
                         </div>
@@ -99,7 +120,7 @@
                         <div class="menu_side">
                             <div id="navbar_menu">
                                 <ul class="first-ul">
-                                    <li >
+                                    <li>
                                         <a class="@((ViewBag.ActiveMenu == "Home") ? "active" : "")" href="/home/index">Trang Chủ</a>
                                     </li>
                                     <li><a href="it_about.html">About Us</a></li>
@@ -118,6 +139,12 @@
                                     </li>
                                     <li>
                                         <a class="@((ViewBag.ActiveMenu == "Contact") ? "active" : "")" href="/home/contact">Liên Hệ</a>
+                                    </li>
+                                    <li class="rd-nav-item">
+                                        <a class="rd-nav-link" href="/ShoppingCart/Index">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <span id="checkout_items" class="checkout_items">0</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -206,56 +233,21 @@
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.video.min.js"></script>
     <script src="~/Content/users/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <!-- shoppingCart js files -->
+    <script src="~/Scripts/jsShopping.js"></script>
+    <!-- Account js files -->
+    <script>
+        const account = document.getElementById('account');
+        const accountSelection = document.getElementById('account-selection');
+
+        account.addEventListener('click', () => {
+            account.classList.toggle('active');
+            accountSelection.classList.toggle('active');
+        });
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-@*<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
-    </html>*@

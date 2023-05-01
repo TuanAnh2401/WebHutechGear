@@ -5,7 +5,6 @@
     padding-left: 20px;
     text-align: center;
     vertical-align: middle;
-   
 }
 
     .account > a {
@@ -21,25 +20,18 @@
             margin-left: 8px;
         }
 
-    .account:hover .account_selection {
-        visibility: visible;
-        opacity: 1;
-        top: 100%;
-    }
-
 .account_selection {
-    display: block;
+    display: none;
     position: absolute;
     right: 0;
     top: 120%;
     margin: 0;
-    width: 100%;
+    width: auto;
     background: #FFFFFF;
     visibility: hidden;
     opacity: 0;
-    z-index: 1;
+    z-index: 9999;
     box-shadow: 0 0 25px rgba(63, 78, 100, 0.15);
-    
 }
 
     .account_selection li {
@@ -53,8 +45,8 @@
             color: #232530;
             border-bottom: solid 1px #dddddd;
             font-size: 14px;
-         
         }
+
             .account_selection li a:hover {
                 color: #260966;
             }
@@ -70,3 +62,10 @@
         .account_selection li a i {
             margin-right: 10px;
         }
+
+.account.active .account_selection {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    top: 100%;
+}

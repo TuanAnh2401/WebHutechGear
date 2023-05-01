@@ -105,6 +105,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product model)
         {
+            ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title");
+            ViewBag.Suppliers = new SelectList(db.Suppliers.ToList(), "Id", "Title");
+            ViewBag.Status = new SelectList(db.Status.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
                 model.Modifiedby = User.Identity.GetUserName();

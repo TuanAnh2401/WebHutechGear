@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,47 @@ namespace Web_Hutech_Gear.Controllers
 
             return PartialView("Partial_Procducts", pagedList);
         }
+        public ActionResult Detail(int id)
+        {
+            var detailProduct = db.Products.SingleOrDefault(n => n.Id == id);
 
+            // Sản phẩm liên quan
+            ViewBag.listProduct = db.Products.Where(n => n.ProductCategoryId == detailProduct.ProductCategoryId).ToList().Take(3);
+
+            // Hiển thị danh sách bình luận
+            ViewBag.listCommnet = db.Comment.Where(n => n.ProductId == id).ToList();
+
+            return View(detailProduct);
+        }
+        public ActionResult Partial_Rated(Comment listCommnet)
+        {
+            return PartialView("Partial_Rated", listCommnet);
+        }
+        // POST: Products/Rated
+        [HttpPost]
+        public ActionResult Rated(int productId, string content, int rate)
+        {
+            // Lấy ID của người dùng đăng nhập
+            var userId = User.Identity.GetUserId();
+
+            // Tạo đối tượng Comment và lưu vào database
+            var comment = new Comment
+            {
+                UserId = userId,
+                ProductId = productId,
+                Content = content,
+                Rating = rate,
+                CreatedDate = DateTime.Now
+            };
+
+            db.Comment.Add(comment);
+            db.SaveChanges();
+
+            // Lấy danh sách bình luận của sản phẩm
+            var listComment = db.Comment.Where(c => c.ProductId == productId).ToList();
+
+            // Trả về PartialView Partial_Rated với dữ liệu danh sách bình luận
+            return PartialView("Partial_Rated", listComment);
+        }
     }
 }

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Comment>
+<!-- #region Bình luận -->
+@foreach (var item in Model)
+{
+    <div class="col-lg-10 col-md-10 col-sm-8">
+        <h5>@item.User.FullName</h5>
+        <p><span class="c_date">@item.CreatedDate.ToString("dd-MM-yyyy")</span> </p>
+        <!-- #region rating -->
+        <span class="rating">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <i class="fa fa-star@(i <= item.Rating ? "" : "-o")" aria-hidden="true"></i>
+            }
+        </span>
+        <!-- #endregion -->
+        <p class="msg">
+            @item.Content
+        </p>
+    </div>
+}

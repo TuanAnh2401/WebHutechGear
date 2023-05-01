@@ -264,6 +264,7 @@
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Migrations\202304091251357_EditProduct.cs" />
     <Compile Include="Migrations\202304091251357_EditProduct.Designer.cs">
       <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
@@ -310,6 +311,11 @@
     <Compile Include="Models\Support\CommonAbstract.cs" />
     <Compile Include="Models\Support\SettingHelper.cs" />
     <Compile Include="Models\Support\SettingSystemViewModel.cs" />
+    <Compile Include="Models\VNPay\OrderViewModel.cs" />
+    <Compile Include="Models\VNPay\PayCompare.cs" />
+    <Compile Include="Models\VNPay\PayLib.cs" />
+    <Compile Include="Models\VNPay\ShoppingCart.cs" />
+    <Compile Include="Models\VNPay\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3151,6 +3157,8 @@
     <Content Include="Content\profile\all.min.css" />
     <Content Include="Content\profile\eye.css" />
     <Content Include="Content\profile\userProfile.css" />
+    <Content Include="Content\templates\send1.html" />
+    <Content Include="Content\templates\send2.html" />
     <Content Include="Content\users\css\account.css" />
     <Content Include="Content\users\css\animate.css" />
     <Content Include="Content\users\css\bootstrap-grid.css" />
@@ -3368,7 +3376,6 @@
     <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductImage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Add.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Status\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Status\Edit.cshtml" />
@@ -3479,6 +3486,7 @@
     <Content Include="Content\users\revolution\fonts\revicons\revicons.woff" />
     <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3491,6 +3499,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsShopping.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Uploads\files\deal_ofthe_week.png" />
     <Content Include="Uploads\files\IT%281%29.gif" />
@@ -4528,11 +4537,19 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\NotificationEmailConfim.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
-    <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\Partial_Procducts.cshtml" />
     <Content Include="Views\Products\Partial_GetCategory.cshtml" />
     <Content Include="Views\Products\Partial_GetSupplier.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_ThanhToan.cshtml" />
+    <Content Include="Views\ShoppingCart\PaymentConfirm.cshtml" />
+    <Content Include="Views\Products\Partial_Rated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

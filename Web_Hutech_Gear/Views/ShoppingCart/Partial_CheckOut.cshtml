@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Web_Hutech_Gear.Models
+@using (Ajax.BeginForm("CheckOut", "Shoppingcart", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "load_data",
+    OnComplete = "OnSuccessCO",
+    OnFailure = "OnFailure"
+
+}, new { @Id = "myForm" }))
+{
+    <script>
+        function OnSuccessCO() {
+            location.href = "/ShoppingCart/CheckOutSuccess";
+        }
+        function OnFailure() {
+
+        }
+    </script>
+    @Html.AntiForgeryToken()
+    IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
+    var ID = User.Identity.GetUserId();
+    var find = context.Users.FirstOrDefault(p => p.Id == ID);
+    <div class="checkout-form">
+        <form action="#">
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <label>Họ tên:</label>
+                            <input type="text" value="@find.FullName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-field">
+                            <label>Địa Chỉ:</label>
+                            <input type="text" value="@find.Address">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <label>Số điện Thoại:</label>
+                            <input type="text" value="@find.PhoneNumber">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <label>Địa chỉ Email:</label>
+                            <input type="text" value="@find.Email">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-field">
+                            <label>Hình thức thanh toán</label>
+                            <select class="form-control" name="TypePayment">
+                                <option value="1" selected>COD</option>
+                                <option value="2">Chuyển khoản</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="col-md-12 payment-bt">
+                            <div class="center">
+                                <button type="submit" class="bt_main">Đặt Hàng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+}

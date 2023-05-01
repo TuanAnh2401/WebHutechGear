@@ -1,0 +1,251 @@
+﻿@using Web_Hutech_Gear.Models.EF
+@model Product
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
+    IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
+}
+<!-- #region Điều hướng -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Chi tiết sản phẩm</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="/home/index">Trang chủ</a></li>
+                                <li class="active">@Model.Title</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region chi tiết sản phẩm -->
+<div class="section padding_layout_1 product_detail">
+    <div class="col-md-9" style="margin:0px auto">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="product_detail_feature_img hizoom hi2" style="width: 400px; height: 400px;">
+                    <div class="hizoom hi2" style="width: 400px; height: 400px;">
+                        <div class="small" style="width: 400px; height: 400px;">
+                            <div class="magnifier" style="width: 200px; height: 200px; opacity: 0.7; background: rgb(255, 255, 255); display: none; left: 200px; top: 113px;"></div>
+                            <img src="@Model.Image" alt="" style="width: 690px; height: 400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 product_detail_side detail_style1">
+                <div class="product-heading">
+                    <h2>@Model.Title</h2>
+                </div>
+                <div class="product-detail-side"> <span><del>@Model.PriceSale</del></span><span class="new-price">@Model.Price</span> <span class="rating"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span> <span class="review">(5 customer review)</span> </div>
+                <div class="detail-contant">
+                    <p>@Html.Raw(Model.Description)</p>
+                    <form class="cart" method="post" action="it_cart.html">
+                        <div class="quantity">
+                            <input step="1" min="1" max="5" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" type="number">
+                        </div>
+                        <button type="submit" class="btn sqaure_bt">Add to cart</button>
+                    </form>
+                </div>
+                <div class="share-post">
+                    <a href="#" class="share-text">Share</a>
+                    <ul class="social_icons">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="tab_bar_section">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Chi Tiết</a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Đánh giá</a> </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <style>
+                            ol, ul {
+                                padding-left: 30px;
+                            }
+                        </style>
+                        <div class="tab-content" style="padding:0px">
+                            <div id="description" class="tab-pane active">
+                                <div class="product_desc">
+                                    @Html.Raw(Model.Detail)
+                                </div>
+                            </div>
+                            <div id="reviews" class="tab-pane fade">
+                                <div class="product_review">
+                                    <!-- #endregion -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="full review_bt_section">
+                                                <div id="loading" style="display: none;">
+                                                    <img src="~/Content/users/images/loading.gif" style="background-color: transparent" alt="Loading..." />
+                                                </div>
+                                                <div class="comment-section">
+                                                    @Html.Partial("Partial_Rated", listCommnet)
+                                                </div>
+                                                <div class="float-right">
+                                                    @if (Request.IsAuthenticated)
+                                                    {
+                                                        <a class="btn sqaure_bt" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Để lại đánh giá</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <!--Lấy đường dẫn URL sau local-->
+                                                        string returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
+                                                        <!--Mã hóa đường dãn encode %-->
+                                                        string encodedReturnUrl = HttpUtility.UrlEncode(returnUrl);
+                                                        string loginUrl = "/Account/Login?ReturnUrl=" + encodedReturnUrl;
+                                                        <a class="btn sqaure_bt" href="@loginUrl">Đăng nhập để đánh giá</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="full">
+                                                <div id="collapseExample" class="full collapse commant_box">
+                                                    <form class="comment-form" action="@Url.Action("Rated", "Products", new { productId = Model.Id, strURL = Request.Url.ToString() })" method="post">
+                                                        <div class="rating">
+                                                            <span class="fa fa-star-o rating-star" data-rating="1"></span>
+                                                            <span class="fa fa-star-o rating-star" data-rating="2"></span>
+                                                            <span class="fa fa-star-o rating-star" data-rating="3"></span>
+                                                            <span class="fa fa-star-o rating-star" data-rating="4"></span>
+                                                            <span class="fa fa-star-o rating-star" data-rating="5"></span>
+                                                        </div>
+                                                        <input type="hidden" name="rate" id="rating" value="5">
+                                                        <textarea class="form-control animated" cols="50" id="new-review" name="content" placeholder="Nhập đánh giá của bạn ở đây..." required=""></textarea>
+                                                        <div class="full_bt center">
+                                                            <button class="btn sqaure_bt" type="submit">Gửi</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="main_heading text_align_left" style="margin-bottom: 35px;">
+                            <h3>Những sảm phẩm tương tự</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- #region Sản phẩm liên quan -->
+                @foreach (var item in listProduct)
+                {
+                    <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                        <div class="product_list">
+                            <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
+                            <div class="product_detail_btm">
+                                <div class="center">
+                                    <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="~/Home/Detail?id=@item.Id">@item.Title</a></h4>
+                                </div>
+                                <div class="starratin">
+                                    <div class="center">
+                                        <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="product_price">
+                                    <p><span class="old_price">@item.PriceSale</span> – <span class="new_price">@item.Price</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- #endregion -->
+            </div>
+        </div>
+</div>
+<!-- #endregion -->
+<style>
+    .rating {
+        margin-right: 5px;
+        color: #eabe12;
+        font-size: 18px;
+        margin: 0 -2px;
+    }
+</style>
+@section scripts{
+    <!--Sự kiện chọn ngôi sao đánh giá-->
+    <script>
+        const stars = document.querySelectorAll(".rating-star");
+        const ratingInput = document.querySelector("#rating");
+        // Đánh dấu sẵn 5 ngôi sao
+        for (let i = 0; i < stars.length; i++) {
+            stars[i].classList.replace("fa-star-o", "fa-star");
+        }
+        stars.forEach((star, index) => {
+            star.addEventListener("click", (e) => {
+                const selectedRating = e.target.getAttribute("data-rating");
+                ratingInput.value = selectedRating;
+                for (let i = 0; i <= index; i++) {
+                    stars[i].classList.replace("fa-star-o", "fa-star");
+                }
+                for (let i = index + 1; i < stars.length; i++) {
+                    stars[i].classList.replace("fa-star", "fa-star-o");
+                }
+            });
+        });
+    </script>
+    <!--Ajax cho việc bình luận-->
+    <script>
+        $(function () {
+            // Sử dụng jQuery để bắt sự kiện khi người dùng submit form
+            $('.comment-form').on('submit', function (e) {
+                e.preventDefault(); // Ngăn chặn submit form mặc định
+                var form = $(this);
+                var url = form.attr('action'); // Lấy URL của controller action
+                var method = form.attr('method'); // Lấy HTTP method (GET hoặc POST)
+                $('#loading').show();
+                $('.comment-section').hide();
+                // Sử dụng jQuery AJAX để gửi dữ liệu form đến controller action
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: form.serialize(), // Chuyển đổi dữ liệu form thành chuỗi URL-encoded
+                    success: function (result) {
+                        $('#loading').hide();
+                        $('.comment-section').show();
+                        // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
+                        $('.comment-section').html(result);
+                        // Đặt lại các giá trị của form
+                        form.find('#new-review').val('');
+                        form.find('.rating .fa-star-o').removeClass('fa-star-o').addClass('fa-star');
+                        form.find('#rating').val('5');
+                    }
+                });
+            });
+        });
+        $(function () {
+            $('form').on('submit', function () {
+                $('#loading').show(); // Hiển thị hình đang load
+            });
+        });
+    </script>
+}

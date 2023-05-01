@@ -58,6 +58,7 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
                         @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.Image)
                         @Html.HiddenFor(x => x.CreatedDate)
                         @Html.HiddenFor(x => x.CreatedBy)
                         <div class="card">
