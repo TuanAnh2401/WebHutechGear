@@ -4,101 +4,125 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- section -->
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+<style>
+    .section-slide {
+        background-color: #FFF;
+        font-family:Arial;
+        padding: 50px 0;
+    }
+    .item-slick1 {
+        position: relative;
+    }
 
-<div id="slider" class="section main_slider">
+    .content {
+        padding: 0 30px;
+    }
+
+    .ltext-101 {
+        font-size: 48px;
+        color: #FFF;
+    }
+
+    .ltext-201 {
+        font-size: 36px;
+        color: #FFF;
+    }
+
+    .image {
+        text-align: center;
+    }
+
+    .circle {
+        width: 800px;
+        height: 400px;
+        background-color: #FFF;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .circle img {
+            max-width: 800px;
+            max-height: 400px;
+            background-color: transparent;
+        }
+    .title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        color: #212529;
+    }
+    .description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #212529;
+    }
+    .brand_list li img {
+        filter: grayscale(100%);
+    }
+
+        .brand_list li img:hover {
+            filter: grayscale(0);
+        }
+</style>
+<div id="slider" class="section main_slider" >
     <div class="container-fuild">
         <div class="row">
-            <div id="rev_slider_4_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="classicslider1" style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
-                <!-- START REVOLUTION SLIDER 5.0.7 auto mode -->
-                <div id="rev_slider_4_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
-                    <ul>
-                        @{
-                            ApplicationDbContext db = new ApplicationDbContext();
-                            foreach (var item in db.Advs)
-                            {
-                                <li data-index="@item.Id" data-transition="zoomin" data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-thumb="@item.Image" data-rotate="0" data-saveperformance="off" data-title="@item.Title" data-description="@item.Description">
-                                    <!-- MAIN IMAGE -->
-                                    <img src="@item.Image" alt="" data-bgposition="center center" data-kenburns="on" data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                                    <!-- LAYERS -->
-                                    <!-- LAYER NR. BG -->
-                                    <div class="tp-caption tp-shape tp-shapewrapper   rs-parallaxlevel-0"
-                                         id="slide-270-layer-101"
-                                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                         data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
-                                         data-width="full"
-                                         data-height="full"
-                                         data-whitespace="nowrap"
-                                         data-transform_idle="o:1;"
-                                         data-transform_in="opacity:0;s:1500;e:Power3.easeInOut;"
-                                         data-transform_out="s:300;s:300;"
-                                         data-start="750"
-                                         data-basealign="slide"
-                                         data-responsive_offset="on"
-                                         data-responsive="off"
-                                         style="z-index: 5;background-color:rgba(0, 0, 0, 0.25);border-color:rgba(0, 0, 0, 0.50);"> </div>
-                                    <!-- LAYER NR. 1 -->
-                                    <div class="tp-caption tp-shape tp-shapewrapper   tp-resizeme rs-parallaxlevel-0"
-                                         id="slide-18-layer-91"
-                                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                         data-y="['middle','middle','middle','middle']" data-voffset="['15','15','15','15']"
-                                         data-width="500"
-                                         data-height="140"
-                                         data-whitespace="nowrap"
-                                         data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power4.easeInOut;"
-                                         data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                         data-mask_in="x:0px;y:0px;"
-                                         data-mask_out="x:inherit;y:inherit;"
-                                         data-start="2000"
-                                         data-responsive_offset="on"
-                                         style="z-index: 5;background-color:rgba(29, 29, 29, 0.85);border-color:rgba(0, 0, 0, 0.50);"> </div>
-                                    <!-- LAYER NR. 2 -->
-                                    <div class="tp-caption NotGeneric-Title   tp-resizeme rs-parallaxlevel-0"
-                                         id="slide-18-layer-11"
-                                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                         data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
-                                         data-fontsize="['70','70','70','35']"
-                                         data-lineheight="['70','70','70','50']"
-                                         data-width="none"
-                                         data-height="none"
-                                         data-whitespace="nowrap"
-                                         data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power4.easeInOut;"
-                                         data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                         data-start="1000"
-                                         data-splitin="chars"
-                                         data-splitout="none"
-                                         data-responsive_offset="on"
-                                         data-elementdelay="0.05"
-                                         style="z-index: 6; white-space: nowrap;">@item.Title </div>
-                                        <!-- LAYER NR. 3 -->
-                                        <div class="tp-caption NotGeneric-SubTitle   tp-resizeme rs-parallaxlevel-0"
-                                             id="slide-18-layer-41"
-                                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                             data-y="['middle','middle','middle','middle']" data-voffset="['52','51','51','31']"
-                                             data-width="none"
-                                             data-height="none"
-                                             data-whitespace="nowrap"
-                                             data-transform_idle="o:1;"
-                                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                             data-start="1500"
-                                             data-splitin="none"
-                                             data-splitout="none"
-                                             data-responsive_offset="on"
-                                             style="z-index: 7; white-space: nowrap;"
-                                             @item.Description
-                                    </li>
-                                }
+            <section class="section-slide" >
+                <div class="wrap-slick1">
+                    <div class="slick1" >
+                        @foreach (var item in db.Advs)
+                        {
+                            <div class="item-slick1" style="height: 720px; ">
+                                <div class="container h-full">
+                                    <div class="row h-full align-items-center" style="margin-left: -100px; margin-top: -50px;">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="content">
+                                                <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+                                                    <span class="ltext-101 cl2 respon2 title">
+                                                        @item.Title
+                                                    </span>
+                                                </div>
+
+                                                <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+                                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+                                                        <div class="description">
+                                                            @item.Description
+                                                        </div>
+                                                    </h2>
+
+                                                </div>
+
+                                                <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+                                                    <a href="@item.Link" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                                        Shop Now
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="image">
+                                                <div class="circle">
+                                                    <img src="@item.Image" alt="Image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    </ul>
-                    <div class="tp-static-layers"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
         </div>
     </div>
 </div>
@@ -333,28 +357,19 @@
     </div>
 </div>
 <!-- end section -->
-<style>
-    .brand_list li img {
-        filter: grayscale(100%);
-    }
-
-        .brand_list li img:hover {
-            filter: grayscale(0);
-        }
-</style>
 <!-- section -->
 <div class="section padding_layout_1" style="padding: 50px 0;">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="full">
-                    <ul class="brand_list">
-                        @foreach (var item in db.Suppliers)
-                        {
-                            <li style="margin-bottom:10px"><img src="@item.Image" style="width:200px;height:100px" alt="#" /></li>
-                        }
-                    </ul>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <ul class="brand_list">
+                    @foreach (var item in db.Suppliers)
+                    {
+                        <li style="margin-bottom:10px"><img src="@item.Image" style="width:200px;height:100px" alt="#" /></li>
+                    }
+                </ul>
             </div>
+        </div>
     </div>
 </div>
 <!-- end section -->
@@ -383,4 +398,31 @@
     </div>
 </div>
 <!-- End Model search bar -->
-﻿
+@section scripts{
+    <script>
+        const descriptions = document.querySelectorAll('.description');
+
+        descriptions.forEach(description => {
+            const parent = description.parentElement;
+            parent.addEventListener('mouseover', () => {
+                description.style.display = 'block';
+            });
+            parent.addEventListener('mouseout', () => {
+                description.style.display = '-webkit-box';
+            });
+        });
+        const title = document.querySelectorAll('.title');
+
+        title.forEach(title => {
+            const parent = title.parentElement;
+            parent.addEventListener('mouseover', () => {
+                title.style.display = 'block';
+            });
+            parent.addEventListener('mouseout', () => {
+                title.style.display = '-webkit-box';
+            });
+        });
+    </script>
+}
+
+    ﻿

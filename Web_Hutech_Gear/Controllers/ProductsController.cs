@@ -18,7 +18,14 @@ namespace Web_Hutech_Gear.Controllers
         public ActionResult Index(String currentFilter)
         {
             ViewBag.CurrentFilter = currentFilter;
-            ViewBag.Max = db.Products.Max(p=>p.Price);
+            var max = db.Products.Max(p => p.Price);
+            if(max > 0)
+            {
+                ViewBag.Max = db.Products.Max(p => p.Price);
+            }else
+            {
+                ViewBag.Max = 10000;
+            }
             ViewBag.ActiveMenu = "Products";
             return View();
         }
