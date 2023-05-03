@@ -982,10 +982,13 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*---------------------------------------------*/
 .header-cart-item-img {
-  width: 60px;
-  position: relative;
-  margin-right: 20px;
-  cursor: pointer;
+    width: 60px;
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-cart-item-img img {

@@ -1,29 +1,34 @@
-﻿@model IEnumerable<WebBanHang.Models.ShoppingCartItem>
-@using WebBanHang.Common;
+﻿@model IEnumerable<Web_Hutech_Gear.Models.VNPay.ShoppingCartItem>
+@using Web_Hutech_Gear.Models.Support;
 
 
 @if (Model != null && Model.Any())
 {
-    <h3>GIỎ HÀNG <span style="float:right;position:relative"><small>@Model.Count()</small></span></h3>
-    var i = 0;
     var tongtien = decimal.Zero;
-    <div style="border:1px solid #808080;">
-        <table class="table">
-            @foreach (var item in Model)
-            {
-                tongtien += item.TotalPrice;
-                <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.Quantity</td>
-                    <td>@Common.FormatNumber(item.Price*item.Quantity, 0)</td>
+    <div class="shopping-cart-cart">
+        <table>
+            <tbody>
+                <tr class="head-table">
+                    <td><h5>Giỏ hàng</h5></td>
+                    <td></td>
+                    <td class="text-right" style="padding-right:20px;"><h1 style="color: #ff0000;"><span>@Model.Count()</span></h1></td>
                 </tr>
+                @foreach (var item in Model)
+                {
+                    tongtien += item.TotalPrice;
+                    <tr>
+                        <td><div style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:170px"><h4>@item.ProductName</h4></div></td>
+                        <td><h4>@item.Quantity</h4></td>
+                        <td class="text-right"><h4>@Common.FormatNumber(item.Price * item.Quantity, 0)</h4></td>
+                    </tr>
+                }
 
-            }
-            <tr>
-                <td>Tổng tiền</td>
-                <td></td>
-                <td>@Common.FormatNumber(tongtien, 0)</td>
-            </tr>
+                <tr>
+                    <td><h3>Tổng tiền</h3></td>
+                    <td></td>
+                    <td class="text-right"><h3>@Common.FormatNumber(tongtien, 0)</h3></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 

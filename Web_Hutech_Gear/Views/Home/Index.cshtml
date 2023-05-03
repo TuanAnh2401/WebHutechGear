@@ -1,6 +1,7 @@
 ﻿﻿@using Web_Hutech_Gear.Models
+@using Web_Hutech_Gear.Models.Support
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Trang Chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- section -->
@@ -10,9 +11,10 @@
 <style>
     .section-slide {
         background-color: #FFF;
-        font-family:Arial;
+        font-family: Arial;
         padding: 50px 0;
     }
+
     .item-slick1 {
         position: relative;
     }
@@ -49,6 +51,7 @@
             max-height: 400px;
             background-color: transparent;
         }
+
     .title {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -56,6 +59,7 @@
         overflow: hidden;
         color: #212529;
     }
+
     .description {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -64,6 +68,7 @@
         text-overflow: ellipsis;
         color: #212529;
     }
+
     .brand_list li img {
         filter: grayscale(100%);
     }
@@ -72,12 +77,12 @@
             filter: grayscale(0);
         }
 </style>
-<div id="slider" class="section main_slider" >
+<div id="slider" class="section main_slider">
     <div class="container-fuild">
         <div class="row">
-            <section class="section-slide" >
+            <section class="section-slide">
                 <div class="wrap-slick1">
-                    <div class="slick1" >
+                    <div class="slick1">
                         @foreach (var item in db.Advs)
                         {
                             <div class="item-slick1" style="height: 720px; ">
@@ -102,7 +107,7 @@
 
                                                 <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
                                                     <a href="@item.Link" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                                        Shop Now
+                                                        Mua ngay
                                                     </a>
                                                 </div>
                                             </div>
@@ -200,7 +205,7 @@
                 {
                     if (item.IsHome)
                     {
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all block2-pic">
                             <div class="product_list">
                                 <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
                                 <div class="product_detail_btm">
@@ -211,7 +216,18 @@
                                         <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
                                     </div>
                                     <div class="product_price">
-                                        <p><span class="old_price">@item.PriceSale</span> – <span class="new_price">@item.Price</span></p>
+                                        <p>
+                                            @if (item.IsSale)
+                                            {
+                                                <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
+                                                <span>-</span>
+                                            }
+                                            <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
+                                        </p>
+                                    </div>
+                                    <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                        <input type="text" id="quantity_value" style="display:none" value="1">
+                                        <div class="btn btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</div>
                                     </div>
                                 </div>
                             </div>
@@ -424,5 +440,30 @@
         });
     </script>
 }
+<!--Hiển thị thêm giỏ hàng-->
+<style>
+    .block2-pic {
+        position: relative;
+    }
 
+    .block2-btn {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        color: #ffffff;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+
+    .block2-pic:hover .block2-btn {
+        background-color: #3bc9fa;
+        color: #ffffff;
+        bottom: 10px;
+        z-index: 50;
+    }
+</style>
     ﻿

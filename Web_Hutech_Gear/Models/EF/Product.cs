@@ -42,7 +42,7 @@ namespace Web_Hutech_Gear.Models.EF
         public decimal? PriceSale { get; set; }
 
         [Required(ErrorMessage = "Số lượng không được để trống")]
-        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn hoặc bằng 0.")]
         public int Quantity { get; set; }
         [Required(ErrorMessage = "Loại sản phẩm không được để trống")]
         public int ProductCategoryId { get; set; }

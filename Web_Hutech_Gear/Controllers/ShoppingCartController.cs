@@ -9,6 +9,8 @@ using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.VNPay;
 using Web_Hutech_Gear.Models.Support;
 using Web_Hutech_Gear.Models.EF;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Web_Hutech_Gear.Controllers
 {
@@ -49,7 +51,6 @@ namespace Web_Hutech_Gear.Controllers
             }
             return PartialView();
         }
-
         public ActionResult Partial_Item_Cart()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -59,8 +60,15 @@ namespace Web_Hutech_Gear.Controllers
             }
             return PartialView();
         }
-
-
+        public ActionResult Partial_Item_Cart_Detail()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null && cart.Items.Any())
+            {
+                return PartialView(cart.Items);
+            }
+            return PartialView();
+        }
         public ActionResult ShowCount()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -69,112 +77,6 @@ namespace Web_Hutech_Gear.Controllers
                 return Json(new { Count = cart.Items.Count }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Count = 0 }, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Partial_CheckOut()
-        {
-            return PartialView();
-        }
-
-        static ApplicationUser find = null;
-        static Order order = null;
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CheckOut(OrderViewModel req)
-        {
-            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
-            var ID = User.Identity.GetUserId();
-            find = context.Users.FirstOrDefault(p => p.Id == ID);
-            if (ModelState.IsValid)
-            {
-                ShoppingCart cart = (ShoppingCart)Session["Cart"];
-                using (DbContextTransaction transaction = db.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        if (cart != null)
-                        {
-                            order = new Order();
-                            order.UserId = find.Id;
-                            cart.Items.ForEach(x => order.OrderDetails.Add(new OrderDetail
-                            {
-                                ProductId = x.ProductId,
-                                Quantity = x.Quantity,
-                                Price = x.Price
-                            }));
-                            order.TotalAmount = cart.Items.Sum(x => (x.Price * x.Quantity));
-                            order.CreatedDate = DateTime.Now;
-                            order.ModifiedDate = DateTime.Now;
-                            order.CreatedBy = find.PhoneNumber;
-                            order.TypePayment = req.TypePayment;
-                            //send mail cho khachs hang
-                            if (order.TypePayment == 1)
-                            {
-                                db.Orders.Add(order);
-                                db.SaveChanges();
-                            }
-                            transaction.Commit();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        return Content("Gặp lỗi khi đặt hàng: " + ex.Message);
-                    }
-                }
-                var strSanPham = "";
-                var thanhtien = decimal.Zero;
-                var TongTien = decimal.Zero;
-                if (req.TypePayment == 1)
-                {
-                    foreach (var sp in cart.Items)
-                    {
-                        var findPr = db.Products.FirstOrDefault(p => p.Id == sp.ProductId);
-                        findPr.Quantity = findPr.Quantity - sp.Quantity;
-                        db.SaveChanges();
-                        strSanPham += "<tr>";
-                        strSanPham += "<td>" + sp.ProductName + "</td>";
-                        strSanPham += "<td>" + sp.Quantity + "</td>";
-                        strSanPham += "<td>" + Common.FormatNumber(sp.TotalPrice, 0) + "</td>";
-                        strSanPham += "</tr>";
-                        thanhtien += sp.Price * sp.Quantity;
-                    }
-                    TongTien = thanhtien;
-                    string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"));
-                    contentCustomer = contentCustomer.Replace("{{MaDon}}","HD" + order.Id);
-                    contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
-                    contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
-                    contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", find.FullName);
-                    contentCustomer = contentCustomer.Replace("{{Phone}}", find.PhoneNumber);
-                    contentCustomer = contentCustomer.Replace("{{Email}}", find.Email);
-                    contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", find.Address);
-                    contentCustomer = contentCustomer.Replace("{{ThanhTien}}", Common.FormatNumber(thanhtien, 0));
-                    contentCustomer = contentCustomer.Replace("{{TongTien}}",Common.FormatNumber(TongTien, 0));
-                    Common.SendMail("ShopOnline", "Đơn hàng #" + "HD" + order.Id, contentCustomer.ToString(), find.Email);
-
-                    string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
-                    contentAdmin = contentAdmin.Replace("{{MaDon}}", "HD" + order.Id);
-                    contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
-                    contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", find.FullName);
-                    contentAdmin = contentAdmin.Replace("{{Phone}}", find.PhoneNumber);
-                    contentAdmin = contentAdmin.Replace("{{Email}}", find.Email);
-                    contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", find.Address);
-                    contentAdmin = contentAdmin.Replace("{{ThanhTien}}", Common.FormatNumber(thanhtien, 0));
-                    contentAdmin = contentAdmin.Replace("{{TongTien}}",Common.FormatNumber(TongTien, 0));
-                    Common.SendMail("ShopOnline", "Đơn hàng mới #" + "HD" + order.Id, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-                    Session["Cart"] = null;
-                    return View("PaymentConfirm");
-
-                }
-                else
-                {
-                    return RedirectToAction("Payment", "ShoppingCart");
-
-                }
-
-            }
-            return Json(new { Success = false, Code = -1 });
         }
 
         [HttpPost]
@@ -208,6 +110,7 @@ namespace Web_Hutech_Gear.Controllers
                 cart.AddToCart(item, quantity);
                 Session["Cart"] = cart;
                 code = new { Success = true, msg = "Thêm sản phẩm vào giở hàng thành công!", code = 1, Count = cart.Items.Count };
+
             }
             return Json(code);
         }
@@ -254,6 +157,94 @@ namespace Web_Hutech_Gear.Controllers
             }
             return Json(new { Success = false });
         }
+
+        public ActionResult Partial_CheckOut()
+        {
+            var ID = User.Identity.GetUserId();
+            var findUser = db.Users.FirstOrDefault(p => p.Id == ID);
+            return PartialView("Partial_CheckOut", findUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Checkout(int TypePayment)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.FirstOrDefault(p => p.Id == userId);
+            var cart = (ShoppingCart)Session["Cart"];
+
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Gặp lỗi khi đặt hàng: Hãy kiểm tra lại Tài khoản đăng nhập" });
+            }
+            if (cart == null)
+            {
+                return Json(new { success = false, message = "Gặp lỗi khi đặt hàng: Hãy kiểm tra lại Giỏ hàng của bạn" });
+
+            }
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var order = new Order
+                    {
+                        UserId = user.Id,
+                        OrderDetails = cart.Items.Select(x => new OrderDetail
+                        {
+                            ProductId = x.ProductId,
+                            Quantity = x.Quantity,
+                            Price = x.Price
+                        }).ToList(),
+                        TotalAmount = cart.Items.Sum(x => x.Price * x.Quantity),
+                        CreatedDate = DateTime.Now,
+                        ModifiedDate = DateTime.Now,
+                        CreatedBy = user.UserName,
+                        TypePayment = TypePayment,
+                        Quantity = cart.Items.Count()
+                    };
+                    var errorMessage = "";
+                    foreach (var sp in cart.Items)
+                    {
+                        var findPr = db.Products.FirstOrDefault(p => p.Id == sp.ProductId);
+                        if (findPr != null && findPr.Quantity >= sp.Quantity)
+                            findPr.Quantity = findPr.Quantity - sp.Quantity;
+                        else
+                            errorMessage += $"Số lượng sản phẩm {findPr.Title} trong giỏ hàng không đủ!\n";
+                    }
+                    if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        // Return error message as JSON
+                        return Json(new { success = false, message = errorMessage });
+                    }
+                    if (order.TypePayment == 1)
+                    {
+                        db.Orders.Add(order);
+                        db.SaveChanges();
+                    }
+                    transaction.Commit();
+
+                    if (TypePayment == 1)
+                    {
+                        SendOrderEmail(order, user);
+                        Session["Cart"] = null;
+                        return Json(new { success = true, url = Url.Action("PaymentConfirm", "ShoppingCart") });
+
+                    }
+                    else
+                    {
+                        Session["Order"] = order;
+                        return Json(new { success = true, url = Url.Action("Payment", "ShoppingCart") });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return Json(new { success = false, message = "Gặp lỗi khi đặt hàng: " + ex.Message });
+                }
+            }
+        }
+
         public ActionResult Payment()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -284,6 +275,9 @@ namespace Web_Hutech_Gear.Controllers
         }
         public ActionResult PaymentConfirm()
         {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.FirstOrDefault(p => p.Id == userId);
+            Order order = (Order)Session["Order"];
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (Request.QueryString.Count > 0)
             {
@@ -311,48 +305,29 @@ namespace Web_Hutech_Gear.Controllers
                 {
                     if (vnp_ResponseCode == "00")
                     {
-                        db.Orders.Add(order);
-                        db.SaveChanges();
-                        var strSanPham = "";
-                        var thanhtien = decimal.Zero;
-                        var TongTien = decimal.Zero;
-                        foreach (var sp in cart.Items)
+                        using (DbContextTransaction transaction = db.Database.BeginTransaction())
                         {
-                            var findPr = db.Products.FirstOrDefault(p => p.Id == sp.ProductId);
-                            findPr.Quantity = findPr.Quantity - sp.Quantity;
-                            db.SaveChanges();
-                            strSanPham += "<tr>";
-                            strSanPham += "<td>" + sp.ProductName + "</td>";
-                            strSanPham += "<td>" + sp.Quantity + "</td>";
-                            strSanPham += "<td>" + Common.FormatNumber(sp.TotalPrice, 0) + "</td>";
-                            strSanPham += "</tr>";
-                            thanhtien += sp.Price * sp.Quantity;
+                            try
+                            {
+                                db.Orders.Add(order);
+                                foreach (var item in cart.Items)
+                                {
+                                    var findPr = db.Products.FirstOrDefault(p => p.Id == item.ProductId);
+                                    if (findPr != null && findPr.Quantity >= item.Quantity)
+                                        findPr.Quantity = findPr.Quantity - item.Quantity;
+                                }
+                                db.SaveChanges();
+                                SendOrderEmail(order, user);
+                                Session["Cart"] = null;
+                                Session["Order"] = null;
+                                transaction.Commit();
+                            }
+                            catch (Exception ex)
+                            {
+                                transaction.Rollback();
+                                ViewBag.Message = "Có lỗi xảy ra khi thanh toán"+ex.Message;
+                            }
                         }
-                        TongTien = thanhtien;
-                        string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"));
-                        contentCustomer = contentCustomer.Replace("{{MaDon}}","HD"+ order.Id);
-                        contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
-                        contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
-                        contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", find.FullName);
-                        contentCustomer = contentCustomer.Replace("{{Phone}}", find.FullName);
-                        contentCustomer = contentCustomer.Replace("{{Email}}", find.Email);
-                        contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", find.Address);
-                        contentCustomer = contentCustomer.Replace("{{ThanhTien}}", Common.FormatNumber(thanhtien, 0));
-                        contentCustomer = contentCustomer.Replace("{{TongTien}}", Common.FormatNumber(TongTien, 0));
-                        Common.SendMail("ShopOnline", "Đơn hàng #" + "HD" + order.Id, contentCustomer.ToString(), find.Email);
-
-                        string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
-                        contentAdmin = contentAdmin.Replace("{{MaDon}}", "HD" + order.Id);
-                        contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                        contentAdmin = contentAdmin.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
-                        contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", find.FullName);
-                        contentAdmin = contentAdmin.Replace("{{Phone}}", find.PhoneNumber);
-                        contentAdmin = contentAdmin.Replace("{{Email}}", find.Email);
-                        contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", find.Address);
-                        contentAdmin = contentAdmin.Replace("{{ThanhTien}}", Common.FormatNumber(thanhtien, 0));
-                        contentAdmin = contentAdmin.Replace("{{TongTien}}", Common.FormatNumber(TongTien, 0));
-                        Common.SendMail("ShopOnline", "Đơn hàng mới #" + "HD" + order.Id, contentAdmin.ToString(), "lokino.00002@gmail.com");
-                        Session["Cart"] = null;
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + "| \n Mã giao dịch: " + vnpayTranId;
                     }
@@ -367,8 +342,54 @@ namespace Web_Hutech_Gear.Controllers
                     ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
                 }
             }
-
             return View();
+        }
+        public void SendOrderEmail(Order order, ApplicationUser user)
+        {
+            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"));
+            contentCustomer = contentCustomer.Replace("{{MaDon}}", "HD" + order.Id);
+            contentCustomer = contentCustomer.Replace("{{SanPham}}", GetOrderProducts(order));
+            contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
+            contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", user.FullName);
+            contentCustomer = contentCustomer.Replace("{{Phone}}", user.PhoneNumber);
+            contentCustomer = contentCustomer.Replace("{{Email}}", user.Email);
+            contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", user.Address);
+            contentCustomer = contentCustomer.Replace("{{ThanhTien}}", Common.FormatNumber(order.TotalAmount, 0));
+            contentCustomer = contentCustomer.Replace("{{TongTien}}", Common.FormatNumber(GetOrderTotal(order), 0));
+            Common.SendMail("HutechGear", "Đơn hàng #" + "HD" + order.Id, contentCustomer, user.Email);
+
+            string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
+            contentAdmin = contentAdmin.Replace("{{MaDon}}", "HD" + order.Id);
+            contentAdmin = contentAdmin.Replace("{{SanPham}}", GetOrderProducts(order));
+            contentAdmin = contentAdmin.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
+            contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", user.FullName);
+            contentAdmin = contentAdmin.Replace("{{Phone}}", user.PhoneNumber);
+            contentAdmin = contentAdmin.Replace("{{Email}}", user.Email);
+            contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", user.Address);
+            contentAdmin = contentAdmin.Replace("{{ThanhTien}}", Common.FormatNumber(order.TotalAmount, 0));
+            contentAdmin = contentAdmin.Replace("{{TongTien}}", Common.FormatNumber(GetOrderTotal(order), 0));
+            Common.SendMail("HutechGear", "Đơn hàng mới #" + "HD" + order.Id, contentAdmin, ConfigurationManager.AppSettings["EmailAdmin"]);
+        }
+
+        private string GetOrderProducts(Order order)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (OrderDetail detail in order.OrderDetails)
+            {
+                var Name = db.Products.Find(detail.Id).Title; 
+                sb.AppendLine("<tr><td>" + Name + "</td><td>" + Common.FormatNumber(detail.Price, 0) + "</td><td>" + detail.Quantity + "</td><td>" + Common.FormatNumber(detail.Quantity * detail.Price, 0) + "</td></tr>");
+            }
+            return sb.ToString();
+        }
+
+        private decimal GetOrderTotal(Order order)
+        {
+            decimal total = 0;
+            foreach (OrderDetail detail in order.OrderDetails)
+            {
+                total += detail.Price * detail.Quantity;
+            }
+            return total;
         }
     }
 }
