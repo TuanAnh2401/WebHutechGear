@@ -1,29 +1,16 @@
 ﻿@using Web_Hutech_Gear.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="~/Content/login/images/icons/favicon.ico" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/iconic/css/material-design-iconic-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
@@ -43,8 +30,6 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
-
-<body>
     <div class="limiter">
         <div class="container-login100" style="background-image: url('@Url.Content("~/Content/login/images/bg-01.jpg")');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
@@ -94,41 +79,21 @@
         </div>
     </div>
     <div id="dropDownSelect1"></div>
-
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/animsition/js/animsition.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/bootstrap/js/popper.js"></script>
-    <script src="~/Content/login/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/daterangepicker/moment.min.js"></script>
-    <script src="~/Content/login/vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <script src="~/Content/login/js/main.js"></script>
-
-</body>
-</html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-    $(document).ready(function () {
-        const togglePassword = $('#togglePassword');
-        const password = $('#id_password');
+        $(document).ready(function () {
+            const togglePassword = $('#togglePassword');
+            const password = $('#id_password');
 
-        togglePassword.on('click', function (e) {
-            // toggle the type attribute
-            const type = password.attr('type') === 'password' ? 'text' : 'password';
-            password.attr('type', type);
-            // toggle the eye slash icon
-            togglePassword.toggleClass('fa-eye fa-eye-slash');
+            togglePassword.on('click', function (e) {
+                // toggle the type attribute
+                const type = password.attr('type') === 'password' ? 'text' : 'password';
+                password.attr('type', type);
+                // toggle the eye slash icon
+                togglePassword.toggleClass('fa-eye fa-eye-slash');
+            });
         });
-    });
 
     </script>
 }

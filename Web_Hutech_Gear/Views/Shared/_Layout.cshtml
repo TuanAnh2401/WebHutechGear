@@ -10,9 +10,6 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
     <title>@SettingHelper.GetValue("SettingTitle")</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <!-- site icons -->
     <link rel="icon" href="@SettingHelper.GetValue("SettingLogo")" type="image/gif" />
     <!-- bootstrap css -->
@@ -97,15 +94,15 @@
                                     <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
                                 </ul>
                             </div>
-                            <li class="account" id="account" style="width:200px; margin:0px auto">
+                            <div class="account" id="account" style="width:200px; margin:0px auto">
                                 <a href="#">
-                                    My Account
+                                    Tài khoản
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="account_selection" id="account-selection">
                                     @Html.Partial("_LoginPartial")
                                 </ul>
-                            </li>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,17 +143,12 @@
                                     <li>
                                         <a class="@((ViewBag.ActiveMenu == "Contact") ? "active" : "")" href="/home/contact">Liên Hệ</a>
                                     </li>
-                                    <li class="rd-nav-item">
-                                        <a class="rd-nav-link" href="/ShoppingCart/Index">
+                                    <li class="js-show-cart">
+                                        <a>
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             <span id="checkout_items" class="checkout_items">0</span>
                                         </a>
                                     </li>
-                                </ul>
-                            </div>
-                            <div class="search_icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -168,6 +160,12 @@
         <!-- header bottom end -->
     </header>
     <!-- end header -->
+    <!-- Cart -->
+    <div class="wrap-header-cart js-panel-cart">
+        @Html.Action("Partial_Item_Cart", "ShoppingCart")
+    </div>
+    <!-- End Cart -->
+
     @RenderBody()
     <!-- footer -->
     <footer class="footer_style_2">
@@ -201,7 +199,7 @@
                             <div class="footer_mail-section" style="float:inherit">
                                 <form>
                                     <fieldset>
-                                        <div class="field">
+                                        <div class="field row" style="padding-left:5px">
                                             <input placeholder="Email" type="text">
                                             <button class="button_custom"><i class="fa fa-envelope" aria-hidden="true"></i></button>
                                         </div>
@@ -242,22 +240,82 @@
     <!-- Banner js files -->
     <script src="~/Content/users/banner/vendor/slick/slick.min.js"></script>
     <script src="~/Content/users/banner/js/slick-custom.js"></script>
-
     <!-- shoppingCart js files -->
     <script src="~/Scripts/jsShopping.js"></script>
-    <!-- Account js files -->
+    <!-- Account js -->
     <script>
-        const account = document.getElementById('account');
-        const accountSelection = document.getElementById('account-selection');
+        const body = document.querySelector('body');
+        const account = document.querySelector('.account');
+        const accountSelection = document.querySelector('.account-selection');
 
-        account.addEventListener('click', () => {
+        body.addEventListener('click', (event) => {
+            if (!account.contains(event.target)) {
+                account.classList.remove('active');
+            }
+        });
+
+        account.addEventListener('click', (event) => {
+            event.stopPropagation();
             account.classList.toggle('active');
-            accountSelection.classList.toggle('active');
         });
     </script>
+    <!-- Cart js -->
+    <script>
+        $('.js-show-cart').on('click', function () {
+            $('.js-panel-cart').addClass('show-header-cart');
+            $.ajax({
+                url: '/ShoppingCart/Partial_Item_Cart', // URL của action method cần request
+                type: 'GET', // Loại request (GET hoặc POST)
+                success: function (result) {
+                    $('.show-header-cart').html(result); // Thay thế nội dung của div
+                },
+                error: function () {
+                    alert('Lỗi khi tải dữ liệu giỏ hàng');
+                }
+            });
+        });
 
+        $('.wrap-header-cart').on('click', function () {
+            $('.js-panel-cart').removeClass('show-header-cart');
+        });
+    </script>
+    <script>
+        // Bắt sự kiện khi nhập giá trị vào input
+        $('body').on('input', 'input[name="quantity"]', function (e) {
+            var val = parseInt($(this).val());
+            $(this).focus();
+            if (isNaN(val) || val < 1) {
+                $(this).val(1); // Nếu giá trị nhập vào nhỏ hơn 1 thì cập nhật lại giá trị thành 1
+            } else if (val > 99) {
+                $(this).val(99); // Nếu giá trị nhập vào lớn hơn 99 thì cập nhật lại giá trị thành 99
+            }
+        });
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $('#checkout-form').submit(function (event) {
+                event.preventDefault(); // prevent default form submission
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: '/shoppingcart/checkout',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.url; // Chuyển hướng đến view
+                        } else {
+                            alert(response.message); // Hiện thông báo lỗi nếu có lỗi xảy ra
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra trong quá trình xử lý!');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

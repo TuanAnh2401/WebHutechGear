@@ -1,71 +1,97 @@
-﻿@model IEnumerable<WebBanHang.Models.ShoppingCartItem>
-@using WebBanHang.Common
-<table class="table">
-    <tr class="text-center">
-        <th>STT</th>
-        <th>Ảnh sản phẩm</th>
-        <th>Tên sản phẩm</th>
-        <th>Danh mục</th>
-        <th>Giá</th>
+﻿@model IEnumerable<Web_Hutech_Gear.Models.VNPay.ShoppingCartItem>
+@using Web_Hutech_Gear.Models.Support
+<div class="s-full js-hide-cart"></div>
+<div class="header-cart flex-col-l" style="padding-right:10px;padding-left:20px">
+    <div class="header-cart-title flex-w flex-sb-m p-b-8" style="padding-left:55px">
+        <span class="mtext-103">
+            Giỏ hàng của bạn
+        </span>
 
-        <th style="width:100px;">Số lượng</th>
-        <th>Thành tiền</th>
-        <th style="width:200px;">
-
-        </th>
-    </tr>
-    @if (Model != null && Model.Any())
-    {
-        var i = 0;
-        var tongtien = decimal.Zero;
-        foreach (var item in Model)
+        <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+            <i class="zmdi zmdi-close"></i>
+        </div>
+    </div>
+    <div class="header-cart-content flex-w js-pscroll">
+        @if (Model != null && Model.Any())
         {
-            tongtien += item.TotalPrice;
-            <tr class="text-center" id="trow_@item.ProductId">
-                <td>@(i+1)</td>
-                <td><img src="@item.ProductImg" width="60" /></td>
-                <td>
-                    <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">
-                        @item.ProductName
+            var i = 0;
+            var tongtien = decimal.Zero;
+            <ul class="header-cart-wrapitem w-full">
+                @foreach (var item in Model)
+                {
+                    tongtien += item.TotalPrice;
+                    <li class="header-cart-item flex-w flex-t m-b-12" id="trow_@item.ProductId">
+                        <div class="header-cart-item-img btnDelete" data-id="@item.ProductId">
+                            <img src="@item.ProductImg" alt="IMG">
+                        </div>
+
+                        <div class="header-cart-item-txt p-t-8">
+                            <a href="/Products/Detail?id=@item.ProductId" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                @item.ProductName
+                            </a>
+                            <span class="header-cart-item-info">
+                                @item.Quantity x  @Common.FormatNumber(item.Price, 0)
+                            </span>
+                        </div>
+                    </li>
+                    i++;
+                }
+            </ul>
+            <div class="w-full">
+                <div class="header-cart-total w-full p-tb-40">
+                    Tổng cộng: @Common.FormatNumber(tongtien, 0)
+                </div>
+
+                <div class="header-cart-buttons flex-w w-full">
+                    <a href="/shoppingcart/index" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        Chi tiết giỏ hàng
                     </a>
-                </td>
-                <td>@item.CategoryName</td>
-                <td>@Common.FormatNumber(item.Price, 0)</td>
-                <td><input type="number" class="form-control-cart" id="Quantity_@item.ProductId" value="@item.Quantity" /></td>
-                <th>@Common.FormatNumber(item.TotalPrice, 2)</th>
-                <td>
-                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-danger btnDelete">Xóa</a>
-                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate">Cập nhật</a>
-                </td>
-            </tr>
-            i++;
+
+                    <a href="/shoppingcart/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        Đặt Hàng
+                    </a>
+                </div>
+            </div>
         }
-        <tr>
-            <th colspan="6" class="text-right">Tổng: </th>
-            <th class="text-center">@Common.FormatNumber(tongtien, 0)</th>
-            <th></th>
-        </tr>
-    
-    }
-    else
-    {
-        <tr>
-            <th colspan="7">Không có sản phẩm trong giỏ hàng!!</th>
-        </tr>
-    }
-</table>
+        else
+        {
+
+            <h4 colspan="7">Không có sản phẩm trong giỏ hàng!!</h4>
+        }
+    </div>
+</div>
+
 <style>
-    .form-control-cart {
-        display: block;
-        width: 100%;
-        font-size: 15px;
-        line-height: 1.85;
-        color: #495057;
-        background-color: #ffffff;
-        background-image: none;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    .btnDelete {
+        position: relative;
     }
+
+        .btnDelete::after {
+            content: 'x';
+            font-size: 16px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .btnDelete:hover::after {
+            opacity: 1;
+        }
+
 </style>

@@ -29,7 +29,7 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>Sign in using:</p>
-                    <div class="btn-group" role="group" aria-label="External Logins">
+                    <div class="btn-group" style="padding-left:25px" role="group" aria-label="External Logins">
                         @foreach (AuthenticationDescription p in loginProviders)
                          {
                             var iconClass = "";

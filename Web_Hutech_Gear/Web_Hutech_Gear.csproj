@@ -5372,13 +5372,13 @@
     <Content Include="Views\Products\Partial_GetSupplier.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
-    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_Item_ThanhToan.cshtml" />
     <Content Include="Views\ShoppingCart\PaymentConfirm.cshtml" />
     <Content Include="Views\Products\Partial_Rated.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Cart_Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

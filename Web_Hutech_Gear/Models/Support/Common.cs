@@ -8,7 +8,7 @@ namespace Web_Hutech_Gear.Models.Support
     public class Common
     {
         private static string password = ConfigurationManager.AppSettings["PasswordEmail"];
-        private static string Email = ConfigurationManager.AppSettings["Email"];
+        private static string Email = ConfigurationManager.AppSettings["EmailAdmin"];
         public static void SendMail(string name, string subject, string content, string toMail)
         {
             try
