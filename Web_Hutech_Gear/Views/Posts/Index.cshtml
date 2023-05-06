@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Bài viết";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Bài viết</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="/home/index">Trang Chủ</a></li>
+                                <li class="active">Bài viết</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section padding_layout_1 blog_grid">
+    <div class="container">
+        <div class="row posts-list">
+            @Html.Action("Partial_Posts", "Posts")
+        </div>
+    </div>
+</div>
+<!-- end section -->
+@section scripts{
+    <script>
+        $(document).on("click", ".pagination a", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+            $('.post-list').hide();
+            // Lấy đường dẫn href của nút phân trang
+            var url = $(this).attr("href");
+
+            // Gửi yêu cầu ajax đến server để lấy dữ liệu mới
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (result) {
+                    $('#loading').hide();
+                    $('.posts-list').show();
+                    // Cập nhật lại nội dung của phần tử chứa dữ liệu
+                    $(".posts-list").html(result);
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra!');
+                }
+            });
+        });
+        $(function () {
+            $('form').on('submit', function () {
+                $('#loading').show(); // Hiển thị hình đang load
+            });
+        });
+    </script>
+}

@@ -1,10 +1,12 @@
 ﻿using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.EF;
 namespace Web_Hutech_Gear.Controllers
@@ -17,12 +19,23 @@ namespace Web_Hutech_Gear.Controllers
             ViewBag.ActiveMenu = "Home";
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult Partial_Products_Home()
         {
-            ViewBag.Message = "Your application description page.";
+            var listProducts = db.Products.Where(p=>p.IsHome).ToList();
+            return PartialView("Partial_Products_Home", listProducts);
+        }
+        public ActionResult Partial_Products_News()
+        {
+            var listNews = db.News.Where(p => p.IsHome).ToList();
+            return PartialView("Partial_Products_News", listNews);
+        }
+        public ActionResult Sale()
+        {
+            ViewBag.ActiveMenu = "Sale";
 
-            return View();
+            var items = db.Products.Where(p=>p.IsSale).ToList();
+
+            return View(items);
         }
         [HttpGet]
         public ActionResult Contact()

@@ -1,5 +1,4 @@
 ﻿﻿@using Web_Hutech_Gear.Models
-@using Web_Hutech_Gear.Models.Support
 @{
     ViewBag.Title = "Trang Chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,75 +7,6 @@
 @{
     ApplicationDbContext db = new ApplicationDbContext();
 }
-<style>
-    .section-slide {
-        background-color: #FFF;
-        font-family: Arial;
-        padding: 50px 0;
-    }
-
-    .item-slick1 {
-        position: relative;
-    }
-
-    .content {
-        padding: 0 30px;
-    }
-
-    .ltext-101 {
-        font-size: 48px;
-        color: #FFF;
-    }
-
-    .ltext-201 {
-        font-size: 36px;
-        color: #FFF;
-    }
-
-    .image {
-        text-align: center;
-    }
-
-    .circle {
-        width: 800px;
-        height: 400px;
-        background-color: #FFF;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .circle img {
-            max-width: 800px;
-            max-height: 400px;
-            background-color: transparent;
-        }
-
-    .title {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        color: #212529;
-    }
-
-    .description {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #212529;
-    }
-
-    .brand_list li img {
-        filter: grayscale(100%);
-    }
-
-        .brand_list li img:hover {
-            filter: grayscale(0);
-        }
-</style>
 <div id="slider" class="section main_slider">
     <div class="container-fuild">
         <div class="row">
@@ -200,41 +130,7 @@
             </div>
         </div>
         <div class="row">
-            @{
-                foreach (var item in db.Products)
-                {
-                    if (item.IsHome)
-                    {
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all block2-pic">
-                            <div class="product_list">
-                                <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
-                                <div class="product_detail_btm">
-                                    <div class="center">
-                                        <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="~/Products/Detail?id=@item.Id">@item.Title</a></h4>
-                                    </div>
-                                    <div class="starratin">
-                                        <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                    </div>
-                                    <div class="product_price">
-                                        <p>
-                                            @if (item.IsSale)
-                                            {
-                                                <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
-                                                <span>-</span>
-                                            }
-                                            <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
-                                        </p>
-                                    </div>
-                                    <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                        <input type="text" id="quantity_value" style="display:none" value="1">
-                                        <div class="btn btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            }
+            @Html.Action("Partial_Products_Home", "Home")
         </div>
     </div>
 </div>
@@ -252,28 +148,7 @@
             </div>
         </div>
         <div class="row">
-            @{
-                foreach (var item in db.News)
-                {
-                    if (item.IsHome)
-                    {
-                        <div class="col-md-3">
-                            <div class="full blog_colum">
-                                <div class="blog_feature_img"> <img src="@item.Image" alt="#" style="width:270px;height:140px" /> </div>
-                                <div class="post_time">
-                                    <p><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy HH:mm")</p>
-                                </div>
-                                <div class="blog_feature_head">
-                                    <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.Title</h4>
-                                </div>
-                                <div class="blog_feature_cont">
-                                    <p style="  max-height: calc(2 * var(--line-height)); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@item.Description</p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            }
+            @Html.Action("Partial_Products_News", "Home")
         </div>
     </div>
 </div>
@@ -440,30 +315,73 @@
         });
     </script>
 }
-<!--Hiển thị thêm giỏ hàng-->
 <style>
-    .block2-pic {
+    .section-slide {
+        background-color: #FFF;
+        font-family: Arial;
+        padding: 50px 0;
+    }
+
+    .item-slick1 {
         position: relative;
     }
 
-    .block2-btn {
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        color: #ffffff;
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
-        transform: translateX(-50%);
-        z-index: -1;
+    .content {
+        padding: 0 30px;
     }
 
-    .block2-pic:hover .block2-btn {
-        background-color: #3bc9fa;
-        color: #ffffff;
-        bottom: 10px;
-        z-index: 50;
+    .ltext-101 {
+        font-size: 48px;
+        color: #FFF;
     }
+
+    .ltext-201 {
+        font-size: 36px;
+        color: #FFF;
+    }
+
+    .image {
+        text-align: center;
+    }
+
+    .circle {
+        width: 800px;
+        height: 400px;
+        background-color: #FFF;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .circle img {
+            max-width: 800px;
+            max-height: 400px;
+            background-color: transparent;
+        }
+
+    .title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        color: #212529;
+    }
+
+    .description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #212529;
+    }
+
+    .brand_list li img {
+        filter: grayscale(100%);
+    }
+
+        .brand_list li img:hover {
+            filter: grayscale(0);
+        }
 </style>
     ﻿

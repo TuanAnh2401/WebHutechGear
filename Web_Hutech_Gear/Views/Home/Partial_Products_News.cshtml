@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.News>
+@{
+    foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="full blog_colum">
+                <div class="blog_feature_img"> <img src="@item.Image" alt="#" style="width:270px;height:140px" /> </div>
+                <div class="post_time">
+                    <p><i class="fa fa-clock-o"></i> @item.CreatedDate.ToString("dd/MM/yyyy HH:mm")</p>
+                </div>
+                <div class="blog_feature_head">
+                    <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.Title</h4>
+                </div>
+                <div class="blog_feature_cont">
+                    <p style="  max-height: calc(2 * var(--line-height)); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@item.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+}
