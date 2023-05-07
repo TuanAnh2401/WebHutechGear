@@ -94,6 +94,12 @@ namespace Web_Hutech_Gear.Controllers
             // Hiển thị danh sách bình luận
             ViewBag.listCommnet = db.Comment.Where(n => n.ProductId == id).ToList();
 
+            // Lấy danh sách các hình ảnh của sản phẩm từ cơ sở dữ liệu
+            var productImages = db.ProductImages.Where(n => n.ProductId == id).ToList();
+
+            // Gán danh sách các hình ảnh cho ViewBag.listProduct
+            ViewBag.listImage = productImages;
+
             return View(detailProduct);
         }
         public ActionResult Partial_Rated(Comment listCommnet)
