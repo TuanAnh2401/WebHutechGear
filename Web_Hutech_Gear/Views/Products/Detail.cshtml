@@ -8,7 +8,6 @@
 @{
     IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
     IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
-    IEnumerable<ProductImage> listImage = ViewBag.listImage as IEnumerable<ProductImage>;
 }
 <!-- #region Điều hướng -->
 <div id="inner_banner" class="section inner_banner_section">
@@ -36,21 +35,15 @@
     <div class="col-md-9" style="margin:0px auto">
         <div class="row">
             <div class="col-xl-6 col-lg-12 col-md-12">
-                <div class="product_detail_feature_img">
-                    <div class="main_image">
-                        <div class="magnifier"></div>
-                        <img id="mainImage" src="@Model.Image" alt="Error">
-                    </div>
-                    <div class="thumbnail_images">
-                        @foreach (var image in ViewBag.listImage)
-                        {
-                            <img src="@image.Image" alt="Error" class="thumbnail" onclick="loadImage('@image.Image')">
-                        }
+                <div class="product_detail_feature_img hizoom hi2" style="width: 400px; height: 400px;">
+                    <div class="hizoom hi2" style="width: 400px; height: 400px;">
+                        <div class="small" style="width: 400px; height: 400px;">
+                            <div class="magnifier" style="width: 200px; height: 200px; opacity: 0.7; background: rgb(255, 255, 255); display: none; left: 200px; top: 113px;"></div>
+                            <img src="@Model.Image" alt="" style="width: 560px; height: 400px;">
+                        </div>
                     </div>
                 </div>
             </div>
-
-
             <div class="col-xl-6 col-lg-12 col-md-12 product_detail_side detail_style1">
                 <div class="product-heading">
                     <h2>@Model.Title</h2>
@@ -76,11 +69,11 @@
                 <div class="share-post">
                     <a href="#" class="share-text">Share</a>
                     <ul class="social_icons">
-                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.ToString())&t=@Url.Encode(ViewBag.Title)" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.ToString())&text=@Url.Encode(ViewBag.Title)" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="https://plus.google.com/share?url=@Url.Encode(Request.Url.ToString())" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.instagram.com/share?url=@Url.Encode(Request.Url.ToString())" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.linkedin.com/shareArticle?url=@Url.Encode(Request.Url.ToString())" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -283,14 +276,6 @@
         });
     </script>
 }
-<!-- load ảnh-->
-<script>
-    function loadImage(imageSource) {
-        var mainImage = document.getElementById('mainImage');
-        mainImage.src = imageSource;
-    }
-</script>
-
 <!--Hiển thị thêm giỏ hàng-->
 <style>
     .block2-pic {
@@ -316,56 +301,4 @@
         bottom: 10px;
         z-index: 50;
     }
-
-    .product_detail_feature_img {
-        position: relative;
-    }
-
-    .main_image {
-        position: relative;
-       
-    }
-
-        .main_image .magnifier {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            opacity: 0.7;
-            background: rgba(255, 255, 255, 0.7);
-            display: none;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .main_image img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-    .thumbnail_images {
-        display: flex;
-        justify-content: flex-start;
-        margin-top: 10px;
-    }
-
-    .thumbnail {
-        width: 60px;
-        height: 60px;
-        margin-right: 5px;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-    }
-
-        .thumbnail:last-child {
-            margin-right: 0;
-        }
-
-        .thumbnail:hover {
-            opacity: 1;
-        }
 </style>
