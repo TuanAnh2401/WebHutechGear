@@ -1,6 +1,6 @@
 ﻿@using Web_Hutech_Gear.Models.Support
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -61,16 +61,21 @@
         }
     </style>
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body id="default_theme" class="it_service">
+    <!-- Back to top -->
+    <div class="btn-back-to-top" style="display: flex; align-items: center; justify-content: center; border-radius: 50%; bottom:20px ">
+        <span class="symbol-btn-back-to-top">
+            <i class="zmdi zmdi-chevron-up"></i>
+        </span>
+    </div>
     <!-- loader -->
     <div class="bg_load"> <img class="loader_animation" src="@SettingHelper.GetValue("SettingLogo")" style="width:200px;height:250px" alt="#" /> </div>
     <!-- end loader -->
     <!-- header -->
     <header id="default_header" class="header_style_1">
         <!-- header top -->
-        <div class="header_top">
+        <div class="header_top container-menu-desktop">
             <div class="container" style="padding-left:0px;padding-right:0px">
                 <div class="row">
                     <div class="col-md-8">
@@ -110,7 +115,7 @@
         </div>
         <!-- end header top -->
         <!-- header bottom -->
-        <div class="header_bottom">
+        <div class="header_bottom ">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -120,22 +125,20 @@
                     </div>
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <!-- menu start -->
-                        <div class="menu_side">
+                        <div class="menu_side" >
                             <div id="navbar_menu">
                                 <ul class="first-ul">
                                     <li>
                                         <a class="@((ViewBag.ActiveMenu == "Home") ? "active" : "")" href="/home/index">Trang Chủ</a>
                                     </li>
-                                    <li><a href="it_about.html">About Us</a></li>
                                     <li>
-                                        <a href="it_service.html">Service</a>
-
+                                        <a class="@((ViewBag.ActiveMenu == "News") ? "active" : "")" href="/news/index">Tin tức</a>
                                     </li>
                                     <li>
-                                        <a href="it_blog.html">Blog</a>
+                                        <a class="@((ViewBag.ActiveMenu == "Posts") ? "active" : "")" href="/posts/index">Bài viết</a>
                                     </li>
                                     <li>
-                                        <a href="#">Pages</a>
+                                        <a class="@((ViewBag.ActiveMenu == "Sale") ? "active" : "")" href="/home/sale">Khuyến Mãi</a>
                                     </li>
                                     <li>
                                         <a class="@((ViewBag.ActiveMenu == "Products") ? "active" : "")" href="/products/index">Sản Phẩm</a>
@@ -158,6 +161,7 @@
             </div>
         </div>
         <!-- header bottom end -->
+
     </header>
     <!-- end header -->
     <!-- Cart -->
@@ -277,6 +281,11 @@
 
         $('.wrap-header-cart').on('click', function () {
             $('.js-panel-cart').removeClass('show-header-cart');
+        });
+    </script>
+    <script>
+        $('.btn-back-to-top').on("click", function () {
+            $('html, body').animate({ scrollTop: 0 }, 300);
         });
     </script>
     <script>

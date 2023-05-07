@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Product>
+@using Web_Hutech_Gear.Models.Support
+@using Web_Hutech_Gear.Models
+@{
+    ViewBag.Title = "Khuyến mãi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/users/status.css" rel="stylesheet" />
+</head>
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Khuyến mãi</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="/home/index">Trang Chủ</a></li>
+                                <li class="active">Khuyến mãi</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<div class="section padding_layout_1 product_list_main">
+    <div class="container">
+            <div class="product-list">
+                <div class="row">
+                    @{
+                        ApplicationDbContext db = new ApplicationDbContext();
+                        foreach (var item in Model)
+                        {
+                            var ListRating = db.Comment.Where(p => p.ProductId == item.Id).ToList();
+                            var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
+                            <div class="col-md-3 col-sm-4 col-xs-3 margin_bottom_30_all block2-pic">
+                                <div class="product_list">
+                                    <a href="~/Products/Detail?id=@item.Id">
+                                        <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
+                                        <div class="product_detail_btm">
+                                            <div class="center">
+                                                <h4 style="width: auto; height: 100px; overflow: hidden; word-wrap: break-word; ">@item.Title</h4>
+                                            </div>
+                                            <div class="starratin">
+                                                <div class="center">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        <i class="fa fa-star@(i <= averageRating ? "" : "-o")" aria-hidden="true"></i>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="product_price">
+                                                <p>
+                                                    @if (item.IsSale)
+                                                    {
+                                                        <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
+                                                        <span>-</span>
+                                                    }
+                                                    <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
+                                                </p>
+                                            </div>
+                                            <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                                <input type="text" id="quantity_value" style="display:none" value="1">
+                                                <div class="btn btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</div>
+                                            </div>
+                                        </div>
+                                        <span class="product-badge product-badge-sale">Sale</span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+</div>

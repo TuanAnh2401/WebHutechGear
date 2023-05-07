@@ -1,13 +1,17 @@
 ﻿@using Web_Hutech_Gear.Models.EF
 @using Web_Hutech_Gear.Models.Support
 @model Product
+@using Web_Hutech_Gear.Models
 @{
     ViewBag.Title = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
+    ApplicationDbContext db = new ApplicationDbContext();
     IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
     IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
+    var ListRating = db.Comment.Where(p => p.ProductId == Model.Id).ToList();
+    var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
 }
 <!-- #region Điều hướng -->
 <div id="inner_banner" class="section inner_banner_section">
@@ -55,7 +59,12 @@
 
                     }
                     <span class="new-price">@Common.FormatNumber(@Model.Price, 0)<sup>đ</sup></span>
-                    <span class="rating"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span> <span class="review">(5 customer review)</span>
+                    <span class="rating">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="fa fa-star@(i <= averageRating ? "" : "-o")" aria-hidden="true"></i>
+                        }
+                    </span> <span class="review">(@ListRating.Count() người đánh giá)</span>
                 </div>
                 <div class="detail-contant">
                     <p>@Html.Raw(Model.Description)</p>
@@ -166,35 +175,48 @@
             <!-- #region Sản phẩm liên quan -->
             @foreach (var item in listProduct)
             {
+                ListRating = db.Comment.Where(p => p.ProductId == item.Id).ToList();
+                averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
                 <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all block2-pic">
                     <div class="product_list">
-                        <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
-                        <div class="product_detail_btm">
-                            <div class="center">
-                                <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/Products/Detail?id=@item.Id">@item.Title</a></h4>
-                            </div>
-                            <div class="starratin">
+                        <a href="~/Products/Detail?id=@item.Id">
+                            <div class="product_img"> <img class="img-responsive" src="@item.Image" alt=""> </div>
+                            <div class="product_detail_btm">
                                 <div class="center">
-                                    <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.Title</h4>
+                                </div>
+                                <div class="starratin">
+                                    <div class="center">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="fa fa-star@(i <= averageRating ? "" : "-o")" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="product_price">
+                                    <p>
+                                        @if (item.IsSale)
+                                        {
+                                            <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
+                                            <span>-</span>
+                                        }
+                                        <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
+                                    </p>
+                                </div>
+                                <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                    <input type="text" id="quantity_value" style="display:none" value="1">
+                                    <div class="btn btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</div>
                                 </div>
                             </div>
-                            <div class="product_price">
-                                <p>
-                                    @if (item.IsSale)
-                                    {
-                                        <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
-                                        <span>-</span>
-                                    }
-                                    <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
-                                </p>
-                            </div>
-                            <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                <input type="text" id="quantity_value" style="display:none" value="1">
-                                <div class="btn btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</div>
-                            </div>
-                        </div>
+                            @if (item.IsSale)
+                            {
+                                <span class="product-badge product-badge-sale">Sale</span>
+                            }
+                            else if (item.IsHot)
+                            {
+                                <span class="product-badge product-badge-new">Hot</span>
+                            }
+                        </a>
                     </div>
                 </div>
             }
@@ -276,29 +298,6 @@
         });
     </script>
 }
-<!--Hiển thị thêm giỏ hàng-->
-<style>
-    .block2-pic {
-        position: relative;
-    }
-
-    .block2-btn {
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        color: #ffffff;
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
-        transform: translateX(-50%);
-        z-index: -1;
-    }
-
-    .block2-pic:hover .block2-btn {
-        background-color: #3bc9fa;
-        color: #ffffff;
-        bottom: 10px;
-        z-index: 50;
-    }
-</style>
+<head>
+    <link href="~/Content/users/status.css" rel="stylesheet" />
+</head>

@@ -13,7 +13,7 @@
                 <div class="full">
                     <div class="title-holder">
                         <div class="title-holder-cell text-left">
-                            <h1 class="page-title">Trang sản phẩm</h1>
+                            <h1 class="page-title">Sản phẩm</h1>
                             <ol class="breadcrumb">
                                 <li><a href="/home/index">Trang chủ</a></li>
                                 <li class="active">Sản phẩm</li>
@@ -164,7 +164,10 @@
             $('.product-list').hide();
             // Lấy đường dẫn href của nút phân trang
             var url = $(this).attr("href");
-
+            // Cuộn lên đầu trang
+            $('html, body').animate({
+                scrollTop: 420
+            }, 'slow');
             // Gửi yêu cầu ajax đến server để lấy dữ liệu mới
             $.ajax({
                 url: url,
@@ -174,6 +177,7 @@
                     $('.product-list').show();
                     // Cập nhật lại nội dung của phần tử chứa dữ liệu
                     $(".product-list").html(result);
+                   
                 },
                 error: function () {
                     alert('Đã có lỗi xảy ra!');

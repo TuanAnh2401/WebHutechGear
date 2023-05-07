@@ -1,0 +1,46 @@
+﻿@model PagedList.PagedList<Web_Hutech_Gear.Models.EF.Posts>
+@using PagedList.Mvc
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="full">
+                <div class="blog_section" >
+                    <div class="blog_feature_img"> <img class="img-responsive" src="@item.Image" alt="Hình ảnh" style="height:270px"> </div>
+                    <div class="blog_feature_cantant">
+                        <p class="blog_head">@item.Title</p>
+                        <div class="post_info">
+                            <ul>
+                                <li><i class="fa fa-user" aria-hidden="true"></i> @item.NewsCategory.Title</li>
+                                <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
+                                <li><i class="fa fa-calendar" aria-hidden="true"></i> @item.ModifiedDate.ToString("dd/MM/yyyy HH:mm")</li>
+                            </ul>
+                        </div>
+                        <p>
+                            @item.Description
+                        </p>
+                        <div class="bottom_info">
+                            <div class="pull-left"><a class="read_more" href="it_blog_detail.html">Đọc Thêm <i class="fa fa-angle-right"></i></a></div>
+                            <div class="pull-right">
+                                <div class="shr">Chia sẽ: </div>
+                                <div class="social_icon">
+                                    <ul>
+                                        <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                        <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="row" style="justify-content: center">
+    <div class="col-6" style="text-align:right;">
+        @Html.PagedListPager(Model, page => Url.Action("Partial_Posts", new { page, currentFilter = ViewBag.CurrentFilte }), new PagedListRenderOptions { DisplayLinkToIndividualPages = true })
+    </div>
+</div>

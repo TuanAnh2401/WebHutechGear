@@ -260,6 +260,8 @@
     <Compile Include="Areas\Admin\Controllers\StatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Migrations\202304091251357_EditProduct.cs" />
@@ -4003,6 +4005,7 @@
     <Content Include="Content\users\revolution\js\extensions\revolution.extension.video.min.js" />
     <Content Include="Content\users\revolution\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\users\revolution\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\users\status.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -5341,7 +5344,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -5379,6 +5381,13 @@
     <Content Include="Views\ShoppingCart\PaymentConfirm.cshtml" />
     <Content Include="Views\Products\Partial_Rated.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_Item_Cart_Detail.cshtml" />
+    <Content Include="Views\Home\Partial_Products_Home.cshtml" />
+    <Content Include="Views\Home\Partial_Products_News.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Partial_News.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Posts\Partial_Posts.cshtml" />
+    <Content Include="Views\Home\Sale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
