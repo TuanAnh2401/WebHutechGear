@@ -10,6 +10,7 @@
     ApplicationDbContext db = new ApplicationDbContext();
     IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
     IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
+    IEnumerable<ProductImage> listImage = ViewBag.listImage as IEnumerable<ProductImage>;
     var ListRating = db.Comment.Where(p => p.ProductId == Model.Id).ToList();
     var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
 }
@@ -39,12 +40,16 @@
     <div class="col-md-9" style="margin:0px auto">
         <div class="row">
             <div class="col-xl-6 col-lg-12 col-md-12">
-                <div class="product_detail_feature_img hizoom hi2" style="width: 400px; height: 400px;">
-                    <div class="hizoom hi2" style="width: 400px; height: 400px;">
-                        <div class="small" style="width: 400px; height: 400px;">
-                            <div class="magnifier" style="width: 200px; height: 200px; opacity: 0.7; background: rgb(255, 255, 255); display: none; left: 200px; top: 113px;"></div>
-                            <img src="@Model.Image" alt="" style="width: 560px; height: 400px;">
-                        </div>
+                <div class="product_detail_feature_img">
+                    <div class="main_image">
+                        <div class="magnifier"></div>
+                        <img id="mainImage" src="@Model.Image" alt="Error">
+                    </div>
+                    <div class="thumbnail_images">
+                        @foreach (var image in ViewBag.listImage)
+                        {
+                            <img src="@image.Image" alt="Error" class="thumbnail" onclick="loadImage('@image.Image')">
+                        }
                     </div>
                 </div>
             </div>
@@ -298,6 +303,14 @@
         });
     </script>
 }
+    <!-- load ảnh-->
+    <script>
+    function loadImage(imageSource) {
+        var mainImage = document.getElementById('mainImage');
+        mainImage.src = imageSource;
+    }
+    </script>
+
 <head>
     <link href="~/Content/users/status.css" rel="stylesheet" />
 </head>
