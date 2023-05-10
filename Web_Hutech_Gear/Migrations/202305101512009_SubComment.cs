@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class editData : DbMigration
+    public partial class SubComment : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.tb_SystemSetting", "SettingDescription");
+            AddColumn("dbo.tb_SubComment", "ProductId", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.tb_SystemSetting", "SettingDescription", c => c.String(maxLength: 4000));
+            DropColumn("dbo.tb_SubComment", "ProductId");
         }
     }
 }

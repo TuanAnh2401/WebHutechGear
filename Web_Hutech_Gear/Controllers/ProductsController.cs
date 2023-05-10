@@ -100,11 +100,14 @@ namespace Web_Hutech_Gear.Controllers
             // Gán danh sách các hình ảnh cho ViewBag.listProduct
             ViewBag.listImage = productImages;
 
+            ViewBag.ListRepplyComment = db.SubComments.Where(c => c.ProductId == id).ToList().OrderBy(c => c.CreatedDate);
+
 
             return View(detailProduct);
         }
         public ActionResult Partial_Rated(Comment listCommnet)
         {
+            ViewBag.ListRepplyComment = db.SubComments.Where(c=>c.ProductId == listCommnet.ProductId).ToList().OrderBy(c=>c.CreatedDate);
             return PartialView("Partial_Rated", listCommnet);
         }
         // POST: Products/Rated
@@ -129,6 +132,9 @@ namespace Web_Hutech_Gear.Controllers
 
             // Lấy danh sách bình luận của sản phẩm
             var listComment = db.Comment.Where(c => c.ProductId == productId).ToList();
+
+            ViewBag.ListRepplyComment = db.SubComments.Where(c => c.ProductId == productId).ToList().OrderBy(c => c.CreatedDate);
+
 
             // Trả về PartialView Partial_Rated với dữ liệu danh sách bình luận
             return PartialView("Partial_Rated", listComment);

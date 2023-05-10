@@ -7,13 +7,13 @@ namespace Web_Hutech_Gear.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class RemoveRating : IMigrationMetadata
+    public sealed partial class SubComment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveRating));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SubComment));
         
         string IMigrationMetadata.Id
         {
-            get { return "202304130403376_RemoveRating"; }
+            get { return "202305101512009_SubComment"; }
         }
         
         string IMigrationMetadata.Source

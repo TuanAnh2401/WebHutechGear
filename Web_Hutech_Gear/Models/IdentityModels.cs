@@ -52,6 +52,7 @@ namespace Web_Hutech_Gear.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SubComment> SubComments { get; set; }
 
 
         public static ApplicationDbContext Create()

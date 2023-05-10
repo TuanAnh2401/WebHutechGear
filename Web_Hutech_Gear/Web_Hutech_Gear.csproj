@@ -264,25 +264,17 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202304091251357_EditProduct.cs" />
-    <Compile Include="Migrations\202304091251357_EditProduct.Designer.cs">
-      <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
+    <Compile Include="Migrations\202305101416510_AddNewDatabase.cs" />
+    <Compile Include="Migrations\202305101416510_AddNewDatabase.designer.cs">
+      <DependentUpon>202305101416510_AddNewDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304111535575_EditNews.Designer.cs" />
-    <Compile Include="Migrations\202304111537454_EditNews2.cs" />
-    <Compile Include="Migrations\202304121045506_editData.cs" />
-    <Compile Include="Migrations\202304121045506_editData.Designer.cs" />
-    <Compile Include="Migrations\202304121058123_editAVT.cs" />
-    <Compile Include="Migrations\202304121058123_editAVT.Designer.cs" />
-    <Compile Include="Migrations\202304130403376_RemoveRating.cs" />
-    <Compile Include="Migrations\202304130403376_RemoveRating.Designer.cs" />
-    <Compile Include="Migrations\202304211201013_CreateDatabase.cs" />
-    <Compile Include="Migrations\202304211208289_AddDatabase.cs" />
-    <Compile Include="Migrations\202304211208289_AddDatabase.designer.cs">
-      <DependentUpon>202304211208289_AddDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202305101512009_SubComment.cs" />
+    <Compile Include="Migrations\202305101512009_SubComment.designer.cs">
+      <DependentUpon>202305101512009_SubComment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
+    <Compile Include="Models\EF\SubComment.cs" />
     <Compile Include="Models\EF\Comment.cs" />
     <Compile Include="Models\EF\Contact.cs" />
     <Compile Include="Models\EF\Messages.cs" />
@@ -5410,18 +5402,15 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304091251357_EditProduct.resx">
-      <DependentUpon>202304091251357_EditProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304111537454_EditNews2.resx">
-      <DependentUpon>202304111537454_EditNews2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304211208289_AddDatabase.resx">
-      <DependentUpon>202304211208289_AddDatabase.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <EmbeddedResource Include="Migrations\202305101416510_AddNewDatabase.resx">
+      <DependentUpon>202305101416510_AddNewDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305101512009_SubComment.resx">
+      <DependentUpon>202305101512009_SubComment.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
