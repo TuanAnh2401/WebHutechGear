@@ -13,7 +13,7 @@ namespace Web_Hutech_Gear.Models.EF
         {
             this.ProductImage = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            this.Comment = new HashSet<Comment>();
+            this.Rated = new HashSet<Rated>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -58,7 +58,9 @@ namespace Web_Hutech_Gear.Models.EF
 
         public virtual Status Status { get; set; }
         public virtual ICollection<ProductImage> ProductImage { get; set; }
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Rated> Rated { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }
