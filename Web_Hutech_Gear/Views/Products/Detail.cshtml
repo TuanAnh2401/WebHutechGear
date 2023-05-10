@@ -9,9 +9,9 @@
 @{
     ApplicationDbContext db = new ApplicationDbContext();
     IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
-    IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
+    IEnumerable<Rated> listRated = ViewBag.listRated as IEnumerable<Rated>;
     IEnumerable<ProductImage> listImage = ViewBag.listImage as IEnumerable<ProductImage>;
-    var ListRating = db.Comment.Where(p => p.ProductId == Model.Id).ToList();
+    var ListRating = db.Rateds.Where(p => p.ProductId == Model.Id).ToList();
     var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
 }
 <!-- #region Điều hướng -->
