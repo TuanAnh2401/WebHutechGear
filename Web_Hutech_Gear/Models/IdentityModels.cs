@@ -15,10 +15,10 @@ namespace Web_Hutech_Gear.Models
         public string FullName { get; set; }
         public string Address { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Rated> Rateds { get; set; }
-        public virtual ICollection<Messages> Messages { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Reply> Replies { get; set; }
+        public virtual ICollection<Messages> Messages { get; set; }
+
+
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -36,7 +36,7 @@ namespace Web_Hutech_Gear.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        public DbSet<Rated> Rateds { get; set; }
+        public DbSet<Comment> Comment { get; set; }
         public DbSet<Posts> Posts { get; set; }
         public DbSet<NewsCategory> NewsCategory { get; set; }
         public DbSet<Adv> Advs { get; set; }
@@ -52,12 +52,7 @@ namespace Web_Hutech_Gear.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-<<<<<<< HEAD
         public DbSet<SubComment> SubComments { get; set; }
-=======
-        public DbSet<Reply> Replies { get; set; }
-        public DbSet<Comment> Comments { get; set; }
->>>>>>> master
 
 
         public static ApplicationDbContext Create()

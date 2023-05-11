@@ -7,7 +7,6 @@ namespace Web_Hutech_Gear.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-<<<<<<<< HEAD:Web_Hutech_Gear/Migrations/202305101512009_SubComment.Designer.cs
     public sealed partial class SubComment : IMigrationMetadata
     {
         private readonly ResourceManager Resources = new ResourceManager(typeof(SubComment));
@@ -15,15 +14,6 @@ namespace Web_Hutech_Gear.Migrations
         string IMigrationMetadata.Id
         {
             get { return "202305101512009_SubComment"; }
-========
-    public sealed partial class UpdataDatabase : IMigrationMetadata
-    {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdataDatabase));
-        
-        string IMigrationMetadata.Id
-        {
-            get { return "202305070826334_UpdataDatabase"; }
->>>>>>>> master:Web_Hutech_Gear/Migrations/202305070826334_UpdataDatabase.Designer.cs
         }
         
         string IMigrationMetadata.Source
