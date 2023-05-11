@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Web_Hutech_Gear.Models.EF
 {
-    [Table("tb_Comment")]
+    [Table("tb_Reply")]
 
-    public class Comment
+    public class Reply
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -17,7 +17,7 @@ namespace Web_Hutech_Gear.Models.EF
         [StringLength(128)]
         public string Content { get; set; }
         public DateTime CreatedDate { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Comment Comment { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 }

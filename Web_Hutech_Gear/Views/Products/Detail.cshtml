@@ -9,9 +9,9 @@
 @{
     ApplicationDbContext db = new ApplicationDbContext();
     IEnumerable<Product> listProduct = ViewBag.listProduct as IEnumerable<Product>;
-    IEnumerable<Comment> listCommnet = ViewBag.listCommnet as IEnumerable<Comment>;
+    IEnumerable<Rated> listRated = ViewBag.listRated as IEnumerable<Rated>;
     IEnumerable<ProductImage> listImage = ViewBag.listImage as IEnumerable<ProductImage>;
-    var ListRating = db.Comment.Where(p => p.ProductId == Model.Id).ToList();
+    var ListRating = db.Rateds.Where(p => p.ProductId == Model.Id).ToList();
     var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
 }
 <!-- #region Điều hướng -->
@@ -122,7 +122,7 @@
                                                     <img src="~/Content/users/images/loading.gif" style="background-color: transparent" alt="Loading..." />
                                                 </div>
                                                 <div class="comment-section">
-                                                    @Html.Partial("Partial_Rated", listCommnet)
+                                                    @Html.Partial("Partial_Rated", listRated)
                                                 </div>
                                                 <div class="float-right">
                                                     @if (Request.IsAuthenticated)
@@ -180,7 +180,7 @@
             <!-- #region Sản phẩm liên quan -->
             @foreach (var item in listProduct)
             {
-                ListRating = db.Comment.Where(p => p.ProductId == item.Id).ToList();
+                ListRating = db.Rateds.Where(p => p.ProductId == item.Id).ToList();
                 averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
                 <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all block2-pic">
                     <div class="product_list">
