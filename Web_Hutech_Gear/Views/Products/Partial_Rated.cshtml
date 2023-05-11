@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Rated>
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Comment>
 @using Web_Hutech_Gear.Models
-@{     
+@{
     ApplicationDbContext db = new ApplicationDbContext();
 }
 <!-- #region Bình luận -->
 @foreach (var item in Model)
 {
-    <div class="col-lg-10 col-md-10 col-sm-8">
-        <h5>@db.Users.FirstOrDefault(p=>p.Id==item.UserId).FullName</h5>
+    <div class="col-lg-10 col-md-10 col-sm-8 comment" data-id="@item.Id" style="display:block; height:auto">
+        <h5>@db.Users.FirstOrDefault(p => p.Id == item.UserId).FullName</h5>
         <p><span class="c_date">@item.CreatedDate.ToString("dd-MM-yyyy")</span> </p>
         <!-- #region rating -->
         <span class="rating">
@@ -20,5 +20,41 @@
         <p class="msg">
             @item.Content
         </p>
+
+        @*<button class="reply-btn" onclick="hidden(this)">Repply</button>*@
+        <button onclick="hiddenSub(this)" class="An">Trả Lời</button>
+
+        <div id="reply-form" style="padding-bottom:25px; display:none" class="hiddenSubComment">
+            <textarea class="reply-content" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
+            <input type="hidden" class="input-group-lg product-id" value="@item.ProductId" />
+                <button class="submit-reply-btn" style="background-color: #808080">Trả Lời</button>
+        </div>
     </div>
+    if (null != ViewBag.ListRepplyComment)
+    {
+        foreach (var itemRepply in ViewBag.ListRepplyComment)
+        {
+            if (item.Id == itemRepply.CommentId)
+            {
+                string userId = itemRepply.UserId;
+                <div class="replly_comment">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+                            <div class="full command_cont margin_bottom_0" style="min-height: auto; padding: 5px 3px 5px 40px;">
+                                <b>@db.Users.FirstOrDefault(p => p.Id == userId).FullName</b>
+
+                                <p class="comm_head">
+                                    <span>@itemRepply.CreatedDate.ToString("dd-MM-yyyy")</span>
+                                </p>
+                                <p>
+                                    @Html.Raw(itemRepply.Content)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+
 }

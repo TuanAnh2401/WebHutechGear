@@ -7,13 +7,13 @@ namespace Web_Hutech_Gear.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class UpdataDatabase : IMigrationMetadata
+    public sealed partial class AddNewDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdataDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddNewDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202305070826334_UpdataDatabase"; }
+            get { return "202305101416510_AddNewDatabase"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,7 +7,7 @@
         ApplicationDbContext db = new ApplicationDbContext();
         foreach (var item in Model)
         {
-            var ListRating = db.Rateds.Where(p => p.ProductId == item.Id).ToList();
+            var ListRating = db.Comment.Where(p => p.ProductId == item.Id).ToList();
             var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
             <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all block2-pic">
                     <div class="product_list">

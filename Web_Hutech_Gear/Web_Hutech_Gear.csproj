@@ -264,18 +264,18 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202305070735080_CreateDatabase.cs" />
-    <Compile Include="Migrations\202305070735080_CreateDatabase.designer.cs">
-      <DependentUpon>202305070735080_CreateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202305101416510_AddNewDatabase.cs" />
+    <Compile Include="Migrations\202305101416510_AddNewDatabase.designer.cs">
+      <DependentUpon>202305101416510_AddNewDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202305070826334_UpdataDatabase.cs" />
-    <Compile Include="Migrations\202305070826334_UpdataDatabase.designer.cs">
-      <DependentUpon>202305070826334_UpdataDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202305101512009_SubComment.cs" />
+    <Compile Include="Migrations\202305101512009_SubComment.designer.cs">
+      <DependentUpon>202305101512009_SubComment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
+    <Compile Include="Models\EF\SubComment.cs" />
     <Compile Include="Models\EF\Comment.cs" />
-    <Compile Include="Models\EF\Rated.cs" />
     <Compile Include="Models\EF\Contact.cs" />
     <Compile Include="Models\EF\Messages.cs" />
     <Compile Include="Models\EF\News.cs" />
@@ -286,7 +286,6 @@
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
-    <Compile Include="Models\EF\Reply.cs" />
     <Compile Include="Models\EF\Status.cs" />
     <Compile Include="Models\EF\Subsribe.cs" />
     <Compile Include="Models\EF\Supplier.cs" />
@@ -5381,6 +5380,8 @@
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Posts\Partial_Posts.cshtml" />
     <Content Include="Views\Home\Sale.cshtml" />
+    <Content Include="Views\Posts\DetailBlog.cshtml" />
+    <Content Include="Views\News\DetailNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5404,11 +5405,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305070735080_CreateDatabase.resx">
-      <DependentUpon>202305070735080_CreateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305101416510_AddNewDatabase.resx">
+      <DependentUpon>202305101416510_AddNewDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305070826334_UpdataDatabase.resx">
-      <DependentUpon>202305070826334_UpdataDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305101512009_SubComment.resx">
+      <DependentUpon>202305101512009_SubComment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
