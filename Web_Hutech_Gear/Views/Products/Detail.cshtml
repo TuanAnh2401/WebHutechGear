@@ -281,6 +281,84 @@
                         $('.comment-section').show();
                         // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
                         $('.comment-section').html(result);
+
+                    }
+                });
+            });
+        });
+        //$(function () {
+        //    $('form').on('submit', function () {
+        //        $('#loading').show(); // Hiển thị hình đang load
+        //    });
+        //});
+    </script>
+
+    @*Sử lý repply comment*@
+    <script>
+        function hiddenSub(button) {
+            //var hidden = button.querySelector('.hiddenSubComment')
+            var hiddens = document.getElementsByClassName('hiddenSubComment')
+            var Ans = document.getElementsByClassName('An')
+
+            for (var i = 0; i < hiddens.length; i++) {
+                var hidden = hiddens[i];
+
+                //var hidden = button.nextsSibling;
+
+                if (hidden.style.display === "none") {
+                    hidden.style.display = "block";
+                    document.querySelectorAll('.An').forEach(button => {
+                        button.textContent = 'Ẩn Trả Lời';
+                    })
+                }
+                else {
+                    hidden.style.display = "none";
+                    document.querySelectorAll('.An').forEach(button => {
+                        button.textContent = 'Trả Lời ';
+                    })
+                }
+            }
+        }
+    </script>
+    <script>
+
+        // Thực hiện xử lý hiển thị mục nhập trả lời bình luận
+        $(document).ready(function () {
+            $(document).on('click', '.reply-btn', function (e) {
+                var hidden = document.getElementsByClassName("hiddenSubComment")[0];
+                var replyContent = $(this).siblings('.reply-content').val(); // Lấy giá trị của nội dung comment trả lời
+
+
+
+                var hidden = e.nexts
+
+                if (hidden.offsetHeight === 0) {
+                    hidden.style.display = "block";
+                }
+                else {
+                    hidden.style.display = "none";
+                }
+            });
+
+            $(document).on('click', '.submit-reply-btn', function () {
+
+                var commentId = $(this).closest('.comment').data('id'); // Lấy giá trị của id comment trả lời
+                var replyContent = $(this).siblings('.reply-content').val(); // Lấy giá trị của nội dung comment trả lời
+                var productId = $(this).siblings('.product-id').val(); // Lấy giá trị của id sản phẩm trả lời
+
+                $.ajax({
+                    url: '/Products/ReplyComment',
+                    type: 'POST',
+                    data: {
+                        commentId: commentId,
+                        productId: productId,
+                        content: replyContent
+                    },
+                    success: function (result) {
+                        $('#loading').hide();
+                        $('.comment-section').show();
+                        // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
+                        $('.comment-section').html(result);
                         // Đặt lại các giá trị của form
                         form.find('#new-review').val('');
                         form.find('.rating .fa-star-o').removeClass('fa-star-o').addClass('fa-star');
@@ -303,13 +381,13 @@
         });
     </script>
 }
-    <!-- load ảnh-->
-    <script>
+<!-- load ảnh-->
+<script>
     function loadImage(imageSource) {
         var mainImage = document.getElementById('mainImage');
         mainImage.src = imageSource;
     }
-    </script>
+</script>
 
 <head>
     <link href="~/Content/users/status.css" rel="stylesheet" />
