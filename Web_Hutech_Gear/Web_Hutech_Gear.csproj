@@ -5730,6 +5730,8 @@
     <Content Include="Views\Posts\Partial_Posts.cshtml" />
     <Content Include="Views\Home\Sale.cshtml" />
     <Content Include="Views\ChatUser\Chat.cshtml" />
+    <Content Include="Views\Posts\DetailBlog.cshtml" />
+    <Content Include="Views\News\DetailNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

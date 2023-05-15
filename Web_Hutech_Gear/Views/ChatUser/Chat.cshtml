@@ -3,10 +3,6 @@
     ViewBag.Title = "Chat";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
-
 <section style="background-color: #eee;">
     <div class="container py-5">
 
@@ -52,6 +48,11 @@
 @section scripts{
     <script src="~/Scripts/jquery-3.6.0.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
+    <script>
+        $.connection.hub.url = '/signalr'; // Đường dẫn đến Hub SignalR
+        $.connection.hub.logging = true; // Bật logging trong console (tùy chọn)
+    </script>
+    <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/chat.js"></script>
 }
 <style>
@@ -121,5 +122,4 @@
         #send-button:hover {
             background-color: #0069d9;
         }
-
 </style>

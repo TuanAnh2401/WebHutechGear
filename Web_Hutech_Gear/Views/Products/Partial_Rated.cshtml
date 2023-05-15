@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Comment>
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Rated>
 @using Web_Hutech_Gear.Models
 @{
     ApplicationDbContext db = new ApplicationDbContext();
@@ -30,7 +30,7 @@
                 <button class="submit-reply-btn" style="background-color: #808080">Trả Lời</button>
         </div>
     </div>
-    if (null != ViewBag.ListRepplyComment)
+    @*if (null != ViewBag.ListRepplyComment)
     {
         foreach (var itemRepply in ViewBag.ListRepplyComment)
         {
@@ -55,6 +55,6 @@
                 </div>
             }
         }
-    }
+    }*@
 
 }
