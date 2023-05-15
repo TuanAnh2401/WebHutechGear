@@ -61,6 +61,7 @@
         }
     </style>
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body id="default_theme" class="it_service">
     <!-- Back to top -->
@@ -125,7 +126,7 @@
                     </div>
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <!-- menu start -->
-                        <div class="menu_side" >
+                        <div class="menu_side">
                             <div id="navbar_menu">
                                 <ul class="first-ul">
                                     <li>
@@ -326,5 +327,10 @@
             });
         });
     </script>
+    <script>
+        $.connection.hub.url = '/signalr'; // Đường dẫn đến Hub SignalR
+        $.connection.hub.logging = true; // Bật logging trong console (tùy chọn)
+    </script>
+    <script src="~/signalr/hubs"></script>
 </body>
 </html>

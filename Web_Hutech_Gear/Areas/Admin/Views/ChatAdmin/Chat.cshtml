@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="chat-container">
+    <div id="chat-history">
+        <ul id="message-list">
+            @foreach (var message in ViewBag.Messages)
+            {
+                if (message.SenderId == ViewBag.UserId)
+                {
+                    <li class="message sent">@message.Message</li>
+                }
+                else
+                {
+                    <li class="message received">@message.Message</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div id="chat-input">
+    <form id="send-message-form">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <input type="hidden" id="receiver" value="@ViewBag.ReceiverId" />
+        <input type="hidden" id="sender" value="@ViewBag.UserId" />
+        <button type="submit" id="send-button">Send</button>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="~/Scripts/chat.js"></script>
+}
+<style>
+    .message {
+        display: block;
+        width: 50%;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .sent {
+        float: right;
+        background-color: #e5e5ea;
+    }
+
+    .received {
+        float: left;
+        background-color: #fff;
+    }
+</style>
+
+

@@ -1,0 +1,52 @@
+﻿@model List<Web_Hutech_Gear.Models.Support.UserViewModel>
+
+@{
+    ViewBag.Title = "Tin nhắn từ khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Tin nhắn từ khách hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin/home">Trang Chủ</a></li>
+                    <li class="breadcrumb-item active">Tin nhắn từ khách hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    @foreach (var user in Model)
+    {
+        <div>
+
+            <div>
+                <a href="@Url.Action("Chat", "ChatAdmin", new { receiverId = user.Id })">@user.FullName</a>
+            </div>
+            <div>
+                @user.LastMessage
+            </div>
+        </div>
+
+    }
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+
+
+
+
+
+
+

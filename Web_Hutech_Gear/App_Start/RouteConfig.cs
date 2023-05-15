@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-
+using Microsoft.AspNet.SignalR;
 namespace Web_Hutech_Gear
 {
     public class RouteConfig

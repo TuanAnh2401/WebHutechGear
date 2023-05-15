@@ -9,13 +9,21 @@ namespace Web_Hutech_Gear.Models.EF
     public class Messages
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [StringLength(128)]
-        public string UserId { get; set; }
-        public string Message { get; set; }
-        public DateTime Timestamp { get; set; }
-        public virtual ApplicationUser User { get; set; }
 
+        [ForeignKey("Sender")]
+        public string SenderId { get; set; }
+
+        [ForeignKey("Receiver")]
+        public string ReceiverId { get; set; }
+
+        public string Message { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        public virtual ApplicationUser Sender { get; set; }
+
+        public virtual ApplicationUser Receiver { get; set; }
     }
 }

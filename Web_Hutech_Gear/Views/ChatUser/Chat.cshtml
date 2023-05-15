@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+
+                <div class="card" id="chat1" style="border-radius: 15px;">
+                    <div class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                         style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <i class="fas fa-angle-left"></i>
+                        <p class="mb-0 fw-bold">Live chat</p>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="card-body">
+
+                        <div id="chat-container">
+                            <div id="chat-history">
+                                <ul id="message-list">
+                                    @foreach (var message in ViewBag.Messages)
+                                    {
+                                        <li class="message @(message.SenderId == ViewBag.UserId ? "sent" : "received")">@message.Message</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="chat-input">
+                            <form id="send-message-form">
+                                <input type="text" id="message-input" placeholder="Type your message...">
+                                <input type="hidden" id="receiver" value="@ViewBag.AdminId" />
+                                <input type="hidden" id="sender" value="@ViewBag.UserId" />
+                                <button type="submit" id="send-button">Send</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
+    <script src="~/Scripts/chat.js"></script>
+}
+<style>
+    #chat-container {
+        background-color: #fff;
+    }
+
+    #chat-history {
+        height: 400px;
+        overflow-y: scroll;
+        padding: 10px;
+    }
+
+    #message-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .message {
+        display: block;
+        width: 50%;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .sent {
+        float: right;
+        background-color: #e5e5ea;
+    }
+
+    .received {
+        float: left;
+        background-color: #fff;
+    }
+
+    #chat-input {
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    #send-message-form {
+        display: flex;
+        align-items: center;
+    }
+
+    #message-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
+
+    #send-button {
+        padding: 8px 16px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        #send-button:hover {
+            background-color: #0069d9;
+        }
+
+</style>
