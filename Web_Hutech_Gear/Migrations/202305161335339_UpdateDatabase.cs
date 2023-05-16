@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateDatabase : DbMigration
+    public partial class UpdateDatabase : DbMigration
     {
         public override void Up()
         {
@@ -24,30 +24,83 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.tb_Contact",
+                "dbo.tb_Comment",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 150),
-                        Email = c.String(nullable: false),
-                        PhoneNumber = c.String(nullable: false),
-                        Message = c.String(nullable: false, maxLength: 4000),
-                        IsRead = c.Boolean(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                        ProductId = c.Int(nullable: false),
+                        Content = c.String(),
+                        Rating = c.Int(nullable: false),
+                        CreatedDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.tb_Product", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.tb_Product",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false, maxLength: 250),
+                        Description = c.String(nullable: false),
+                        Detail = c.String(nullable: false),
+                        Image = c.String(maxLength: 250),
+                        OriginalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        PriceSale = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false),
+                        ProductCategoryId = c.Int(nullable: false),
+                        SupplierId = c.Int(nullable: false),
+                        StatusId = c.Int(nullable: false),
+                        IsHome = c.Boolean(nullable: false),
+                        IsSale = c.Boolean(nullable: false),
+                        IsHot = c.Boolean(nullable: false),
                         CreatedBy = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
                         Modifiedby = c.String(),
                         ModifiedDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.tb_ProductCategory", t => t.ProductCategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.tb_Status", t => t.StatusId, cascadeDelete: true)
+                .ForeignKey("dbo.tb_Supplier", t => t.SupplierId, cascadeDelete: true)
+                .Index(t => t.ProductCategoryId)
+                .Index(t => t.SupplierId)
+                .Index(t => t.StatusId);
             
             CreateTable(
-                "dbo.tb_Messages",
+                "dbo.tb_OrderDetail",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrderId = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.tb_Order", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("dbo.tb_Product", t => t.ProductId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.tb_Order",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(maxLength: 128),
-                        Message = c.String(),
-                        Timestamp = c.DateTime(nullable: false),
+                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false),
+                        TypePayment = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        CreatedDate = c.DateTime(nullable: false),
+                        Modifiedby = c.String(),
+                        ModifiedDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
@@ -102,70 +155,66 @@
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.tb_Order",
+                "dbo.tb_Rated",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(maxLength: 128),
-                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
-                        TypePayment = c.Int(nullable: false),
-                        CreatedBy = c.String(),
-                        CreatedDate = c.DateTime(nullable: false),
-                        Modifiedby = c.String(),
-                        ModifiedDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.tb_OrderDetail",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        OrderId = c.Int(nullable: false),
                         ProductId = c.Int(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
+                        Content = c.String(),
+                        Rating = c.Int(nullable: false),
+                        CreatedDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.tb_Order", t => t.OrderId, cascadeDelete: true)
                 .ForeignKey("dbo.tb_Product", t => t.ProductId, cascadeDelete: true)
-                .Index(t => t.OrderId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.tb_Product",
+                "dbo.tb_Messages",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false, maxLength: 250),
-                        Description = c.String(nullable: false),
-                        Detail = c.String(nullable: false),
-                        Image = c.String(maxLength: 250),
-                        OriginalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        PriceSale = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
-                        ProductCategoryId = c.Int(nullable: false),
-                        SupplierId = c.Int(nullable: false),
-                        StatusId = c.Int(nullable: false),
-                        IsHome = c.Boolean(nullable: false),
-                        IsSale = c.Boolean(nullable: false),
-                        IsHot = c.Boolean(nullable: false),
-                        CreatedBy = c.String(),
-                        CreatedDate = c.DateTime(nullable: false),
-                        Modifiedby = c.String(),
-                        ModifiedDate = c.DateTime(nullable: false),
+                        SenderId = c.String(maxLength: 128),
+                        ReceiverId = c.String(maxLength: 128),
+                        Message = c.String(),
+                        Timestamp = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.tb_ProductCategory", t => t.ProductCategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.tb_Status", t => t.StatusId, cascadeDelete: true)
-                .ForeignKey("dbo.tb_Supplier", t => t.SupplierId, cascadeDelete: true)
-                .Index(t => t.ProductCategoryId)
-                .Index(t => t.SupplierId)
-                .Index(t => t.StatusId);
+                .ForeignKey("dbo.AspNetUsers", t => t.ReceiverId)
+                .ForeignKey("dbo.AspNetUsers", t => t.SenderId)
+                .Index(t => t.SenderId)
+                .Index(t => t.ReceiverId);
+            
+            CreateTable(
+                "dbo.tb_Reply",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Content = c.String(maxLength: 128),
+                        CreatedDate = c.DateTime(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                        RatedId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.tb_Rated", t => t.RatedId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.RatedId);
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.tb_ProductCategory",
@@ -193,23 +242,6 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.tb_Product", t => t.ProductId, cascadeDelete: true)
-                .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.tb_Rated",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(maxLength: 128),
-                        ProductId = c.Int(nullable: false),
-                        Content = c.String(),
-                        Rating = c.Int(nullable: false),
-                        CreatedDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.tb_Product", t => t.ProductId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId)
                 .Index(t => t.ProductId);
             
             CreateTable(
@@ -241,17 +273,21 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.tb_Contact",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 150),
+                        Email = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        Message = c.String(nullable: false, maxLength: 4000),
+                        IsRead = c.Boolean(nullable: false),
+                        CreatedBy = c.String(),
+                        CreatedDate = c.DateTime(nullable: false),
+                        Modifiedby = c.String(),
+                        ModifiedDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.tb_News",
@@ -343,57 +379,69 @@
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.tb_Posts", "NewsCategoryId", "dbo.tb_NewsCategory");
             DropForeignKey("dbo.tb_News", "NewsCategoryId", "dbo.tb_NewsCategory");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.tb_Order", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.tb_Product", "SupplierId", "dbo.tb_Supplier");
             DropForeignKey("dbo.tb_Product", "StatusId", "dbo.tb_Status");
-            DropForeignKey("dbo.tb_Rated", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.tb_Rated", "ProductId", "dbo.tb_Product");
             DropForeignKey("dbo.tb_ProductImage", "ProductId", "dbo.tb_Product");
             DropForeignKey("dbo.tb_Product", "ProductCategoryId", "dbo.tb_ProductCategory");
             DropForeignKey("dbo.tb_OrderDetail", "ProductId", "dbo.tb_Product");
-            DropForeignKey("dbo.tb_OrderDetail", "OrderId", "dbo.tb_Order");
-            DropForeignKey("dbo.tb_Messages", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Messages", "SenderId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Reply", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Reply", "RatedId", "dbo.tb_Rated");
+            DropForeignKey("dbo.tb_Messages", "ReceiverId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Rated", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Rated", "ProductId", "dbo.tb_Product");
+            DropForeignKey("dbo.tb_Order", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_Comment", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.tb_OrderDetail", "OrderId", "dbo.tb_Order");
+            DropForeignKey("dbo.tb_Comment", "ProductId", "dbo.tb_Product");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.tb_Posts", new[] { "NewsCategoryId" });
             DropIndex("dbo.tb_News", new[] { "NewsCategoryId" });
+            DropIndex("dbo.tb_ProductImage", new[] { "ProductId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.tb_Reply", new[] { "RatedId" });
+            DropIndex("dbo.tb_Reply", new[] { "UserId" });
+            DropIndex("dbo.tb_Messages", new[] { "ReceiverId" });
+            DropIndex("dbo.tb_Messages", new[] { "SenderId" });
             DropIndex("dbo.tb_Rated", new[] { "ProductId" });
             DropIndex("dbo.tb_Rated", new[] { "UserId" });
-            DropIndex("dbo.tb_ProductImage", new[] { "ProductId" });
-            DropIndex("dbo.tb_Product", new[] { "StatusId" });
-            DropIndex("dbo.tb_Product", new[] { "SupplierId" });
-            DropIndex("dbo.tb_Product", new[] { "ProductCategoryId" });
-            DropIndex("dbo.tb_OrderDetail", new[] { "ProductId" });
-            DropIndex("dbo.tb_OrderDetail", new[] { "OrderId" });
-            DropIndex("dbo.tb_Order", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.tb_Messages", new[] { "UserId" });
+            DropIndex("dbo.tb_Order", new[] { "UserId" });
+            DropIndex("dbo.tb_OrderDetail", new[] { "ProductId" });
+            DropIndex("dbo.tb_OrderDetail", new[] { "OrderId" });
+            DropIndex("dbo.tb_Product", new[] { "StatusId" });
+            DropIndex("dbo.tb_Product", new[] { "SupplierId" });
+            DropIndex("dbo.tb_Product", new[] { "ProductCategoryId" });
+            DropIndex("dbo.tb_Comment", new[] { "ProductId" });
+            DropIndex("dbo.tb_Comment", new[] { "UserId" });
             DropTable("dbo.tb_SystemSetting");
             DropTable("dbo.tb_Subscribe");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.tb_Posts");
             DropTable("dbo.tb_NewsCategory");
             DropTable("dbo.tb_News");
-            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.tb_Contact");
             DropTable("dbo.tb_Supplier");
             DropTable("dbo.tb_Status");
-            DropTable("dbo.tb_Rated");
             DropTable("dbo.tb_ProductImage");
             DropTable("dbo.tb_ProductCategory");
-            DropTable("dbo.tb_Product");
-            DropTable("dbo.tb_OrderDetail");
-            DropTable("dbo.tb_Order");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.tb_Reply");
+            DropTable("dbo.tb_Messages");
+            DropTable("dbo.tb_Rated");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.tb_Messages");
-            DropTable("dbo.tb_Contact");
+            DropTable("dbo.tb_Order");
+            DropTable("dbo.tb_OrderDetail");
+            DropTable("dbo.tb_Product");
+            DropTable("dbo.tb_Comment");
             DropTable("dbo.tb_Adv");
         }
     }

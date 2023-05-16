@@ -278,21 +278,9 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202305070735080_CreateDatabase.cs" />
-    <Compile Include="Migrations\202305070735080_CreateDatabase.designer.cs">
-      <DependentUpon>202305070735080_CreateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305070826334_UpdataDatabase.cs" />
-    <Compile Include="Migrations\202305070826334_UpdataDatabase.designer.cs">
-      <DependentUpon>202305070826334_UpdataDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305100443457_updatMessages.cs" />
-    <Compile Include="Migrations\202305100443457_updatMessages.designer.cs">
-      <DependentUpon>202305100443457_updatMessages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202305100500216_fixMessages.cs" />
-    <Compile Include="Migrations\202305100500216_fixMessages.designer.cs">
-      <DependentUpon>202305100500216_fixMessages.cs</DependentUpon>
+    <Compile Include="Migrations\202305161335339_UpdateDatabase.cs" />
+    <Compile Include="Migrations\202305161335339_UpdateDatabase.designer.cs">
+      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
@@ -5754,17 +5742,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305070735080_CreateDatabase.resx">
-      <DependentUpon>202305070735080_CreateDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305070826334_UpdataDatabase.resx">
-      <DependentUpon>202305070826334_UpdataDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305100443457_updatMessages.resx">
-      <DependentUpon>202305100443457_updatMessages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202305100500216_fixMessages.resx">
-      <DependentUpon>202305100500216_fixMessages.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305161335339_UpdateDatabase.resx">
+      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -21,20 +21,25 @@
             @item.Content
         </p>
 
-        @*<button class="reply-btn" onclick="hidden(this)">Repply</button>*@
-        <button onclick="hiddenSub(this)" class="An">Trả Lời</button>
+        <!-- #region  Đăng nhập mới được trả lời -->
+        @if (Request.IsAuthenticated)
+        {
+            <button onclick="hiddenSub(this)" class="An">Trả Lời</button>
 
-        <div id="reply-form" style="padding-bottom:25px; display:none" class="hiddenSubComment">
-            <textarea class="reply-content" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
-            <input type="hidden" class="input-group-lg product-id" value="@item.ProductId" />
+            <div id="reply-form" style="padding-bottom:25px; display:none" class="hiddenSubComment">
+                <textarea class="reply-content" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
+                <input type="hidden" class="input-group-lg product-id" value="@item.ProductId" />
                 <button class="submit-reply-btn" style="background-color: #808080">Trả Lời</button>
-        </div>
+            </div>
+        }
+        <!-- #endregion -->
+
     </div>
-    @*if (null != ViewBag.ListRepplyComment)
+    if (null != ViewBag.ListRepplyComment)
     {
         foreach (var itemRepply in ViewBag.ListRepplyComment)
         {
-            if (item.Id == itemRepply.CommentId)
+            if (item.Id == itemRepply.RatedId)
             {
                 string userId = itemRepply.UserId;
                 <div class="replly_comment">
@@ -55,6 +60,6 @@
                 </div>
             }
         }
-    }*@
+    }
 
 }

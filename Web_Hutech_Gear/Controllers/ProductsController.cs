@@ -89,6 +89,8 @@ namespace Web_Hutech_Gear.Controllers
             // Lấy danh sách các hình ảnh của sản phẩm từ cơ sở dữ liệu
             var productImages = db.ProductImages.Where(n => n.ProductId == id).ToList();
 
+            ViewBag.ListRepplyComment = db.Replies.ToList().OrderBy(c => c.CreatedDate);
+
             // Gán danh sách các hình ảnh cho ViewBag.listProduct
             ViewBag.listImage = productImages;
 
@@ -97,6 +99,8 @@ namespace Web_Hutech_Gear.Controllers
         }
         public ActionResult Partial_Rated(Rated listRated)
         {
+            ViewBag.ListRepplyComment = db.Replies.ToList().OrderBy(c => c.CreatedDate);
+
             return PartialView("Partial_Rated", listRated);
         }
         // POST: Products/Rated
@@ -122,8 +126,38 @@ namespace Web_Hutech_Gear.Controllers
             // Lấy danh sách bình luận của sản phẩm
             var listRated = db.Rateds.Where(c => c.ProductId == productId).ToList();
 
+            ViewBag.ListRepplyComment = db.Replies.ToList().OrderBy(c => c.CreatedDate);
+
             // Trả về PartialView Partial_Rated với dữ liệu danh sách bình luận
             return PartialView("Partial_Rated", listRated);
+        }
+
+        // Trả lời bình luận
+        [HttpPost]
+        public ActionResult ReplyComment(int commentId, int productId, string content)
+        {
+            // Lấy ID của người dùng đăng nhập
+            var userId = User.Identity.GetUserId();
+
+            // Tạo đối tượng SubComment và lưu vào database
+            var reply = new Reply
+            {
+                UserId = userId,
+                RatedId = commentId,
+                Content = content,
+                CreatedDate = DateTime.Now
+            };
+
+            db.Replies.Add(reply);
+            db.SaveChanges();
+
+            // Lấy danh sách bình luận của sản phẩm
+            var listComment = db.Rateds.Where(c => c.ProductId == productId).ToList();
+
+            ViewBag.ListRepplyComment = db.Replies.ToList().OrderBy(c => c.CreatedDate);
+
+            // Trả về PartialView Partial_Rated với dữ liệu danh sách bình luận
+            return PartialView("Partial_Rated", listComment);
         }
     }
 }
