@@ -220,10 +220,5 @@
     <script src="~/Content/ckeditor/ckeditor.js"></script>
     <script src="~/Content/ckfinder/ckfinder.js"></script>
     @RenderSection("scripts", required: false)
-    <script>
-        $.connection.hub.url = '/signalr'; // Đường dẫn đến Hub SignalR
-        $.connection.hub.logging = true; // Bật logging trong console (tùy chọn)
-    </script>
-    <script src="~/signalr/hubs"></script>
 </body>
 </html>
