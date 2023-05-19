@@ -13,7 +13,7 @@ namespace Web_Hutech_Gear.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202305161335339_UpdateDatabase"; }
+            get { return "202305191641588_UpdateDatabase"; }
         }
         
         string IMigrationMetadata.Source

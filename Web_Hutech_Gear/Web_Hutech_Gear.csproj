@@ -278,9 +278,9 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202305161335339_UpdateDatabase.cs" />
-    <Compile Include="Migrations\202305161335339_UpdateDatabase.designer.cs">
-      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202305191641588_UpdateDatabase.cs" />
+    <Compile Include="Migrations\202305191641588_UpdateDatabase.designer.cs">
+      <DependentUpon>202305191641588_UpdateDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
@@ -5742,8 +5742,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305161335339_UpdateDatabase.resx">
-      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305191641588_UpdateDatabase.resx">
+      <DependentUpon>202305191641588_UpdateDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

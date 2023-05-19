@@ -1,10 +1,11 @@
-﻿using PagedList;
+﻿using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Web_Hutech_Gear.Models;
+using Web_Hutech_Gear.Models.EF;
 
 namespace Web_Hutech_Gear.Controllers
 {
@@ -60,8 +61,35 @@ namespace Web_Hutech_Gear.Controllers
             // Truyền dữ liệu sang view bằng Viewbag
             ViewBag.idCurrent = idCurrent;
             ViewBag.idMaxTmp = idMaxTmp;
+            var aaaa = db.Comments.ToList();
+            // Hiển thị danh sách bình luận hiện có
+            ViewBag.comments = db.Comments.Where(x => x.NewsId == id).ToList();
 
             return View(news);
         }
+
+        // Hiển thị sanh sách Comment_News
+        public ActionResult Comment(int newsId, string content, int rating, string url)
+        {
+            // Lấy ID của người dùng đăng nhập
+            var userId = User.Identity.GetUserId();
+
+            // Tạo đối tượng Comment và lưu vào database
+            var comment = new Comment
+            {
+                UserId = userId,
+                NewsId = newsId,
+
+                Content = content,
+                Rating = rating,
+                CreatedDate = DateTime.Now
+            };
+
+            db.Comments.Add(comment);
+            db.SaveChanges();
+
+            return Redirect(url);
+        }
+
     }
 }

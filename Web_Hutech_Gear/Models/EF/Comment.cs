@@ -13,12 +13,12 @@ namespace Web_Hutech_Gear.Models.EF
         public int Id { get; set; }
         [StringLength(128)]
         public string UserId { get; set; }
-        public int ProductId { get; set; }
+        public int NewsId { get; set; }
+        [Required(ErrorMessage = "Content không được để trống")]
         public string Content { get; set; }
-        [Required(ErrorMessage = "Tên không được để trống")]
         public int Rating { get; set; }
         public DateTime CreatedDate { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual News News { get; set; }
         public virtual ApplicationUser User { get; set; }
 
 
