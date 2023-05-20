@@ -4,6 +4,9 @@
     ViewBag.Title = "Liên hệ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link href="~/Content/contact/contact.css" rel="stylesheet" />
+</head>
 <div id="inner_banner" class="section inner_banner_section">
     <div class="container">
         <div class="row">
@@ -42,7 +45,7 @@
                                     <div class="icon_bottom"> <i class="fa fa-road" aria-hidden="true"></i> </div>
                                     <div class="info_cont">
                                         <h4>@SettingHelper.GetValue("SettingAddress")</h4>
-                                        <p>Melbourne Australia</p>
+                                        <p>Hutech Gear</p>
                                     </div>
                                 </div>
                             </div>
@@ -67,31 +70,39 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contant_form">
                             <h2 class="text_align_center">Gửi tin nhắn</h2>
-                            <div class="form_section">
-                                @using (Html.BeginForm("Contact", "Home", new { }))
-                                {
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                                <input class="field_custom font-con" name="Name" placeholder="Tên của bạn" type="text">
+                            <div id="contact" class="request">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-7 ">
+                                                    @using (Html.BeginForm("Contact", "Home", new { }))
+                                                    {
+                                                        <div class="main_form">
+                                                            <div class="row">
+                                                                <div class="col-md-12 ">
+                                                                    <input class="contactus" placeholder="Tên của bạn" type="text" name="Name">
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <input class="contactus" placeholder="Số điện thoại" type="text" name="PhoneNumber">
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <input class="contactus" placeholder="Địa chỉ Email" type="text" name="email">
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <textarea class="textarea" placeholder="Tin nhắn" type="text" name="Message"></textarea>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <button class="send_btn" type="submit">Gửi ngay</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                                <input class="field_custom" name="Email" placeholder="Địa chỉ Email" type="email">
-                                            </div>
-                                            <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                                <input class="field_custom" name="PhoneNumber" placeholder="Số điện thoại" type="text">
-                                            </div>
-                                            <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <textarea class="field_custom" name="Message" placeholder="Tin nhắn"></textarea>
-                                            </div>
-                                            <div class="center">
-                                                <button class="btn main_bt" type="submit">Gửi ngay</button>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                }
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
