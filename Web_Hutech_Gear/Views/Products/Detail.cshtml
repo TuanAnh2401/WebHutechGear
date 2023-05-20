@@ -14,6 +14,15 @@
     var ListRating = db.Rateds.Where(p => p.ProductId == Model.Id).ToList();
     var averageRating = ListRating?.Any() == true ? ListRating.Average(p => p.Rating) : 5;
 }
+<style>
+    #hiddenSubComment {
+        display: none
+    }
+
+        #hiddenSubComment.active {
+            display: block
+        }
+</style>
 <!-- #region Điều hướng -->
 <div id="inner_banner" class="section inner_banner_section">
     <div class="container">
@@ -298,73 +307,53 @@
     </script>
 
     @*Sử lý repply comment*@
+    // Thực hiện xử lý hiển thị mục nhập trả lời bình luận
     <script>
-        function hiddenSub(button) {
-            //var hidden = button.querySelector('.hiddenSubComment')
-            var hiddens = document.getElementsByClassName('hiddenSubComment')
-            var Ans = document.getElementsByClassName('An')
-
-            for (var i = 0; i < hiddens.length; i++) {
-                var hidden = hiddens[i];
-
-                //var hidden = button.nextsSibling;
-
-                if (hidden.style.display === "none") {
-                    hidden.style.display = "block";
-                    document.querySelectorAll('.An').forEach(button => {
-                        button.textContent = 'Ẩn Trả Lời';
-                    })
-                }
-                else {
-                    hidden.style.display = "none";
-                    document.querySelectorAll('.An').forEach(button => {
-                        button.textContent = 'Trả Lời ';
-                    })
-                }
-            }
-        }
-    </script>
-    <script>
-
-        // Thực hiện xử lý hiển thị mục nhập trả lời bình luận
         $(document).ready(function () {
-            $(document).on('click', '.reply-btn', function (e) {
-                var hidden = document.getElementsByClassName("hiddenSubComment")[0];
-                var replyContent = $(this).siblings('.reply-content').val(); // Lấy giá trị của nội dung comment trả lời
+            // Bắt sự kiện click vào nút "Trả lời"
+            $(document).on('click', '#replyButton1', function () {
+                var $form = $(this).next('#replyForm1');
+                var isReplyFormVisible = $form.is(':visible');
 
-
-
-                var hidden = e.nexts
-
-                if (hidden.offsetHeight === 0) {
-                    hidden.style.display = "block";
-                }
-                else {
-                    hidden.style.display = "none";
+                if (isReplyFormVisible) {
+                    $form.hide();
+                } else {
+                    $form.show();
                 }
             });
+        });
+    </script>
 
-            $(document).on('click', '.submit-reply-btn', function () {
+    <script>
+        $(document).ready(function () {
+           // thực hiện khi nhấn button submit reply bình luận
+            $(document).on('click', '.submit-reply-btn', function (e) {
 
                 var commentId = $(this).closest('.comment').data('id'); // Lấy giá trị của id comment trả lời
                 var replyContent = $(this).siblings('.reply-content').val(); // Lấy giá trị của nội dung comment trả lời
                 var productId = $(this).siblings('.product-id').val(); // Lấy giá trị của id sản phẩm trả lời
+                if (replyContent.length == 0) {
+                    alert("Nội dung bình luận là bắt buộc");
+                    //e.preventDefault();
+                }
+                else {
+                    $.ajax({
+                        url: '/Products/ReplyComment',
+                        type: 'POST',
+                        data: {
+                            commentId: commentId,
+                            productId: productId,
+                            content: replyContent
+                        },
+                        success: function (result) {
+                            $('#loading').hide();
+                            $('.comment-section').show();
+                            // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
+                            $('.comment-section').html(result);
+                        }
+                    });
+                }
 
-                $.ajax({
-                    url: '/Products/ReplyComment',
-                    type: 'POST',
-                    data: {
-                        commentId: commentId,
-                        productId: productId,
-                        content: replyContent
-                    },
-                    success: function (result) {
-                        $('#loading').hide();
-                        $('.comment-section').show();
-                        // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
-                        $('.comment-section').html(result);
-                    }
-                });
             });
         });
         $(function () {

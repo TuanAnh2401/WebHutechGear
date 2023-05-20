@@ -24,12 +24,12 @@
         <!-- #region  Đăng nhập mới được trả lời -->
         @if (Request.IsAuthenticated)
         {
-            <button onclick="hiddenSub(this)" class="An">Trả Lời</button>
+            <button id="replyButton1" class="An">Trả Lời</button>
 
-            <div id="reply-form" style="padding-bottom:25px; display:none" class="hiddenSubComment">
-                <textarea class="reply-content" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
+            <div id="replyForm1" style="padding-bottom:25px; display:none" class="hiddenSubComment">
+                <textarea class="reply-content field_custom" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
                 <input type="hidden" class="input-group-lg product-id" value="@item.ProductId" />
-                <button class="submit-reply-btn" style="background-color: #808080">Trả Lời</button>
+                <button class="btn main_bt submit-reply-btn" role="button" style="background-color: #808080">Trả Lời</button>
             </div>
         }
         <!-- #endregion -->
