@@ -278,11 +278,6 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202305180126270_fixreply.cs" />
-    <Compile Include="Migrations\202305180126270_fixreply.designer.cs">
-      <DependentUpon>202305180126270_fixreply.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
     <Compile Include="Models\EF\Rated.cs" />
