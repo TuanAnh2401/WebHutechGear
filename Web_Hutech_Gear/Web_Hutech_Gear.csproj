@@ -3943,6 +3943,9 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
     <Content Include="Content\contact\contact.css" />
+    <Content Include="Content\detailProduct\detailProduct.css" />
+    <Content Include="Content\Images\arrow-left.png" />
+    <Content Include="Content\Images\arrow-right.png" />
     <Content Include="Content\Images\avt.jpg" />
     <Content Include="Content\Images\th.jpg" />
     <Content Include="Content\login\css\main.css" />
