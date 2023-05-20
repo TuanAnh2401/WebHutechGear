@@ -281,7 +281,10 @@
                         $('.comment-section').show();
                         // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
                         $('.comment-section').html(result);
-
+                        // Đặt lại các giá trị của form
+                        form.find('#new-review').val('');
+                        form.find('.rating .fa-star-o').removeClass('fa-star-o').addClass('fa-star');
+                        form.find('#rating').val('5');
                     }
                 });
             });
@@ -354,10 +357,6 @@
                         $('.comment-section').show();
                         // Nếu controller action trả về kết quả thành công, cập nhật phần tử HTML chứa dữ liệu
                         $('.comment-section').html(result);
-                        // Đặt lại các giá trị của form
-                        form.find('#new-review').val('');
-                        form.find('.rating .fa-star-o').removeClass('fa-star-o').addClass('fa-star');
-                        form.find('#rating').val('5');
                     }
                 });
             });
