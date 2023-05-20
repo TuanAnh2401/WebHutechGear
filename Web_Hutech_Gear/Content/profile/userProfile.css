@@ -1,4 +1,114 @@
-﻿/* CSS cho avatar */
+﻿body {
+    background: #f5f5f5;
+    margin-top: 20px;
+}
+
+.ui-w-80 {
+    width: 80px !important;
+    height: auto;
+}
+
+.btn-default {
+    border-color: rgba(24,28,33,0.1);
+    background: rgba(0,0,0,0);
+    color: #4E5155;
+}
+
+label.btn {
+    margin-bottom: 0;
+}
+
+.btn-outline-primary {
+    border-color: #26B4FF;
+    background: transparent;
+    color: #26B4FF;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.text-light {
+    color: #babbbc !important;
+}
+
+.btn-facebook {
+    border-color: rgba(0,0,0,0);
+    background: #3B5998;
+    color: #fff;
+}
+
+.btn-instagram {
+    border-color: rgba(0,0,0,0);
+    background: #000;
+    color: #fff;
+}
+
+.card {
+    background-clip: padding-box;
+    box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+}
+
+.row-bordered {
+    overflow: hidden;
+}
+
+.account-settings-fileinput {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.account-settings-links .list-group-item.active {
+    font-weight: bold !important;
+}
+
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+    background: transparent !important;
+}
+
+.account-settings-multiselect ~ .select2-container {
+    width: 100% !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+    .light-style .account-settings-links .list-group-item.active {
+        color: #4e5155 !important;
+    }
+
+.material-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+    .material-style .account-settings-links .list-group-item.active {
+        color: #4e5155 !important;
+    }
+
+.dark-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+    .dark-style .account-settings-links .list-group-item.active {
+        color: #fff !important;
+    }
+
+.light-style .account-settings-links .list-group-item.active {
+    color: #4E5155 !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24,28,33,0.03) !important;
+}
+
 .avatar-container {
     display: flex;
     align-items: center;
@@ -13,81 +123,3 @@
     height: 200px;
     object-fit: cover;
 }
-
-
-/* CSS cho form đăng ký */
-.signup-form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px 0px #ddd;
-}
-
-.form-field {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-    .form-field label {
-        margin-right: 250px;
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    .form-field input[type="text"],
-    .form-field input[type="email"],
-    .form-field input[type="tel"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-.submit-button {
-    text-align: center;
-    margin-top: 20px;
-}
-
-    .submit-button input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .submit-button input[type="submit"]:hover {
-            background-color: #3e8e41;
-        }
-
-
-.validation-error {
-    color: red;
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-.other-features {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.manage-link a {
-    padding: 10px 30px;
-    background-color: #ddd;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.2s ease-in-out;
-}
-
-    .manage-link a:hover {
-        background-color: #333;
-        color: #fff;
-    }

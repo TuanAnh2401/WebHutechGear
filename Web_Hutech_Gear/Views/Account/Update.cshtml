@@ -8,92 +8,117 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thôn tin người dùng</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/profile/userProfile.css" />
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+   
 </head>
 <body>
-    <div style="padding-top:150px"></div>
-    <form action="/Account/Update" method="post" role="form" class="signup-form" enctype="multipart/form-data">
+    <form action="/Account/Update" method="post" role="form" class="signup-form" enctype="multipart/form-data" >
         @Html.AntiForgeryToken()
-        <div class="avatar-container">
-            <div class="avatar-preview">
-                @{
-                    IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
-                    var ID = User.Identity.GetUserId();
-                    var find = context.Users.FirstOrDefault(p => p.Id == ID);
-                    if (!string.IsNullOrEmpty(find.Avatar))
-                    {
-                        <img alt="User Image" src="~/Content/Images/@find.Avatar" id="preview-image" />
-                    }
-                    else
-                    {
-                        <img alt="User Image" src="~/Content/Images/avt.jpg" id="preview-image" />
-                    }
-                }
-            </div>
-            <div class="avatar-upload">
-                <input type="file" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg" />
-            </div>
-        </div>
-        <div class="form-fields">
-            <div class="form-field">
-                <div style="display: flex; align-items: center; padding-bottom:10px">
-                    <label for="fullname">Họ và tên:</label>
-                    <i class='fas fa-pencil-alt' style='font-size:24px; margin-left:-110px;'></i>
-                </div>
-                <input type="text" id="FullName" name="FullName" value="@find.FullName" style="width: 100%;">
-                @Html.ValidationMessageFor(row => row.FullName)
-            </div>
-            <div class="form-field">
-                <div style="display: flex; align-items: center; padding-bottom:10px">
-                    <label for="username">Tên tài khoản:</label>
-                    <i class='fas fa-user-circle' style='font-size:24px; margin-left:-140px;'></i>
-                </div>
-                <input type="text" id="UserName" name="UserName" value="@find.UserName" readonly>
-            </div>
-            <div class="form-field">
-                <div style="display: flex; align-items: center; padding-bottom:10px">
-                    <label for="email">Email:</label>
-                    <i class="material-icons" style='font-size: 24px; margin-left: -87px;'>email</i>
-                </div>
-                <input type="email" id="Email" name="Email" value="@find.Email" readonly>
-            </div>
-            <div class="form-field">
-                <div style="display: flex; align-items: center; padding-bottom:10px">
-                    <label for="phone">Số điện thoại:</label>
-                    <i class='fas fa-phone-square-alt' style='font-size: 24px; margin-left: -137px;'></i>
-                </div>
-                <input type="tel" id="Phone" name="Phone" value="@find.PhoneNumber">
-                @Html.ValidationMessageFor(row => row.Phone)
-            </div>
-            <div class="form-field">
-                <div style="display: flex; align-items: center; padding-bottom:10px">
-                    <label for="address">Địa chỉ:</label>
-                    <i class="fa fa-home" style='font-size: 24px; margin-left: -100px;'></i>
-                </div>
-                <input type="text" id="Address" name="Address" value="@find.Address">
-                @Html.ValidationMessageFor(row => row.Address)
-            </div>
-            <div class="submit-button">
-                <input type="submit" value="Lưu Thay Đổi" class="custom-submit">
-            </div>
-        </div>
-    </form>
-    <div class="other-features">
-        <div class="manage-link">
-            @Html.ActionLink("Tính năng khác!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
-        </div>
-    </div>
-    <div style="padding-bottom:50px">
+        <div class="container light-style flex-grow-1 container-p-y">
+            <div class="card overflow-hidden">
+                <div class="row no-gutters row-bordered row-border-light">
+                    <div class="col-md-3 pt-0">
+                        <div class="list-group list-group-flush account-settings-links">
+                            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Tổng quan</a>
+                            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Đổi mật khẩu</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="account-general">
 
-    </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+                                <div class="card-body media align-items-center">
+                                    <div class="avatar-preview">
+                                        @{
+                                            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
+                                            var ID = User.Identity.GetUserId();
+                                            var find = context.Users.FirstOrDefault(p => p.Id == ID);
+                                            if (!string.IsNullOrEmpty(find.Avatar))
+                                            {
+                                                <img alt="User Image" src="~/Content/Images/@find.Avatar" id="preview-image" />
+                                            }
+                                            else
+                                            {
+                                                <img alt="User Image" src="~/Content/Images/avt.jpg" id="preview-image" />
+                                            }
+                                        }
+                                    </div>
+                                    <div class="media-body ml-4">
+                                        <label class="btn btn-outline-primary">
+                                            Upload new photo
+                                            <input type="file" class="account-settings-fileinput" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg">
+                                        </label> &nbsp;
+                                        <button type="button" class="btn btn-default md-btn-flat" onclick="resetImage()">Reset</button>
+                                        <div class="text-light small mt-1">Cho phép JPG, PNG, JPEG.</div>
+                                    </div>
+                                </div>
+                                <hr class="border-light m-0">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Họ và tên:</label>
+                                        <input type="text" class="form-control mb-1" id="FullName" name="FullName" value="@find.FullName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Tên tài khoản:</label>
+                                        <input type="text" class="form-control" id="UserName" name="UserName" value="@find.UserName" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">E-mail:</label>
+                                        <input type="text" class="form-control mb-1" id="Email" name="Email" value="@find.Email" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Số điện thoại:</label>
+                                        <input type="text" class="form-control" id="Phone" name="Phone" value="@find.PhoneNumber">
+                                        @Html.ValidationMessageFor(row => row.Phone)
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Địa chỉ:</label>
+                                        <input type="text" class="form-control" id="Address" name="Address" value="@find.Address">
+                                        @Html.ValidationMessageFor(row => row.Address)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account-change-password">
+                                <div class="card-body pb-2">
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nhập mật khẩu cũ</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nhập mật khẩu mới</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nhập lại mật khẩu mới</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right mt-3">
+                <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                <button type="button" class="btn btn-default" onclick="cancelChanges()">Cancel</button>
+            </div>
+        </div>
+        </form>
+        @*<div class="other-features">
+            <div class="manage-link">
+                @Html.ActionLink("Tính năng khác!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
+            </div>
+        </div>*@
+        <div style="padding-bottom:50px">
+
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 </body>
 <script>
     // Lấy phần tử đầu vào hình ảnh và phần tử hình ảnh xem trước
@@ -115,4 +140,21 @@
         // Đọc tệp hình ảnh
         reader.readAsDataURL(input.files[0]);
     });
+</script>
+<script>
+    function resetImage() {
+        // Thay đổi nguồn hình ảnh về giá trị mặc định
+        document.getElementById("preview-image").src = "~/Content/Images/avt.jpg";
+        // Xóa giá trị của input file
+        document.getElementById("ImageFile").value = "";
+    }
+</script>
+<script>
+    function cancelChanges() {
+        // Thực hiện các hành động cần thiết khi nhấn nút "Cancel"
+        // Ví dụ: Chuyển hướng đến một trang khác hoặc làm sạch form
+
+        // Ví dụ: Chuyển hướng đến trang "/dashboard"
+        window.location.href = "/home/index";
+    }
 </script>
