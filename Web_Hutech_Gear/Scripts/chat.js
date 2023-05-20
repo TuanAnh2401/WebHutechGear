@@ -24,7 +24,6 @@
     $.connection.hub.start().done(function () {
         // Đặt thông tin đăng nhập của người gửi vào query string
         $.connection.hub.qs = { 'username': $('#sender').val() };
-
         // Xử lý sự kiện gửi tin nhắn mới
         $('#send-message-form').submit(function (event) {
             event.preventDefault();

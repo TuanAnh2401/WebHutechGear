@@ -31,6 +31,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Content/clients/dist/css/adminlte.min.css">
     <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -220,5 +221,12 @@
     <script src="~/Content/ckeditor/ckeditor.js"></script>
     <script src="~/Content/ckfinder/ckfinder.js"></script>
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
+    <script>
+        $.connection.hub.url = '/signalr'; // Đường dẫn đến Hub SignalR
+        $.connection.hub.logging = true; // Bật logging trong console (tùy chọn)
+    </script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/chat.js"></script>
 </body>
 </html>

@@ -60,6 +60,50 @@
             color: #FFFFFF;
         }
     </style>
+    <style>
+        .chat-logo {
+            position: fixed;
+            right: 30px; /* Đặt giá trị right thay vì left */
+            bottom: 100px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            color: #fff;
+        }
+        .wrap-header-mess {
+            position: fixed;
+            z-index: 1100;
+            width: 25%;
+            height:100px;
+            height: 100vh;
+            right:30px;
+            bottom: -220px;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.3s, opacity 0.3s;
+        }
+
+        .show-header-mess {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+        .hide-header-mess {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.3s, opacity 0.3s;
+        }
+    </style>
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -70,6 +114,7 @@
             <i class="zmdi zmdi-chevron-up"></i>
         </span>
     </div>
+    <!-- End back to top -->
     <!-- loader -->
     <div class="bg_load"> <img class="loader_animation" src="@SettingHelper.GetValue("SettingLogo")" style="width:200px;height:250px" alt="#" /> </div>
     <!-- end loader -->
@@ -170,7 +215,17 @@
         @Html.Action("Partial_Item_Cart", "ShoppingCart")
     </div>
     <!-- End Cart -->
-
+    <!-- Mess -->
+    <a href="#" class="chat-logo js-show-mess">
+        <img src="~/Content/users/images/messenger-logo-png-6.png" alt="Tin nhắn" class="logo-icon">
+        <div class="chat-view">
+            <!-- Nội dung view chat -->
+        </div>
+    </a>
+    <div class="wrap-header-mess js-panel-mess ">
+        @Html.Action("Partial_Chat", "ChatUser")
+    </div>
+    <!-- End Mess -->
     @RenderBody()
     <!-- footer -->
     <footer class="footer_style_2">
@@ -219,6 +274,7 @@
                 </div>
             </div>
         </div>
+
     </footer>
     <!-- end footer -->
     <!-- js section -->
@@ -284,11 +340,17 @@
             $('.js-panel-cart').removeClass('show-header-cart');
         });
     </script>
+
     <script>
-        $('.btn-back-to-top').on("click", function () {
-            $('html, body').animate({ scrollTop: 0 }, 300);
+        // Hiển thị Partial_Chat khi nhấp vào .js-show-mess
+        $('.js-show-mess').on('click', function (e) {
+            $('.js-panel-mess').removeClass('hide-header-mess').addClass('show-header-mess');
+        });
+        $('.js-hide-mess').on('click', function () {
+            $('.wrap-header-mess').removeClass('show-header-mess').addClass('hide-header-mess');
         });
     </script>
+
     <script>
         // Bắt sự kiện khi nhập giá trị vào input
         $('body').on('input', 'input[name="quantity"]', function (e) {
@@ -327,5 +389,12 @@
             });
         });
     </script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
+    <script>
+        $.connection.hub.url = '/signalr'; // Đường dẫn đến Hub SignalR
+        $.connection.hub.logging = true; // Bật logging trong console (tùy chọn)
+    </script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/chat.js"></script>
 </body>
 </html>

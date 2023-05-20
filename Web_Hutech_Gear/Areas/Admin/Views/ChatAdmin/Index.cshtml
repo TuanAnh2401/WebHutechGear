@@ -1,52 +1,69 @@
-﻿@model List<Web_Hutech_Gear.Models.Support.UserViewModel>
-
-@{
-    ViewBag.Title = "Tin nhắn từ khách hàng";
+﻿@{
+    ViewBag.Title = "Chat";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Tin nhắn từ khách hàng</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/admin/home">Trang Chủ</a></li>
-                    <li class="breadcrumb-item active">Tin nhắn từ khách hàng</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
-
-<!-- Main content -->
-<section class="content">
-
-    <!-- Default box -->
-    @foreach (var user in Model)
-    {
-        <div>
-
-            <div>
-                <a href="@Url.Action("Chat", "ChatAdmin", new { receiverId = user.Id })">@user.FullName</a>
-            </div>
-            <div>
-                @user.LastMessage
+<div class="row">
+    <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-unstyled mb-0">
+                    @foreach (var user in Model)
+                    {
+                        <li class="p-2 border-bottom" style="background-color: #eee;">
+                            <div class="chat-user d-flex justify-content-between" data-url="@Url.Action("Chat", "ChatAdmin", new { receiverId = user.Id })">
+                                <div class="d-flex flex-row">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
+                                         class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                                    <div class="pt-1">
+                                        <p class="fw-bold mb-0">@user.FullName</p>
+                                        <p class="small text-muted">@user.LastMessage</p>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <p class="small text-muted mb-1">Just now</p>
+                                    <span class="badge bg-danger float-end">1</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
+    </div>
+    <div class="col-md-6 col-lg-7 col-xl-8">
+        <div id="chat-container">
+            <!-- Nội dung của phần Chat sẽ được cập nhật ở đây -->
+        </div>
+    </div>
+</div>
 
-    }
-    <!-- /.card -->
-</section>
-<!-- /.content -->
+@section scripts{
+    <script>
+        $(function () {
+            // Xử lý sự kiện nhấp vào đường dẫn chat
+            $('.chat-user').on('click', function (event) {
+                event.preventDefault();
 
+                var url = $(this).data('url'); // Lấy URL từ thuộc tính data-url của phần tử
 
+                // Gửi yêu cầu AJAX để tải nội dung chat từ URL
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        // Xử lý thành công
+                        // Ví dụ: Cập nhật nội dung chat trong phần Chat
+                        $('#chat-container').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi
+                        console.error(error);
+                    }
+                });
+            });
+        });
+        
+    </script>
 
-
-
-
-
-
+}

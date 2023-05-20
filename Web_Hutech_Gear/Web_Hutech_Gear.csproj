@@ -278,9 +278,9 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Migrations\202305191641588_UpdateDatabase.cs" />
-    <Compile Include="Migrations\202305191641588_UpdateDatabase.designer.cs">
-      <DependentUpon>202305191641588_UpdateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202305180126270_fixreply.cs" />
+    <Compile Include="Migrations\202305180126270_fixreply.designer.cs">
+      <DependentUpon>202305180126270_fixreply.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
@@ -4240,12 +4240,14 @@
     <Content Include="Content\users\images\loading.gif" />
     <Content Include="Content\users\images\logos\it_logo.png" />
     <Content Include="Content\users\images\logos\it_logo_white.png" />
+    <Content Include="Content\users\images\messenger-logo-png-6.png" />
     <Content Include="Content\users\js\bootstrap.min.js" />
     <Content Include="Content\users\js\custom.js" />
     <Content Include="Content\users\js\hizoom.js" />
     <Content Include="Content\users\js\jquery.min.js" />
     <Content Include="Content\users\js\menumaker.js" />
     <Content Include="Content\users\js\wow.js" />
+    <Content Include="Content\users\messenger-logo-png-6.png" />
     <Content Include="Content\users\price.css" />
     <Content Include="Content\users\price.js" />
     <Content Include="Content\users\revolution\assets\coloredbg.png" />
@@ -5718,9 +5720,9 @@
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Posts\Partial_Posts.cshtml" />
     <Content Include="Views\Home\Sale.cshtml" />
-    <Content Include="Views\ChatUser\Chat.cshtml" />
     <Content Include="Views\Posts\DetailBlog.cshtml" />
     <Content Include="Views\News\DetailNew.cshtml" />
+    <Content Include="Views\ChatUser\Partial_Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5742,8 +5744,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305191641588_UpdateDatabase.resx">
-      <DependentUpon>202305191641588_UpdateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305161335339_UpdateDatabase.resx">
+      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

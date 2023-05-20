@@ -13,7 +13,7 @@ namespace Web_Hutech_Gear.Controllers
         private static ConcurrentDictionary<string, string> ChatLog = new ConcurrentDictionary<string, string>();
 
         // GET: ChatUser
-        public ActionResult Chat()
+        public ActionResult Partial_Chat()
         {
             var userId = User.Identity.GetUserId();
             var adminUsers = db.Roles.FirstOrDefault(p=>p.Name=="admin").Users.FirstOrDefault();
@@ -31,7 +31,7 @@ namespace Web_Hutech_Gear.Controllers
             ViewBag.UserId = userId;
             ViewBag.Messages = messages;
 
-            return View();
+            return PartialView();
         }
         public JsonResult SaveMessage(string sender, string receiver, string message)
         {
