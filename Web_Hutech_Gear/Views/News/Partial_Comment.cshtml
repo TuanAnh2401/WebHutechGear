@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Web_Hutech_Gear.Models.EF.Comment>
+@using Web_Hutech_Gear.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+<!-- #region Bình luận -->
+@foreach (var item in Model)
+{
+    string userId = item.UserId;
+    <div style="padding-bottom:40px">
+        <p class="comm_head">@db.Users.FirstOrDefault(p => p.Id == userId).FullName <span Ngày:>@item.CreatedDate.ToString("dd-MM-yyyy")</span></p>
+        <p> @item.Content </p>
+    </div>
+}

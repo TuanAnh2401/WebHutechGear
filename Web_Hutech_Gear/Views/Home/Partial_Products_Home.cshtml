@@ -14,7 +14,7 @@
                     <div class="product_img"> <img class="img-responsive" style="height:180px;width:300px" src="@item.Image" alt=""> </div>
                     <div class="product_detail_btm">
                         <div class="center">
-                            <h4 style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@item.Title</h4>
+                            <h4 style="width: auto; height: 100px; overflow: hidden; word-wrap: break-word; ">@item.Title</h4>
                         </div>
                         <div class="starratin">
                             <div class="center">
@@ -30,7 +30,6 @@
                                 {
                                     <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
                                     <span>-</span>
-
                                 }
                                 <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
                             </p>

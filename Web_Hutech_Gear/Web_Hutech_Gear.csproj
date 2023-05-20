@@ -263,7 +263,6 @@
     <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
-    <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
@@ -275,9 +274,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatUserController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Migrations\202305200410539_updatedatabase.cs" />
+    <Compile Include="Migrations\202305200410539_updatedatabase.designer.cs">
+      <DependentUpon>202305200410539_updatedatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305200421179_updatecmt.cs" />
+    <Compile Include="Migrations\202305200421179_updatecmt.designer.cs">
+      <DependentUpon>202305200421179_updatecmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305200428153_deletepost.cs" />
+    <Compile Include="Migrations\202305200428153_deletepost.designer.cs">
+      <DependentUpon>202305200428153_deletepost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
     <Compile Include="Models\EF\Rated.cs" />
@@ -287,7 +298,6 @@
     <Compile Include="Models\EF\NewsCategory.cs" />
     <Compile Include="Models\EF\Order.cs" />
     <Compile Include="Models\EF\OrderDetail.cs" />
-    <Compile Include="Models\EF\Posts.cs" />
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
@@ -4158,6 +4168,7 @@
     <Content Include="Content\users\css\bootstrap-select.css" />
     <Content Include="Content\users\css\bootstrap.css" />
     <Content Include="Content\users\css\bootstrap.min.css" />
+    <Content Include="Content\users\css\checkoutItem.css" />
     <Content Include="Content\users\css\colors1.css" />
     <Content Include="Content\users\css\colors1_dark.css" />
     <Content Include="Content\users\css\colors2.css" />
@@ -4168,6 +4179,7 @@
     <Content Include="Content\users\css\font-awesome.css" />
     <Content Include="Content\users\css\font-awesome.min.css" />
     <Content Include="Content\users\css\hizoom.css" />
+    <Content Include="Content\users\css\mess.css" />
     <Content Include="Content\users\css\owl.carousel.css" />
     <Content Include="Content\users\css\owl.carousel.min.css" />
     <Content Include="Content\users\css\owl.theme.default.css" />
@@ -4376,9 +4388,6 @@
     <Content Include="Areas\Admin\Views\Adv\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Posts\Add.cshtml" />
-    <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NewsCategory\Add.cshtml" />
     <Content Include="Areas\Admin\Views\NewsCategory\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NewsCategory\Index.cshtml" />
@@ -5712,12 +5721,10 @@
     <Content Include="Views\Home\Partial_Products_News.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\Partial_News.cshtml" />
-    <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Posts\Partial_Posts.cshtml" />
     <Content Include="Views\Home\Sale.cshtml" />
-    <Content Include="Views\Posts\DetailBlog.cshtml" />
     <Content Include="Views\News\DetailNew.cshtml" />
     <Content Include="Views\ChatUser\Partial_Chat.cshtml" />
+    <Content Include="Views\News\Partial_Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5739,8 +5746,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305161335339_UpdateDatabase.resx">
-      <DependentUpon>202305161335339_UpdateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305200410539_updatedatabase.resx">
+      <DependentUpon>202305200410539_updatedatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305200421179_updatecmt.resx">
+      <DependentUpon>202305200421179_updatecmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305200428153_deletepost.resx">
+      <DependentUpon>202305200428153_deletepost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

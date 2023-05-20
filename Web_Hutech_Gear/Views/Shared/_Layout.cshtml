@@ -39,82 +39,13 @@
     <link href="~/Content/users/banner/css/main.css" rel="stylesheet" />
     <link href="~/Content/users/banner/css/util.css" rel="stylesheet" />
     <!-- ShoppingCart css -->
-    <style>
-        .checkout_items {
-            display: -webkit-box;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0px;
-            left: 26px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #fe4c50;
-            font-size: 12px;
-            color: #FFFFFF;
-        }
-    </style>
-    <style>
-        .chat-logo {
-            position: fixed;
-            right: 30px; /* Đặt giá trị right thay vì left */
-            bottom: 100px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            z-index: 1;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            color: #fff;
-        }
-        .wrap-header-mess {
-            position: fixed;
-            z-index: 1100;
-            width: 25%;
-            height:100px;
-            height: 100vh;
-            right:30px;
-            bottom: -220px;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s linear 0.3s, opacity 0.3s;
-        }
-
-        .show-header-mess {
-            visibility: visible;
-            opacity: 1;
-            transition-delay: 0s;
-        }
-        .hide-header-mess {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s linear 0.3s, opacity 0.3s;
-        }
-    </style>
+    <link href="~/Content/users/css/checkoutItem.css" rel="stylesheet" />
+    <!-- Mess css -->
+    <link href="~/Content/users/css/mess.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body id="default_theme" class="it_service">
-    <!-- Back to top -->
-    <div class="btn-back-to-top" style="display: flex; align-items: center; justify-content: center; border-radius: 50%; bottom:20px ">
-        <span class="symbol-btn-back-to-top">
-            <i class="zmdi zmdi-chevron-up"></i>
-        </span>
-    </div>
-    <!-- End back to top -->
     <!-- loader -->
     <div class="bg_load"> <img class="loader_animation" src="@SettingHelper.GetValue("SettingLogo")" style="width:200px;height:250px" alt="#" /> </div>
     <!-- end loader -->
@@ -181,9 +112,6 @@
                                         <a class="@((ViewBag.ActiveMenu == "News") ? "active" : "")" href="/news/index">Tin tức</a>
                                     </li>
                                     <li>
-                                        <a class="@((ViewBag.ActiveMenu == "Posts") ? "active" : "")" href="/posts/index">Bài viết</a>
-                                    </li>
-                                    <li>
                                         <a class="@((ViewBag.ActiveMenu == "Sale") ? "active" : "")" href="/home/sale">Khuyến Mãi</a>
                                     </li>
                                     <li>
@@ -238,14 +166,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="main-heading left_text">
-                                <h2>Additional links</h2>
+                                <h2>Liên kết bổ sung</h2>
                             </div>
                             <ul class="footer-menu">
-                                <li><a href="it_about.html"><i class="fa fa-angle-right"></i> About us</a></li>
-                                <li><a href="it_term_condition.html"><i class="fa fa-angle-right"></i> Terms and conditions</a></li>
-                                <li><a href="it_privacy_policy.html"><i class="fa fa-angle-right"></i> Privacy policy</a></li>
-                                <li><a href="it_news.html"><i class="fa fa-angle-right"></i> News</a></li>
-                                <li><a href="it_contact.html"><i class="fa fa-angle-right"></i> Contact us</a></li>
+                                <li><a href="/home/index"><i class="fa fa-angle-right"></i> Trang chủ </a></li>
+                                <li><a href="/products/index"><i class="fa fa-angle-right"></i> Sản phẩm </a></li>
+                                <li><a href="/news/index"><i class="fa fa-angle-right"></i> Tin tức</a></li>
+                                <li><a href="/home/contact"><i class="fa fa-angle-right"></i> Liên hệ</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
@@ -261,7 +188,7 @@
                                     <fieldset>
                                         <div class="field row" style="padding-left:5px">
                                             <input placeholder="Email" type="text">
-                                            <button class="button_custom"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+                                            <button class="button_custom" ><i class="fa fa-envelope" aria-hidden="true"></i></button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -270,7 +197,7 @@
                     </div>
                 </div>
                 <div class="cprt">
-                    <p>ItNext © Copyrights 2019 Design by html.design</p>
+                    <p>HutechGear © Copyrights 2019 Design by html.design</p>
                 </div>
             </div>
         </div>

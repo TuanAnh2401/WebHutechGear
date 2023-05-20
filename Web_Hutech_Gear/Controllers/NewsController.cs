@@ -45,7 +45,10 @@ namespace Web_Hutech_Gear.Controllers
 
             return PartialView("Partial_News", pagedList);
         }
-
+        public ActionResult Partial_Comment(Comment listCmt)
+        {
+            return PartialView("Partial_Comment", listCmt);
+        }
         // Chi tiết tin tức
         public ActionResult DetailNew(int id)
         {
@@ -57,7 +60,8 @@ namespace Web_Hutech_Gear.Controllers
 
             //id nhỏ nhất là 1 max là tmp
             int idMaxTmp = db.News.Count();
-
+            // Hiển thị danh sách bình luận
+            ViewBag.listComment = db.Comments.Where(n => n.NewsId == id).ToList();
             // Truyền dữ liệu sang view bằng Viewbag
             ViewBag.idCurrent = idCurrent;
             ViewBag.idMaxTmp = idMaxTmp;
@@ -69,7 +73,7 @@ namespace Web_Hutech_Gear.Controllers
         }
 
         // Hiển thị sanh sách Comment_News
-        public ActionResult Comment(int newsId, string content, int rating, string url)
+        public ActionResult Comment(int newsId, string content, string url)
         {
             // Lấy ID của người dùng đăng nhập
             var userId = User.Identity.GetUserId();
@@ -81,14 +85,19 @@ namespace Web_Hutech_Gear.Controllers
                 NewsId = newsId,
 
                 Content = content,
-                Rating = rating,
                 CreatedDate = DateTime.Now
             };
 
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return Redirect(url);
+            // Lấy danh sách bình luận của sản phẩm
+            var listComments = db.Comments.Where(c => c.NewsId == newsId).ToList();
+
+            ViewBag.ListRepplyComment = db.Replies.ToList().OrderBy(c => c.CreatedDate);
+
+            // Trả về PartialView Partial_Rated với dữ liệu danh sách bình luận
+            return PartialView("Partial_Comment", listComments);
         }
 
     }

@@ -70,14 +70,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                     var item = db.NewsCategory.Find(id);
                     if (item != null)
                     {
-                        var findPost = db.Posts.Where(p => p.NewsCategoryId == item.Id).ToList();
-                        if (findPost != null)
-                        {
-                            foreach (var pos in findPost)
-                            {
-                               db.Posts.Remove(pos);
-                            }
-                        }
                         var findNews = db.News.Where(p => p.NewsCategoryId == item.Id).ToList();
                         if (findNews != null)
                         {
@@ -118,14 +110,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                 var sp = db.NewsCategory.Find(Convert.ToInt32(item));
                                 if (sp != null)
                                 {
-                                    var findPost = db.Posts.Where(p => p.NewsCategoryId == sp.Id).ToList();
-                                    if (findPost != null)
-                                    {
-                                        foreach (var pos in findPost)
-                                        {
-                                            db.Posts.Remove(pos);
-                                        }
-                                    }
                                     var findNews = db.News.Where(p => p.NewsCategoryId == sp.Id).ToList();
                                     if (findNews != null)
                                     {

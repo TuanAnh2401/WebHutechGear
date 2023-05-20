@@ -2,7 +2,8 @@
 @{
     foreach (var item in Model)
     {
-        <div class="col-md-3">
+    <div class="col-md-3" style="padding-bottom:30px;">
+        <a href="/News/DetailNew?id=@item.Id">
             <div class="full blog_colum">
                 <div class="blog_feature_img"> <img src="@item.Image" alt="#" style="width:270px;height:140px" /> </div>
                 <div class="post_time">
@@ -15,6 +16,7 @@
                     <p style="  max-height: calc(2 * var(--line-height)); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@item.Description</p>
                 </div>
             </div>
-        </div>
+        </a>
+    </div>
     }
 }

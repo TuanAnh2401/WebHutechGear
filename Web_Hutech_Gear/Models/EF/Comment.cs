@@ -16,7 +16,6 @@ namespace Web_Hutech_Gear.Models.EF
         public int NewsId { get; set; }
         [Required(ErrorMessage = "Content không được để trống")]
         public string Content { get; set; }
-        public int Rating { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual News News { get; set; }
         public virtual ApplicationUser User { get; set; }

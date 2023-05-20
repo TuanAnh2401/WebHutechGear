@@ -20,7 +20,6 @@ namespace Web_Hutech_Gear.Models.EF
         [StringLength(150)]
         public string Title { get; set; }
         public ICollection<News> News { get; set; }
-        public ICollection<Posts> Posts { get; set; }
 
     }
 }

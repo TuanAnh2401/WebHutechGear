@@ -59,21 +59,19 @@
                         <h4>Khoảng giá</h4>
                         <div class="price-input">
                             <div class="field">
-                                <span>Min</span>
                                 <input type="number" class="input-min" id="myInput" value="0" />
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
-                                <span>Max</span>
-                                <input type="number" class="input-max" id="myInput" value="@ViewBag.Max" />
+                                <input type="number" class="input-max" id="myInput" value="100000000" />
                             </div>
                         </div>
                         <div class="sliders">
                             <div class="progresss"></div>
                         </div>
                         <div class="range-input">
-                            <input type="range" class="range-min" min="0" max="@ViewBag.Max" value="0" step="100" />
-                            <input type="range" class="range-max" min="0" max="@ViewBag.Max" value="@ViewBag.Max" step="100" />
+                            <input type="range" class="range-min" min="0" max="100000000" value="0" step="100000" />
+                            <input type="range" class="range-max" min="0" max="100000000" value="100000000" step="100000" />
                         </div>
                     </div>
                     <div class="side_bar_blog">
