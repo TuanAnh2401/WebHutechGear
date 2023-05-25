@@ -9,7 +9,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/profile/userProfile.css" />
-   
 </head>
 <body>
     <form action="/Account/Update" method="post" role="form" class="signup-form" enctype="multipart/form-data" >
@@ -24,31 +23,31 @@
                         </div>
                     </div>
                     <div class="col-md-9">
+                        @{
+                            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
+                            var ID = User.Identity.GetUserId();
+                            var find = context.Users.FirstOrDefault(p => p.Id == ID);
+                        }
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="account-general">
 
                                 <div class="card-body media align-items-center">
                                     <div class="avatar-preview">
-                                        @{
-                                            IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
-                                            var ID = User.Identity.GetUserId();
-                                            var find = context.Users.FirstOrDefault(p => p.Id == ID);
-                                            if (!string.IsNullOrEmpty(find.Avatar))
-                                            {
-                                                <img alt="User Image" src="~/Content/Images/@find.Avatar" id="preview-image" />
-                                            }
-                                            else
-                                            {
-                                                <img alt="User Image" src="~/Content/Images/avt.jpg" id="preview-image" />
-                                            }
+                                        @if (!string.IsNullOrEmpty(find.Avatar))
+                                        {
+                                            <img alt="User Image" src="~/Content/Images/@find.Avatar" id="preview-image" />
+                                        }
+                                        else
+                                        {
+                                            <img alt="User Image" src="~/Content/Images/avt.jpg" id="preview-image" />
                                         }
                                     </div>
                                     <div class="media-body ml-4">
                                         <label class="btn btn-outline-primary">
-                                            Upload new photo
+                                            Tải ảnh mới lên
                                             <input type="file" class="account-settings-fileinput" name="ImageFile" id="ImageFile" value="@find.Avatar" accept=".png, .jpg, .jpeg">
                                         </label> &nbsp;
-                                        <button type="button" class="btn btn-default md-btn-flat" onclick="resetImage()">Reset</button>
+                                        <button type="button" class="btn btn-default md-btn-flat" onclick="resetImage()">Cài lại</button>
                                         <div class="text-light small mt-1">Cho phép JPG, PNG, JPEG.</div>
                                     </div>
                                 </div>
@@ -80,22 +79,18 @@
                             </div>
                             <div class="tab-pane fade" id="account-change-password">
                                 <div class="card-body pb-2">
-
                                     <div class="form-group">
                                         <label class="form-label">Nhập mật khẩu cũ</label>
-                                        <input type="password" class="form-control">
+                                        <input type="password" class="form-control" id="CurrentPassword" name="CurrentPassword">
                                     </div>
-
                                     <div class="form-group">
                                         <label class="form-label">Nhập mật khẩu mới</label>
-                                        <input type="password" class="form-control">
+                                        <input type="password" class="form-control" id="NewPassword" name="NewPassword">
                                     </div>
-
                                     <div class="form-group">
                                         <label class="form-label">Nhập lại mật khẩu mới</label>
-                                        <input type="password" class="form-control">
+                                        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword">
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -103,8 +98,8 @@
                 </div>
             </div>
             <div class="text-right mt-3">
-                <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
-                <button type="button" class="btn btn-default" onclick="cancelChanges()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>&nbsp;
+                <button type="button" class="btn btn-default" onclick="cancelChanges()">Hủy bỏ</button>
             </div>
         </div>
         </form>
@@ -144,7 +139,7 @@
 <script>
     function resetImage() {
         // Thay đổi nguồn hình ảnh về giá trị mặc định
-        document.getElementById("preview-image").src = "~/Content/Images/avt.jpg";
+        document.getElementById("preview-image").src = "/Content/Images/avt.jpg";
         // Xóa giá trị của input file
         document.getElementById("ImageFile").value = "";
     }

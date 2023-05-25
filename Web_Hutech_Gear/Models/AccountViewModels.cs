@@ -130,6 +130,9 @@ namespace Web_Hutech_Gear.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
         public string Email { get; set; }
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+
 
     }
     public class RegisterViewModel

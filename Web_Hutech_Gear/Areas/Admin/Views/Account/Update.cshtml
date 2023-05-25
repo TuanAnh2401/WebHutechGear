@@ -60,23 +60,23 @@
                 <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Họ tên</label>
-                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Địa chỉ</label>
-                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Số điện thoại</label>
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên tài khoản</label>
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label>Quyền</label>

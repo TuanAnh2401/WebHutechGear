@@ -164,7 +164,7 @@ namespace Web_Hutech_Gear.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Update(UpDate model, HttpPostedFileBase ImageFile)
+        public ActionResult Update(UpDate model, HttpPostedFileBase ImageFile)
         {
             if (ImageFile != null && ImageFile.ContentLength > 0)
             {
@@ -176,17 +176,37 @@ namespace Web_Hutech_Gear.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
+                var user = UserManager.FindByEmail(model.Email);
 
                 if (user != null)
                 {
-
                     user.FullName = model.FullName;
                     user.PhoneNumber = model.Phone;
                     user.Address = model.Address;
-                    user.Avatar = model.Avatar;
+                    if(string.IsNullOrEmpty(model.Avatar))
+                    {
+                        user.Avatar = "avt.jpg";
+                    }
+                    else
+                    {
+                        user.Avatar = model.Avatar;
+                    }
 
-                    IdentityResult result = await UserManager.UpdateAsync(user);
+                    // Kiểm tra và cập nhật mật khẩu
+                    if (!string.IsNullOrEmpty(model.CurrentPassword) && !string.IsNullOrEmpty(model.NewPassword))
+                    {
+                        var changePasswordResult = UserManager.ChangePassword(user.Id, model.CurrentPassword, model.NewPassword);
+                        if (!changePasswordResult.Succeeded)
+                        {
+                            // Xử lý lỗi khi đổi mật khẩu
+                            foreach (var error in changePasswordResult.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error);
+                            }
+                        }
+                    }
+
+                    var result = UserManager.Update(user);
                     if (result.Succeeded)
                         return View(model);
                 }
@@ -194,6 +214,8 @@ namespace Web_Hutech_Gear.Controllers
 
             return View(model);
         }
+
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
