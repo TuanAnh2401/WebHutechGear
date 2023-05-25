@@ -58,29 +58,5 @@ namespace Web_Hutech_Gear.Controllers
             }
             return View(model);
         }
-        [HttpPost]
-        public ActionResult ContactByEmail(string email)
-        {
-            try
-            {
-                // Tạo một đối tượng Contact mới
-                var contact = new Contact
-                {
-                    Email = email,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now
-                };
-
-                // Lưu đối tượng Contact vào cơ sở dữ liệu
-                db.Contacts.Add(contact);
-                db.SaveChanges();
-
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, errorMessage = ex.Message });
-            }
-        }
     }
 }

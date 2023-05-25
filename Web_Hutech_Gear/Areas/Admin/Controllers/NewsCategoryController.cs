@@ -14,7 +14,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         // GET: Admin/ProductCategory
         public ActionResult Index()
         {
-            var items = db.NewsCategory;
+            var items = db.NewsCategory.Where(p=> !(p.IsActivate));
             return View(items);
         }
 
@@ -75,10 +75,14 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                         {
                             foreach (var news in findNews)
                             {
-                                db.News.Remove(news);
+                                news.IsActivate = true;
+                                db.News.Attach(news);
+                                db.Entry(news).State = System.Data.Entity.EntityState.Modified;
                             }
                         }
-                        db.NewsCategory.Remove(item);
+                        item.IsActivate = true;
+                        db.NewsCategory.Attach(item);
+                        db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                         transaction.Commit();
                         return Json(new { success = true });
@@ -115,12 +119,16 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                     {
                                         foreach (var news in findNews)
                                         {
-                                            db.News.Remove(news);
+                                            news.IsActivate = true;
+                                            db.News.Attach(news);
+                                            db.Entry(news).State = System.Data.Entity.EntityState.Modified;
                                         }
                                     }
                                    
                                 }
-                                db.NewsCategory.Remove(sp);
+                                sp.IsActivate = true;
+                                db.NewsCategory.Attach(sp);
+                                db.Entry(sp).State = System.Data.Entity.EntityState.Modified;
                             }
                             db.SaveChanges();
                             transaction.Commit();

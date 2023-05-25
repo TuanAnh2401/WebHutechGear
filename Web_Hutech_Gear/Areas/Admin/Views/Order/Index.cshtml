@@ -35,13 +35,14 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>STT</th>
                         <th>Mã đơn hàng</th>
                         <th>Tên Khách hàng</th>
                         <th>Phone</th>
                         <th>Tiền</th>
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
+                        <th>Tình trạng đơn hàng</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -56,19 +57,20 @@
                             var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
                             foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@i</td>
-                                    <td>HD:@item.Id</td>
-                                    <td>@find.FullName</td>
-                                    <td>@find.PhoneNumber</td>
-                                    <td>@Web_Hutech_Gear.Models.Support.Common.FormatNumber(item.TotalAmount, 0)</td>
-                                    <td>@(item.TypePayment==1?"Chờ thành toán":"Đã thanh toán")</td>
-                                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                                    <td>
-                                        <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
-                                        <a href="#" class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>HD:@item.Id</td>
+                                            <td>@find.FullName</td>
+                                            <td>@find.PhoneNumber</td>
+                                            <td>@Web_Hutech_Gear.Models.Support.Common.FormatNumber(item.TotalAmount, 0)</td>
+                                            <td>@(item.TypePayment==1?"Chờ thành toán":"Đã thanh toán")</td>
+                                            <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@(item.IsOrder?"Hoàn thành":"Đang chờ")</td>
+                                            <td>
+                                                <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
+                                                <a href="#" class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
+                                            </td>
+                                        </tr>
                                 i++;
                             }
                         }

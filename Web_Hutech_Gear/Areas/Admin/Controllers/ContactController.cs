@@ -22,7 +22,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 page = 1;
             else
                 searchString = currentFilter;
-            IEnumerable<Contact> items = db.Contacts.ToList();
+            IEnumerable<Contact> items = db.Contacts.Where(p=>!(p.IsActivate));
             var pageSize = 10;
             if (page == null)
             {
@@ -34,11 +34,11 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                          String.Compare(p.PhoneNumber, searchString, true) == 0 ||
                                          String.Compare(p.Email, searchString, true) == 0).ToList().ToPagedList(pageIndex, pageSize);
             else
-                items = items.ToPagedList(pageIndex, pageSize);
+                items = items.ToList().ToPagedList(pageIndex, pageSize);
             ViewBag.CurrentFilter = searchString;
             ViewBag.PageSize = pageSize;
             ViewBag.Page = page;
-            return View(items);
+            return View(items.ToPagedList(pageIndex, pageSize));
         }
         public ActionResult Detail(int id)
         {
@@ -50,6 +50,11 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             db.Entry(detail).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return View(detail);
+        }
+        public ActionResult Partial_Contact ()
+        {
+            ViewBag.CountContact = db.Contacts.Where(p => p.IsRead == false).Count();
+            return PartialView();
         }
         [HttpPost]
         public ActionResult IsRead(int id)
@@ -73,7 +78,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             var item = db.Contacts.Find(id);
             if (item != null)
             {
-                db.Contacts.Remove(item);
+                item.IsActivate = true;
+                db.Contacts.Attach(item);
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true });
             }
@@ -91,7 +98,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                     foreach (var item in items)
                     {
                         var obj = db.Contacts.Find(Convert.ToInt32(item));
-                        db.Contacts.Remove(obj);
+                        obj.IsActivate = true;
+                        db.Contacts.Attach(obj);
+                        db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                     }
                 }

@@ -43,16 +43,16 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách: @ViewBag.Title</h3>
+            <div style="padding-top:30px"></div>
             @using (Html.BeginForm("Index", "Account", FormMethod.Get))
             {
-                <div class="form-container">
+                <div class="form-container" style="float:left">
                     <input class="form-controll form-controll-navbar" type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tài khoản" />
                     <input type="submit" value="Search" />
                 </div>
             }
             <div class="card-tools">
                 <a href="/Admin/Account/Create" class="btn btn-primary">Thêm mới</a>
-                <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
             </div>
         </div>
         <div class="card-body">
@@ -60,7 +60,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" id="SelectAll" /></th>
                         <th>STT</th>
                         <th>Tài khoản</th>
                         <th>Họ tên</th>
@@ -77,7 +76,6 @@
                         {
                             var strCheckLock = item.LockoutEnabled ? "<i class='fa fa-unlock text-success'></i>" : "<i class='fas fa-lock text-danger'></i>";
                             <tr id="trow_@item.Id">
-                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td>@i</td>
                                 <td>@item.UserName</td>
                                 <td>@item.FullName</td>
@@ -87,7 +85,6 @@
                                 </td>
                                 <td>
                                     <a href="/Admin/Account/Update/@item.Id" class="btn btn-sm btn-primary">Cập Nhật</a>
-                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
                             </tr>
                             i++;
@@ -122,69 +119,6 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('body').on('click', '#BtnDeleteAll', function (e) {
-                e.preventDefault();
-                var str = "";
-                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
-                var i = 0;
-                checkbox.each(function () {
-                    if (this.checked) {
-                        var _id = $(this).val();
-                        if (i === 0) {
-                            str += _id;
-                        } else {
-                            str += "," + _id;
-                        }
-                        i++;
-                    } else {
-                        checkbox.attr('selected', '');
-                    }
-                });
-                if (str.length > 0) {
-                    var conf = confirm('Bạn có muốn xóa các bản ghi này hay không?');
-                    if (conf === true) {
-                        $.ajax({
-                            url: '/Admin/Account/DeleteAll',
-                            type: 'POST',
-                            data: { ids: str },
-                            success: function (rs) {
-                                if (rs.success) {
-                                    location.reload();
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-
-            $('body').on('change', '#SelectAll', function () {
-                var checkStatus = this.checked;
-                var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
-                checkbox.each(function () {
-                    this.checked = checkStatus;
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                    } else {
-                        checkbox.attr('selected', '');
-                    }
-                });
-            });
-            $('body').on('click', '.btnDelete', function () {
-                var id = $(this).data("id");
-                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
-                if (conf === true) {
-                    $.ajax({
-                        url: '/Admin/Account/Delete',
-                        type: 'POST',
-                        data: { id: id },
-                        success: function (rs) {
-                            if (rs.success) {
-                                $('#trow_' + id).remove();
-                            }
-                        }
-                    });
-                }
-            });
             $('body').on('click', '.btnLock', function (e) {
                 e.preventDefault();
                 var btn = $(this);

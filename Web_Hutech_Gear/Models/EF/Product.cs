@@ -52,6 +52,8 @@ namespace Web_Hutech_Gear.Models.EF
         public bool IsHome { get; set; }
         public bool IsSale { get; set; }
         public bool IsHot { get; set; }
+        public bool IsActivate { get; set; }
+
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual Supplier Supplier { get; set; }
 

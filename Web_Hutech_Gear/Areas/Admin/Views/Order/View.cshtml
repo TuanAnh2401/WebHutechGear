@@ -40,20 +40,20 @@
                 IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
                 var ID = User.Identity.GetUserId();
                 var find = context.Users.FirstOrDefault(p => p.Id == ID);
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Mã đơn hàng</label>
-                                    <p class="form-control">HD:@Model.Id</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Mã khách hàng</label>
-                                    <p class="form-control">@find.Id</p>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mã đơn hàng</label>
+                            <p class="form-control">HD:@Model.Id</p>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mã khách hàng</label>
+                            <p class="form-control">@find.Id</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -87,23 +87,23 @@
                 </div>
             }
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Trạng thái</label>
-                    <p class="form-control">@(Model.TypePayment == 1 ? "Chua thanh toán" : "Đã thanh toán")</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <p class="form-control">@(Model.TypePayment == 1 ? "Chua thanh toán" : "Đã thanh toán")</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Email</label>
-                    <p class="form-control">@find.Email</p>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p class="form-control">@find.Email</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
+                <div class="col-md-6">
 
+                </div>
             </div>
-        </div>
             <div class="row">
                 <div class="col-12">
                     <h2>Danh sách sản phẩm</h2>
@@ -115,11 +115,50 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
+            @if (Model.IsOrder)
+            {
+                <a href="#" class="btn btn-sm btn-danger">Đã Hoàn Thành</a>
 
+            }
+            else
+            {
+                <a href="#" data-id="@Model.Id" class="btn btn-sm btn-primary btnHoanThanh">Hoàn Thành</a>
+            }
+            <a href="/admin/order" class="btn btn-sm btn-danger">Quay Lại</a>
         </div>
         <!-- /.card-footer-->
     </div>
-        <!-- /.card -->
+    <!-- /.card -->
 
-    </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btnHoanThanh').click(function (e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của nút nhấn
+
+                var orderId = $(this).data('id'); // Lấy giá trị data-id của nút nhấn
+
+                // Hiển thị cửa sổ xác nhận
+                var confirmed = confirm("Bạn có chắc chắn muốn hoàn thành đơn hàng này?");
+                if (confirmed) {
+                    // Gửi yêu cầu POST
+                    $.ajax({
+                        url: '/admin/order/isorder/' + orderId,
+                        type: 'POST',
+                        success: function (response) {
+                            // Chuyển hướng đến trang index
+                            window.location.href = '/admin/order';
+                        },
+                        error: function (xhr, status, error) {
+                            // Xử lý lỗi nếu cần
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+}

@@ -21,5 +21,7 @@ namespace Web_Hutech_Gear.Models.EF
         public string Image { get; set; }
         [StringLength(500)]
         public string Link { get; set; }
+        public bool IsActivate { get; set; }
+
     }
 }

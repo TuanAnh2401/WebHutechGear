@@ -7,27 +7,8 @@
 }
 
 <head>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/fonts/iconic/css/material-design-iconic-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
-    <!--===============================================================================================-->
-    <style>
-        .input-icon {
-            position: relative;
-        }
-
-        .input-icon-toggle {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 10px;
-            cursor: pointer;
-        }
-    </style>
+    <link href="~/Content/login/css/helpUser.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
     <div class="limiter">
@@ -36,15 +17,16 @@
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login100-form validate-form" }))
                 {
                     @Html.AntiForgeryToken()
+                    @Html.Hidden("UserToken", User.Identity.Name) 
                     if (TempData["ErrorMessage"] != null)
                     {
                         <div class="alert alert-danger">@TempData["ErrorMessage"].ToString()</div>
                     }
                     <span class="login100-form-title p-b-49">
-                        LOGIN
+                        Đăng Nhập
                     </span>
                     <div class="wrap-input100 input m-b-23">
-                        <span class="label-input100">Tên tài khoản</span>
+                        <span class="label-input100">Tài Khoản</span>
                         @Html.TextBoxFor(m => m.Account, new { @class = "input100", placeholder = "Nhập tài khoản của bạn" })
                         @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
@@ -68,7 +50,7 @@
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
-                            <button type="submit" class="login100-form-btn">
+                            <button type="submit" class="login100-form-btn" style="font-family: Arial;">
                                 Đăng nhập
                             </button>
                         </div>

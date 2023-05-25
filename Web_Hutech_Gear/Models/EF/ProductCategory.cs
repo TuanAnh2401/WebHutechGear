@@ -21,6 +21,8 @@ namespace Web_Hutech_Gear.Models.EF
         public string Description { get; set; }
         [Required(ErrorMessage = "Thêm ảnh sản phẩm")]
         public string Image { get; set; }
+        public bool IsActivate { get; set; }
+
         public ICollection<Product> Products { get; set; }
     }
 }

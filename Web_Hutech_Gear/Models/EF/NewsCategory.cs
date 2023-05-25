@@ -19,6 +19,7 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Bạn không được để trống tiêu đề tin")]
         [StringLength(150)]
         public string Title { get; set; }
+        public bool IsActivate { get; set; }
         public ICollection<News> News { get; set; }
 
     }

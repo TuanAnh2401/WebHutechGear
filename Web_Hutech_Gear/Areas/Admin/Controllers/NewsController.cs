@@ -21,7 +21,8 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 page = 1;
             else
                 searchString = currentFilter;
-            IEnumerable<News> items = db.News.OrderByDescending(x => x.Id); var pageSize = 10;
+            IEnumerable<News> items = db.News.Where(p=> !(p.IsActivate)).OrderByDescending(x => x.Id); 
+            var pageSize = 10;
             if (page == null)
             {
                 page = 1;
@@ -90,7 +91,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             var item = db.News.Find(id);
             if (item != null)
             {
-                db.News.Remove(item);
+                item.IsActivate = true;
+                db.News.Attach(item);
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true });
             }
@@ -108,7 +111,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                     foreach (var item in items)
                     {
                         var obj = db.News.Find(Convert.ToInt32(item));
-                        db.News.Remove(obj);
+                        obj.IsActivate = true;
+                        db.News.Attach(obj);
+                        db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                     }
                 }

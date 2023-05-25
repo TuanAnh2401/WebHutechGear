@@ -97,14 +97,11 @@ namespace Web_Hutech_Gear.Controllers
                 {
                     ProductId = checkProduct.Id,
                     ProductName = checkProduct.Title,
+                    ProductImg = checkProduct.Image,
                     CategoryName = checkProduct.ProductCategory.Title,
                     SupplierName = checkProduct.Supplier.Title,
                     Quantity = quantity,
                 };
-                if (checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault) != null)
-                {
-                    item.ProductImg = checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault).Image;
-                }
                 item.Price = checkProduct.Price;
                 item.TotalPrice = item.Quantity * item.Price;
                 cart.AddToCart(item, quantity);
@@ -210,7 +207,7 @@ namespace Web_Hutech_Gear.Controllers
                         if (findPr != null && findPr.Quantity >= sp.Quantity)
                             findPr.Quantity = findPr.Quantity - sp.Quantity;
                         else
-                            errorMessage += $"Số lượng sản phẩm {findPr.Title} trong giỏ hàng không đủ!\n";
+                            errorMessage += $"Số lượng sản phẩm {findPr.Title} trong kho không đủ!\n";
                     }
                     if (!string.IsNullOrEmpty(errorMessage))
                     {

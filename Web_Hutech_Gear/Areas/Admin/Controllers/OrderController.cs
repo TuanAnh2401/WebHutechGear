@@ -1,4 +1,6 @@
-﻿using PagedList;
+﻿using Microsoft.AspNet.Identity;
+using PagedList;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
@@ -53,6 +55,21 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 return Json(new { message = "Success", Success = true });
             }
             return Json(new { message = "Unsuccess", Success = false });
+        }
+        [HttpPost]
+        public ActionResult IsOrder(int id)
+        {
+            var item = db.Orders.Find(id);
+            if (item != null)
+            {
+                item.IsOrder = true;
+                item.Modifiedby = User.Identity.GetUserName();
+                item.ModifiedDate = DateTime.Now;
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿@model Web_Hutech_Gear.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Đăng Ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Content/login/css/main.css">
     <!--===============================================================================================-->
+    <link href="~/Content/login/css/helpUser.css" rel="stylesheet" />
 </head>
 <body>
     <div class="limiter">
@@ -37,7 +40,7 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <span class="login100-form-title p-b-49">
-                        Register
+                        Đăng Ký
                     </span>
                     <div class="wrap-input100 validate-input m-b-23" data-validate="FullName is required">
                         <span class="label-input100">Họ và tên</span>

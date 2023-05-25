@@ -17,6 +17,8 @@ namespace Web_Hutech_Gear.Models.EF
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
+        public bool IsActivate { get; set; }
+
         public ICollection<Product> Products { get; set; }
 
     }

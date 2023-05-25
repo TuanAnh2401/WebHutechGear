@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+        <div class="card">
+            <div class="card-body">
+                @Html.Partial("_MenuRestore")
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-7 col-xl-8">
+        <div id="view-container">
+            <!-- Nội dung của phần Chat sẽ được cập nhật ở đây -->
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#contact-menu a').click(function (e) {
+                e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+
+                var url = $(this).attr('href'); // Lấy đường dẫn từ thuộc tính href của liên kết
+
+                $.get(url, function (data) {
+                    $('#view-container').html(data); // Cập nhật nội dung của #chat-container bằng kết quả trả về từ yêu cầu AJAX
+                })
+                    .fail(function (xhr, status, error) {
+                        console.log(error);
+                        // Xử lý lỗi (nếu có)
+                    });
+            });
+        });
+
+    </script>
+
+}

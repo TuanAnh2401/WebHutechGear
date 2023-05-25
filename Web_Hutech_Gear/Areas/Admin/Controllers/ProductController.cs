@@ -20,7 +20,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 page = 1;
             else
                 searchString = currentFilter;
-            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
+            IEnumerable<Product> items = db.Products.Where(p=>!(p.IsActivate)).OrderByDescending(x => x.Id);
             var pageSize = 10;
             if (page == null)
             {
@@ -130,15 +130,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                     var item = db.Products.Find(id);
                     if (item != null)
                     {
-                        var checkImg = item.ProductImage.Where(x => x.ProductId == item.Id).ToList();
-                        if (checkImg != null)
-                        {
-                            foreach (var img in checkImg)
-                            {
-                                db.ProductImages.Remove(img);
-                            }
-                        }
-                        db.Products.Remove(item);
+                        item.IsActivate = true;
+                        db.Products.Attach(item);
+                        db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                         transaction.Commit();
                         return Json(new { success = true });
@@ -168,16 +162,10 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                 var obj = db.Products.Find(Convert.ToInt32(item));
                                 if (obj != null)
                                 {
-                                    var checkImg = obj.ProductImage.Where(x => x.ProductId == obj.Id).ToList();
-                                    if (checkImg != null)
-                                    {
-                                        foreach (var img in checkImg)
-                                        {
-                                            db.ProductImages.Remove(img);
-                                        }
-                                    }
+                                    obj.IsActivate = true;
+                                    db.Products.Attach(obj);
+                                    db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                                 }
-                                db.Products.Remove(obj);
                             }
                         }
                         db.SaveChanges();

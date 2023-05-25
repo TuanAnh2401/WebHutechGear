@@ -20,6 +20,8 @@ namespace Web_Hutech_Gear.Models.EF
         public decimal TotalAmount { get; set; }
         public int Quantity { get; set; }
         public int TypePayment { get; set; }
+        public bool IsOrder { get; set; }
+
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ApplicationUser User { get; set; }
 

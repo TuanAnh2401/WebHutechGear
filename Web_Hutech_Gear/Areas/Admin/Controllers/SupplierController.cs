@@ -16,7 +16,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         // GET: Admin/ProductCategory
         public ActionResult Index()
         {
-            var items = db.Suppliers;
+            var items = db.Suppliers.Where(p=>!(p.IsActivate));
             return View(items);
         }
 
@@ -80,20 +80,16 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                 var obj = db.Products.Find(proc.Id);
                                 if (obj != null)
                                 {
-                                    var checkImg = obj.ProductImage.Where(x => x.ProductId == obj.Id).ToList();
-                                    if (checkImg != null)
-                                    {
-                                        foreach (var img in checkImg)
-                                        {
-                                            db.ProductImages.Remove(img);
-                                        }
-                                    }
-                                    db.Products.Remove(obj);
+                                    obj.IsActivate = true;
+                                    db.Products.Attach(obj);
+                                    db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
 
                                 }
                             }
-                        }    
-                        db.Suppliers.Remove(item);
+                        }
+                        item.IsActivate = true;
+                        db.Suppliers.Attach(item);
+                        db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                         transaction.Commit();
                         return Json(new { success = true });
@@ -133,19 +129,15 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                                             var obj = db.Products.Find(proc.Id);
                                             if (obj != null)
                                             {
-                                                var checkImg = obj.ProductImage.Where(x => x.ProductId == obj.Id).ToList();
-                                                if (checkImg != null)
-                                                {
-                                                    foreach (var img in checkImg)
-                                                    {
-                                                        db.ProductImages.Remove(img);
-                                                    }
-                                                }
-                                                db.Products.Remove(obj);
+                                                obj.IsActivate = true;
+                                                db.Products.Attach(obj);
+                                                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                                             }
                                         }
                                     }
-                                    db.Suppliers.Remove(sp);
+                                    sp.IsActivate = true;
+                                    db.Suppliers.Attach(sp);
+                                    db.Entry(sp).State = System.Data.Entity.EntityState.Modified;
                                 }
                             }
                             db.SaveChanges();

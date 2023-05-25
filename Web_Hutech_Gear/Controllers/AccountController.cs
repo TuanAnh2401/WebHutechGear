@@ -91,6 +91,7 @@ namespace Web_Hutech_Gear.Controllers
                         return View("NotificationEmailConfim");
                     }else if(!findUser.LockoutEnabled)
                     {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                         TempData["ErrorMessage"] = "Tài khoản của bạn đã bị khóa";
                         return View(model);
                     }    
@@ -210,7 +211,7 @@ namespace Web_Hutech_Gear.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address, Avatar = "avt.jpg" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -428,7 +429,7 @@ namespace Web_Hutech_Gear.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address, Avatar = "avt.jpg" };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

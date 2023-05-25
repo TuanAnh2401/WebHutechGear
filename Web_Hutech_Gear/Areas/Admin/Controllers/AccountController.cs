@@ -204,41 +204,5 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 ModelState.AddModelError("", error);
             }
         }
-        public async Task<ActionResult> Delete(string id)
-        {
-            var item = db.Users.Find(id);
-            if (item != null)
-            {
-                var userRoles = await UserManager.GetRolesAsync(id);
-                await UserManager.RemoveFromRolesAsync(id, userRoles.ToArray());
-                db.Users.Remove(item);
-                db.SaveChanges();
-                return Json(new { success = true });
-            }
-
-            return Json(new { success = false });
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteAll(string ids)
-        {
-            if (!string.IsNullOrEmpty(ids))
-            {
-                var items = ids.Split(',');
-                if (items != null && items.Any())
-                {
-                    foreach (var item in items)
-                    {
-                        var userRoles = await UserManager.GetRolesAsync(item);
-                        await UserManager.RemoveFromRolesAsync(item, userRoles.ToArray());
-                        var obj = db.Users.Find(item);
-                        db.Users.Remove(obj);
-                        db.SaveChanges();
-                    }
-                }
-                return Json(new { success = true });
-            }
-            return Json(new { success = false });
-        }
     }
 }

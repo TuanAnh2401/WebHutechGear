@@ -10,12 +10,12 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AdvController : Controller
     {
-        // GET: Admin/Adv
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Admin/Posts
+
+        // GET: Admin/Adv
         public ActionResult Index()
         {
-            var items = db.Advs.ToList();
+            var items = db.Advs.Where(p=>!(p.IsActivate));
             return View(items);
         }
         public ActionResult Add()
@@ -68,7 +68,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             var item = db.Advs.Find(id);
             if (item != null)
             {
-                db.Advs.Remove(item);
+                item.IsActivate = true;
+                db.Advs.Attach(item);
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true });
             }
@@ -88,7 +90,9 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                     foreach (var item in items)
                     {
                         var obj = db.Advs.Find(Convert.ToInt32(item));
-                        db.Advs.Remove(obj);
+                        obj.IsActivate = true;
+                        db.Advs.Attach(obj);
+                        db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                     }
                 }

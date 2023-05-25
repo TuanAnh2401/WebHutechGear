@@ -25,5 +25,7 @@ namespace Web_Hutech_Gear.Models.EF
         [StringLength(4000, ErrorMessage = "Tin nhắn quá dài")]
         public string Message { get; set; }
         public bool IsRead { get; set; }
+        public bool IsActivate { get; set; }
+
     }
 }

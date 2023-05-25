@@ -11,20 +11,12 @@
         var find = context.Users.FirstOrDefault(p => p.Id == ID);
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image" style="margin-top:10px;">
-                @if (!string.IsNullOrEmpty(find.Avatar))
-                {
-                    <img class="img-circle elevation-2" alt="User Image" src="~/Content/Images/@find.Avatar" />
-                }
-                else
-                {
-                    <img class="img-circle elevation-2" alt="User Image" src="~/Content/Images/avt.jpg" />
-                }
+                <img class="img-circle elevation-2" alt="User Image" src="~/Content/Images/@find.Avatar" />
             </div>
             <div class="info">
                 @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
                     @Html.AntiForgeryToken()
-
                     @Html.ActionLink(find.FullName.ToString(), "Update", "Account", new { area = "" }, htmlAttributes: new { title = "Manage", @class = "d-block" })
                     <a class="rd-nav-link" href="javascript:document.getElementById('logoutForm').submit()">Đăng Xuất</a>
                 }
@@ -33,8 +25,6 @@
         </div>
 
     }
-
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -139,33 +129,25 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Quản lý tài khoản
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
+                <a href="/Admin/Account" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Danh mục tài khoản</p>
+
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/Admin/Account" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh mục tài khoản</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Admin/Role" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Vai trò tài khoản</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item">
                 <a href="/Admin/SettingSystem" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                         Cấu hình hệ thống
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Restore" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Khôi phục dữ liệu
                     </p>
                 </a>
             </li>

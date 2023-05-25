@@ -26,6 +26,10 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult Partial_List()
+        {
             var userId = User.Identity.GetUserId();
             var messages = db.Messages
                 .Where(m => m.ReceiverId == userId && m.SenderId != userId)
@@ -35,13 +39,14 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 {
                     Id = g.Key.Id,
                     FullName = g.Key.FullName,
-                    LastMessage = g.OrderByDescending(m => m.Timestamp).FirstOrDefault().Message
-                })
-                .ToList();
-
-            return View(messages);
+                    LastMessage = g.OrderByDescending(m => m.Timestamp).FirstOrDefault().Message,
+                    Avatar = g.Key.Avatar,
+                    Timestamp = g.OrderByDescending(m => m.Timestamp).FirstOrDefault().Timestamp,
+                    IsRead = g.Where(m => m.IsRead == false).Count()
+                }).ToList();
+            ViewBag.ListChat = messages;
+            return PartialView("Partial_List", ViewBag.ListChat);
         }
-
         public ActionResult Chat(string receiverId)
         {
             // Lấy thông tin user hiện tại
@@ -51,6 +56,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             // Lấy thông tin người nhận
             var receiver = db.Users.Find(receiverId);
             ViewBag.ReceiverId = receiverId;
+            ViewBag.ReceviverName = receiver.FullName;
 
             // Lấy lịch sử tin nhắn giữa hai người
             var messages = db.Messages
@@ -59,6 +65,16 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
                 .OrderBy(m => m.Timestamp)
                 .ToList();
             ViewBag.Messages = messages;
+
+            if (messages != null)
+            {
+                foreach(var mess in messages)
+                {
+                    mess.IsRead = true;
+                    db.Entry(mess).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.SaveChanges();
+            }
 
             return View();
         }
@@ -69,6 +85,16 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             ChatLog.TryAdd(chatKey, $"{sender}: {message}");
             return Json(new { success = true });
         }
+        public ActionResult Partial_Chat()
+        {
+            // Lấy thông tin user hiện tại
+            var userId = User.Identity.GetUserId();
+            ViewBag.CountChat = db.Messages.Where(p => p.IsRead == false && p.ReceiverId == userId).GroupBy(p => p.SenderId).Count();
+
+            // Trả về partial view chứa phần tử countChatBadge
+            return PartialView("Partial_Chat", ViewBag.CountChat);
+        }
+
 
     }
 }

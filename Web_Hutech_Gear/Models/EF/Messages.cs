@@ -21,6 +21,7 @@ namespace Web_Hutech_Gear.Models.EF
         public string Message { get; set; }
 
         public DateTime Timestamp { get; set; }
+        public bool IsRead { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }
 
