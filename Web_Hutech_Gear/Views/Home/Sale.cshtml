@@ -59,10 +59,14 @@
                                                 <p>
                                                     @if (item.IsSale)
                                                     {
-                                                        <span class="old_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
+                                                        <span class="old_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
                                                         <span>-</span>
+                                                        <span class="new_price">@Common.FormatNumber(item.PriceSale, 0)<sup>đ</sup></span>
                                                     }
-                                                    <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
+                                                    else
+                                                    {
+                                                        <span class="new_price">@Common.FormatNumber(item.Price, 0)<sup>đ</sup></span>
+                                                    }
                                                 </p>
                                             </div>
                                             <div class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">

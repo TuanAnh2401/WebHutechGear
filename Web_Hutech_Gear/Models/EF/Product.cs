@@ -36,8 +36,7 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Giá không được để trống")]
         [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Giá phải lớn hơn 0.")]
         public decimal Price { get; set; }
-        [Required(ErrorMessage = "Giá khuyến mãi không được để trống")]
-        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Giá khuyến mãi phải lớn hơn 0.")]
+        [RegularExpression(@"^(0|[1-9]\d*)(\.\d{0,2})?$", ErrorMessage = "Giá khuyến mãi phải lớn hơn hoặc bằng 0.")]
         public decimal? PriceSale { get; set; }
 
         [Required(ErrorMessage = "Số lượng không được để trống")]

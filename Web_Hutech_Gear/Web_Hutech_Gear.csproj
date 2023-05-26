@@ -310,6 +310,10 @@
     <Compile Include="Migrations\202305261453397_fixStatus.designer.cs">
       <DependentUpon>202305261453397_fixStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305261514570_fixSale.cs" />
+    <Compile Include="Migrations\202305261514570_fixSale.designer.cs">
+      <DependentUpon>202305261514570_fixSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
@@ -5245,6 +5249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305261453397_fixStatus.resx">
       <DependentUpon>202305261453397_fixStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305261514570_fixSale.resx">
+      <DependentUpon>202305261514570_fixSale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
