@@ -41,7 +41,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title");
             ViewBag.Suppliers = new SelectList(db.Suppliers.ToList(), "Id", "Title");
-            ViewBag.Status = new SelectList(db.Status.ToList(), "Id", "Title");
             return View();
         }
 
@@ -51,7 +50,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title");
             ViewBag.Suppliers = new SelectList(db.Suppliers.ToList(), "Id", "Title");
-            ViewBag.Status = new SelectList(db.Status.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
                 if (Images != null && Images.Count > 0)
@@ -96,7 +94,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title");
             ViewBag.Suppliers = new SelectList(db.Suppliers.ToList(), "Id", "Title");
-            ViewBag.Status = new SelectList(db.Status.ToList(), "Id", "Title");
             var item = db.Products.Find(id);
             return View(item);
         }
@@ -107,7 +104,6 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "Id", "Title");
             ViewBag.Suppliers = new SelectList(db.Suppliers.ToList(), "Id", "Title");
-            ViewBag.Status = new SelectList(db.Status.ToList(), "Id", "Title");
             if (ModelState.IsValid)
             {
                 model.Modifiedby = User.Identity.GetUserName();

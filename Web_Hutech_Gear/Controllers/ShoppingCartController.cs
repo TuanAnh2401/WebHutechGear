@@ -208,6 +208,13 @@ namespace Web_Hutech_Gear.Controllers
                             findPr.Quantity = findPr.Quantity - sp.Quantity;
                         else
                             errorMessage += $"Số lượng sản phẩm {findPr.Title} trong kho không đủ!\n";
+
+                        if (findPr.Quantity == 0)
+                        {
+                            findPr.IsStatus = true;
+                            db.Products.Attach(findPr);
+                            db.Entry(findPr).State = System.Data.Entity.EntityState.Modified;
+                        }
                     }
                     if (!string.IsNullOrEmpty(errorMessage))
                     {
@@ -312,6 +319,12 @@ namespace Web_Hutech_Gear.Controllers
                                     var findPr = db.Products.FirstOrDefault(p => p.Id == item.ProductId);
                                     if (findPr != null && findPr.Quantity >= item.Quantity)
                                         findPr.Quantity = findPr.Quantity - item.Quantity;
+                                    if (findPr.Quantity == 0)
+                                    {
+                                        findPr.IsStatus = true;
+                                        db.Products.Attach(findPr);
+                                        db.Entry(findPr).State = System.Data.Entity.EntityState.Modified;
+                                    }
                                 }
                                 db.SaveChanges();
                                 SendOrderEmail(order, user);

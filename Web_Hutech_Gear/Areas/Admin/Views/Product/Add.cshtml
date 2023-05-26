@@ -63,7 +63,6 @@
                         @{ 
                             List<SelectListItem> productCategoryList = ((SelectList)ViewBag.ProductCategory).ToList();
                             List<SelectListItem> suppliersList = ((SelectList)ViewBag.Suppliers).ToList();
-                            List<SelectListItem> statusList = ((SelectList)ViewBag.Status).ToList();
                         }
                         <div class="card-body">
                             <div class="tab-content">
@@ -98,18 +97,6 @@
                                             <input type="text" id="SupplierId" name="SupplierId" class="form-control" readonly placeholder = "Vui lòng nhập danh sách nhà cung cấp">
                                         }
                                         @Html.ValidationMessageFor(x => x.SupplierId, null, new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Trạng thái</label>
-                                        @if (statusList.Count() != 0)
-                                        {
-                                            @Html.DropDownListFor(x => x.StatusId, ViewBag.Status as SelectList, new { @class = "form-control", @placeholder = "Mô tả" })
-                                        }
-                                        else
-                                        {
-                                            <input type="text" id="ProductCategoryId" name="ProductCategoryId" class="form-control" readonly placeholder="Vui lòng nhập danh sách trạng thái">
-                                        }
-                                        @Html.ValidationMessageFor(x => x.StatusId, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Mô tả</label>

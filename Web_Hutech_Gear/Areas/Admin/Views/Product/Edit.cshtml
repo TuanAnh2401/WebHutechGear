@@ -87,11 +87,6 @@
                                             @Html.ValidationMessageFor(x => x.SupplierId, null, new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Trạng thái</label>
-                                            @Html.DropDownListFor(x => x.StatusId, ViewBag.Status as SelectList, new { @class = "form-control", @placeholder = "Mã mã phẩm" })
-                                            @Html.ValidationMessageFor(x => x.StatusId, null, new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
                                             <label for="exampleInputEmail1">Mô tả</label>
                                             @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mã mã phẩm" })
                                             @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })

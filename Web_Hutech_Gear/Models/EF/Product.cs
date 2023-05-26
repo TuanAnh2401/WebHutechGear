@@ -53,11 +53,11 @@ namespace Web_Hutech_Gear.Models.EF
         public bool IsSale { get; set; }
         public bool IsHot { get; set; }
         public bool IsActivate { get; set; }
+        public bool IsStatus { get; set; }
 
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual Supplier Supplier { get; set; }
 
-        public virtual Status Status { get; set; }
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

@@ -268,7 +268,6 @@
     <Compile Include="Areas\Admin\Controllers\RestoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
-    <Compile Include="Areas\Admin\Controllers\StatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatUserController.cs" />
@@ -307,6 +306,10 @@
     <Compile Include="Migrations\202305251436560_IsOrder.designer.cs">
       <DependentUpon>202305251436560_IsOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305261453397_fixStatus.cs" />
+    <Compile Include="Migrations\202305261453397_fixStatus.designer.cs">
+      <DependentUpon>202305261453397_fixStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
@@ -321,7 +324,6 @@
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
     <Compile Include="Models\EF\Reply.cs" />
-    <Compile Include="Models\EF\Status.cs" />
     <Compile Include="Models\EF\Subsribe.cs" />
     <Compile Include="Models\EF\Supplier.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
@@ -3847,9 +3849,6 @@
     <Content Include="Areas\Admin\Views\ProductImage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Status\Add.cshtml" />
-    <Content Include="Areas\Admin\Views\Status\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Status\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Adv\Index.cshtml" />
@@ -5243,6 +5242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305251436560_IsOrder.resx">
       <DependentUpon>202305251436560_IsOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305261453397_fixStatus.resx">
+      <DependentUpon>202305261453397_fixStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -44,7 +44,6 @@ namespace Web_Hutech_Gear.Models
         public DbSet<Rated> Rateds { get; set; }
         public DbSet<NewsCategory> NewsCategory { get; set; }
         public DbSet<Adv> Advs { get; set; }
-        public DbSet<Status> Status { get; set; }
         public DbSet<Messages> Messages { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<SystemSetting> SystemSettings { get; set; }

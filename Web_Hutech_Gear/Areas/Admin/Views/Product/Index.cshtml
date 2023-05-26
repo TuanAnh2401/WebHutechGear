@@ -68,7 +68,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Loại sản phẩm</th>
                         <th>Nhà cung cấp</th>
-                        <th>Trạng thái</th>
+                        <th>Tình Trạng</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Ngày tạo</th>
@@ -105,7 +105,7 @@
                                 <td>@item.Title</td>
                                 <td>@item.ProductCategory.Title</td>
                                 <td>@item.Supplier.Title</td>
-                                <td>@item.Status.Title</td>
+                                <td>@(item.IsStatus?"Hết":"Còn")</td>
                                 <td>@item.Quantity</td>
                                 <td>@Web_Hutech_Gear.Models.Support.Common.FormatNumber(item.Price, 0)</td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>

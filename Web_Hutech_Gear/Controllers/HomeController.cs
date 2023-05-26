@@ -21,7 +21,7 @@ namespace Web_Hutech_Gear.Controllers
         }
         public ActionResult Partial_Products_Home()
         {
-            var listProducts = db.Products.Where(p=>p.IsHome).ToList();
+            var listProducts = db.Products.Where(p=>p.IsHome && !(p.IsStatus)).ToList();
             return PartialView("Partial_Products_Home", listProducts);
         }
         public ActionResult Partial_Products_News()

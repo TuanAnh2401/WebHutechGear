@@ -14,44 +14,48 @@
                     <div class="slick1">
                         @foreach (var item in db.Advs)
                         {
-                            <div class="item-slick1" style="height: 720px;">
-                                <div class="container h-full">
-                                    <div class="row h-full align-items-center" style="margin-left: -100px; margin-top: -50px;">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="content">
-                                                <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-                                                    <span class="ltext-101 cl2 respon2 title" style="font-family: Arial;font-size:28px">
-                                                        @item.Title
-                                                    </span>
-                                                </div>
+                            if (!(item.IsActivate))
+                            {
+                                <div class="item-slick1" style="height: 720px;">
+                                    <div class="container h-full">
+                                        <div class="row h-full align-items-center" style="margin-left: -100px; margin-top: -50px;">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="content">
+                                                    <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+                                                        <span class="ltext-101 cl2 respon2 title" style="font-family: Arial;font-size:28px">
+                                                            @item.Title
+                                                        </span>
+                                                    </div>
 
-                                                <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                                        <div class="description" style="font-family: Arial;font-size:30px">
-                                                            @item.Description
-                                                        </div>
-                                                    </h2>
+                                                    <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+                                                        <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+                                                            <div class="description" style="font-family: Arial;font-size:30px">
+                                                                @item.Description
+                                                            </div>
+                                                        </h2>
 
-                                                </div>
+                                                    </div>
 
-                                                <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                                    <a href="@item.Link" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                                        Mua ngay
-                                                    </a>
+                                                    <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+                                                        <a href="@item.Link" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                                            Mua ngay
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="image">
-                                                <div class="circle">
-                                                    <img src="@item.Image" alt="Image">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="image">
+                                                    <div class="circle">
+                                                        <img src="@item.Image" alt="Image">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+                            }
                         }
                     </div>
                 </div>
