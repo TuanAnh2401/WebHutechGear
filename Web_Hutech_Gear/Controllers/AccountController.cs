@@ -456,6 +456,7 @@ namespace Web_Hutech_Gear.Controllers
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

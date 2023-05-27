@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using OfficeOpenXml;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.EF;
@@ -220,5 +222,81 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
 
             return Json(new { success = false });
         }
+        [HttpPost]
+        public ActionResult ImportExcel(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    // Mở tệp Excel sử dụng EPPlus
+                    using (var package = new ExcelPackage(file.InputStream))
+                    {
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets.First(); // Lấy trang tính đầu tiên
+
+                        // Tạo danh sách sản phẩm để lưu dữ liệu từ tệp Excel
+                        List<Product> productList = new List<Product>();
+
+                        // Lặp qua các hàng trong worksheet và tạo các đối tượng sản phẩm
+                        for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                        {
+                            string title = worksheet.Cells[row, 1].Value.ToString();
+                            string description = worksheet.Cells[row, 2].Value.ToString();
+                            string detail = worksheet.Cells[row, 3].Value.ToString();
+                            string image = worksheet.Cells[row, 4].Value.ToString();
+                            decimal originalPrice = Convert.ToDecimal(worksheet.Cells[row, 5].Value.ToString());
+                            decimal price = Convert.ToDecimal(worksheet.Cells[row, 6].Value.ToString());
+                            decimal? priceSale = null;
+                            if (worksheet.Cells[row, 7].Value != null)
+                            {
+                                priceSale = Convert.ToDecimal(worksheet.Cells[row, 7].Value.ToString());
+                            }
+                            int quantity = Convert.ToInt32(worksheet.Cells[row, 8].Value.ToString());
+                            var productCategory = worksheet.Cells[row, 9].Value.ToString();
+                            int productCategoryId = db.ProductCategories.FirstOrDefault(p => p.Title == productCategory).Id;
+                            var supplier = worksheet.Cells[row, 10].Value.ToString();
+                            int supplierId = db.Suppliers.FirstOrDefault(p => p.Title == supplier).Id;
+                            bool isHome = Convert.ToBoolean(worksheet.Cells[row, 11].Value.ToString());
+                            bool isSale = Convert.ToBoolean(worksheet.Cells[row, 12].Value.ToString());
+                            bool isHot = Convert.ToBoolean(worksheet.Cells[row, 13].Value.ToString());
+
+                            var product = new Product
+                            {
+                                Title = title,
+                                Description = description,
+                                Detail = detail,
+                                Image = image,
+                                OriginalPrice = originalPrice,
+                                Price = price,
+                                PriceSale = priceSale,
+                                Quantity = quantity,
+                                ProductCategoryId = productCategoryId,
+                                SupplierId = supplierId,
+                                IsHome = isHome,
+                                IsSale = isSale,
+                                IsHot = isHot,
+                                CreatedBy = User.Identity.GetUserName(),
+                                Modifiedby = User.Identity.GetUserName(),
+                                CreatedDate = DateTime.Now,
+                                ModifiedDate = DateTime.Now
+                            };
+
+                            productList.Add(product);
+                        }
+
+                        // Lưu danh sách sản phẩm vào cơ sở dữ liệu
+                        db.Products.AddRange(productList);
+                        db.SaveChanges();
+                    }
+                }
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }

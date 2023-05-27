@@ -47,7 +47,6 @@ namespace Web_Hutech_Gear.Models.EF
         [Required(ErrorMessage = "Nhà phân phối không được để trống")]
         public int SupplierId { get; set; }
         [Required(ErrorMessage = "Trạng thái không được để trống")]
-        public int StatusId { get; set; }
         public bool IsHome { get; set; }
         public bool IsSale { get; set; }
         public bool IsHot { get; set; }

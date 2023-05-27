@@ -41,7 +41,7 @@
 
 <!-- Main content -->
 <section class="content">
-<link href="~/Content/clients/dist/css/search.css" rel="stylesheet" />
+    <link href="~/Content/clients/dist/css/search.css" rel="stylesheet" />
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
@@ -57,6 +57,10 @@
                 <a href="/admin/News/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
             </div>
+            <form action="/Admin/News/ImportExcel" class="importExcel" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" />
+                <input type="submit" value="Thêm" />
+            </form>
         </div>
         <div class="card-body">
             <table class="table table-hover">
@@ -141,7 +145,7 @@
 @section scripts{
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script>
-        $(document).ready(function () { 
+        $(document).ready(function () {
             $('body').on('click', '#BtnDeleteAll', function (e) {
                 e.preventDefault();
                 var str = "";
@@ -267,5 +271,37 @@
                 });
             });
         });
+
     </script>
+    <script>
+        $(function () {
+            $('.importExcel').submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    url: '/Admin/News/ImportExcel',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.success) {
+                            // Xử lý kết quả thành công (nếu cần)
+                            alert('Tải dữ liệu lên thành công');
+                            window.location.reload(); // Tải lại trang
+                        } else {
+                            alert('Tải dữ liệu lên không thành công');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi và hiển thị thông báo lỗi
+                        alert('Đã xảy ra lỗi trong quá trình import: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+        });
+
+    </script>
+
 }

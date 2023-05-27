@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using OfficeOpenXml;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.EF;
@@ -164,6 +167,66 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             }
 
             return Json(new { success = false });
+        }
+        [HttpPost]
+        public ActionResult ImportExcel(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    // Mở tệp Excel sử dụng EPPlus
+                    using (var package = new ExcelPackage(file.InputStream))
+                    {
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets.First(); // Lấy trang tính đầu tiên
+
+                        // Tạo danh sách News để lưu dữ liệu từ tệp Excel
+                        List<News> newsList = new List<News>();
+
+                        // Lặp qua các hàng trong worksheet và tạo các đối tượng News
+                        for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                        {
+                            string title = worksheet.Cells[row, 1].Value.ToString();
+                            string description = worksheet.Cells[row, 2].Value.ToString();
+                            string detail = worksheet.Cells[row, 3].Value.ToString();
+                            string image = worksheet.Cells[row, 4].Value.ToString();
+                            var titleCategory = worksheet.Cells[row, 5].Value.ToString();
+                            int newsCategoryId = db.NewsCategory.FirstOrDefault(p => p.Title == titleCategory).Id;
+                            bool isHome = Convert.ToBoolean(worksheet.Cells[row, 6].Value.ToString());
+                            bool isSale = Convert.ToBoolean(worksheet.Cells[row, 7].Value.ToString());
+                            bool isHot = Convert.ToBoolean(worksheet.Cells[row, 8].Value.ToString());
+
+                            var news = new News
+                            {
+                                Title = title,
+                                Description = description,
+                                Detail = detail,
+                                Image = image,
+                                NewsCategoryId = newsCategoryId,
+                                IsHome = isHome,
+                                IsSale = isSale,
+                                IsHot = isHot,
+                                CreatedBy = User.Identity.GetUserName(),
+                                Modifiedby = User.Identity.GetUserName(),
+                                CreatedDate = DateTime.Now,
+                                ModifiedDate = DateTime.Now
+                            };
+
+                            newsList.Add(news);
+                        }
+
+                        // Lưu danh sách News vào cơ sở dữ liệu
+                        db.News.AddRange(newsList);
+                        db.SaveChanges();
+                    }
+                }
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
     }
 }
