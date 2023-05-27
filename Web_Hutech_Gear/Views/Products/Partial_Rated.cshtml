@@ -6,35 +6,51 @@
 <!-- #region Bình luận -->
 @foreach (var item in Model)
 {
-    <div class="col-lg-10 col-md-10 col-sm-8 comment" data-id="@item.Id" style="display:block; height:auto">
-        <h5>@db.Users.FirstOrDefault(p => p.Id == item.UserId).FullName</h5>
-        <p><span class="c_date">@item.CreatedDate.ToString("dd-MM-yyyy")</span> </p>
-        <!-- #region rating -->
-        <span class="rating">
-            @for (int i = 1; i <= 5; i++)
-            {
-                <i class="fa fa-star@(i <= item.Rating ? "" : "-o")" aria-hidden="true"></i>
-            }
-        </span>
-        <!-- #endregion -->
-        <p class="msg">
-            @item.Content
-        </p>
+    var findUser = @db.Users.FirstOrDefault(p => p.Id == item.UserId);
+    <div class="col-lg-10 col-md-10 col-sm-8 comment" data-id="@item.Id" style=" display: block; height: auto; padding: 10px; border-radius: 10px;">
+        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6" style="float: left;">
+            <img src="~/Content/Images/@findUser.Avatar" alt="AVATAR" style="width: 100%; height: auto; border-radius: 50%;">
+        </div>
+        <div class="size-207">
+            <div class="flex-w flex-sb-m" style=" display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <span class="mtext-107 cl2" style="font-weight: 900;">
+                        @findUser.FullName
+                    </span>
+                    <div class="rating" style="white-space: nowrap;">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="fa fa-star@(i <= item.Rating ?"" : "-o")" aria-hidden="true"></i>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div style="padding-left: 80px;">
+                <p class="msg">
+                    @item.Content
+                </p>
+                <span>@item.CreatedDate.ToString("dd-MM-yyyy")</span>
+            </div>
+    
+        </div>
+
+
 
         <!-- #region  Đăng nhập mới được trả lời -->
         @if (Request.IsAuthenticated)
         {
-            <button id="replyButton1" class="An">Trả Lời</button>
+            <button id="replyButton1" class="An" style="padding-left: 80px;border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Trả Lời</button>
 
-            <div id="replyForm1" style="padding-bottom:25px; display:none" class="hiddenSubComment">
-                <textarea class="reply-content field_custom" style="border: solid 1px #808080!important; float:left" placeholder="Nhập nội dung trả lời"></textarea>
+            <div id="replyForm1" style="padding-bottom: 25px; display: none; margin-top: 10px;" class="hiddenSubComment">
+                <textarea class="reply-content field_custom" style="border: solid 1px #808080!important; float: left; width: 100%; padding: 10px; margin-bottom: 10px;" placeholder="Nhập nội dung trả lời"></textarea>
                 <input type="hidden" class="input-group-lg product-id" value="@item.ProductId" />
-                <button class="btn main_bt submit-reply-btn" role="button" style="background-color: #808080">Trả Lời</button>
+                <button class="btn main_bt submit-reply-btn" role="button" style="background-color: #808080; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Trả Lời</button>
             </div>
         }
         <!-- #endregion -->
-
     </div>
+
     if (null != ViewBag.ListRepplyComment)
     {
         foreach (var itemRepply in ViewBag.ListRepplyComment)
@@ -42,18 +58,25 @@
             if (item.Id == itemRepply.RatedId)
             {
                 string userId = itemRepply.UserId;
-                <div class="replly_comment">
+                var findRep = db.Users.FirstOrDefault(p => p.Id == userId);
+                <div class="replly_comment" style="padding-left: 80px;">
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-                            <div class="full command_cont margin_bottom_0" style="min-height: auto; padding: 5px 3px 5px 40px;">
-                                <b>@db.Users.FirstOrDefault(p => p.Id == userId).FullName</b>
-
-                                <p class="comm_head">
-                                    <span>@itemRepply.CreatedDate.ToString("dd-MM-yyyy")</span>
-                                </p>
-                                <p>
-                                    @Html.Raw(itemRepply.Content)
-                                </p>
+                            <div class="full command_cont margin_bottom_0" style="min-height: auto;">
+                                <div class="row" style="align-items:center">
+                                    <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6" style="float: left;">
+                                        <img src="~/Content/Images/@findRep.Avatar" alt="AVATAR" style="width: 100%; height: auto; border-radius: 50%;">
+                                    </div>
+                                    <b>@findRep.FullName</b>
+                                </div>
+                                <div style="padding-left: 60px;">
+                                    <span>
+                                        @Html.Raw(itemRepply.Content)
+                                    </span>
+                                    <p class="comm_head">
+                                        <span>@itemRepply.CreatedDate.ToString("dd-MM-yyyy")</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

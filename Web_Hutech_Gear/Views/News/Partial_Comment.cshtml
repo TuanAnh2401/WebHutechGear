@@ -7,8 +7,27 @@
 @foreach (var item in Model)
 {
     string userId = item.UserId;
-    <div style="padding-bottom:40px">
-        <p class="comm_head">@db.Users.FirstOrDefault(p => p.Id == userId).FullName <span Ngày:>@item.CreatedDate.ToString("dd-MM-yyyy")</span></p>
-        <p> @item.Content </p>
+    var findNew = db.Users.FirstOrDefault(p => p.Id == userId);
+    <div class="replly_comment">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+                <div class="full command_cont margin_bottom_0" style="min-height: auto;">
+                    <div class="row" style="align-items:center">
+                        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6" style="float: left;">
+                            <img src="~/Content/Images/@findNew.Avatar" alt="AVATAR" style="width: 100%; height: auto; border-radius: 50%;">
+                        </div>
+                        <b>@findNew.FullName</b>
+                    </div>
+                    <div style="padding-left: 60px;">
+                        <span>
+                            @Html.Raw(item.Content)
+                        </span>
+                        <p class="comm_head">
+                            <span>@item.CreatedDate.ToString("dd-MM-yyyy")</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
