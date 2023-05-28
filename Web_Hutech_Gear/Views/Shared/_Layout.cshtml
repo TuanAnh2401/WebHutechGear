@@ -183,14 +183,7 @@
                                 <span style="font-size:18px;"><a href="tel:@SettingHelper.GetValue("SettingHotline")">@SettingHelper.GetValue("SettingHotline")</a></span>
                             </p>
                             <div class="footer_mail-section" style="float:inherit">
-                                <form>
-                                    <fieldset>
-                                        <div class="field row" style="padding-left:5px">
-                                            <input placeholder="Email" type="text">
-                                            <button class="button_custom"><i class="fa fa-envelope" aria-hidden="true"></i></button>
-                                        </div>
-                                    </fieldset>
-                                </form>
+                                @Html.Action("Partial_Contact", "Home")
                             </div>
                         </div>
                     </div>
@@ -240,6 +233,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Content/users/contact.js"></script>
     <!-- Loading cart js -->
     <script src="~/Content/users/checkOutCart.js"></script>
     <!-- SignalR js -->

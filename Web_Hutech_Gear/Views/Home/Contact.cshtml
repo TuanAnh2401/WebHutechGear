@@ -78,18 +78,24 @@
                                                 <div class="col-md-7 ">
                                                     @using (Html.BeginForm("Contact", "Home", new { }))
                                                     {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.ValidationSummary(true)
                                                         <div class="main_form">
                                                             <div class="row">
                                                                 <div class="col-md-12 ">
+                                                                    @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
                                                                     <input class="contactus" placeholder="Tên của bạn" type="text" name="Name">
                                                                 </div>
                                                                 <div class="col-md-12">
+                                                                    @Html.ValidationMessageFor(x => x.PhoneNumber, null, new { @class = "text-danger" })
                                                                     <input class="contactus" placeholder="Số điện thoại" type="text" name="PhoneNumber">
                                                                 </div>
                                                                 <div class="col-md-12">
+                                                                    @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
                                                                     <input class="contactus" placeholder="Địa chỉ Email" type="text" name="email">
                                                                 </div>
                                                                 <div class="col-md-12">
+                                                                    @Html.ValidationMessageFor(x => x.Message, null, new { @class = "text-danger" })
                                                                     <textarea class="textarea" placeholder="Tin nhắn" type="text" name="Message"></textarea>
                                                                 </div>
                                                                 <div class="col-sm-12">

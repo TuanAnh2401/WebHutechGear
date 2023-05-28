@@ -58,5 +58,30 @@ namespace Web_Hutech_Gear.Controllers
             }
             return View(model);
         }
+        [HttpGet]
+        public ActionResult Partial_Contact()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult Partial_Contact(string email)
+        {
+            if (!string.IsNullOrEmpty(email))
+            {
+                var item = new Contact();
+                item.Name = email;
+                item.Email = email;
+                item.PhoneNumber = "0000000000";
+                item.Message = email;
+                item.CreatedBy = email;
+                item.CreatedDate = DateTime.Now;
+                item.ModifiedDate = DateTime.Now;
+                db.Contacts.Add(item);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Gửi yêu cầu thất bại!." });
+        }
     }
 }

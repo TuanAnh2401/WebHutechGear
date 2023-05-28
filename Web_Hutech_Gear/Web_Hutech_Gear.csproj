@@ -3646,6 +3646,7 @@
     <Content Include="Content\users\banner\vendor\sweetalert\sweetalert.min.js" />
     <Content Include="Content\users\CartShow.js" />
     <Content Include="Content\users\checkOutCart.js" />
+    <Content Include="Content\users\contact.js" />
     <Content Include="Content\users\css\account.css" />
     <Content Include="Content\users\css\animate.css" />
     <Content Include="Content\users\css\bootstrap-grid.css" />
@@ -5222,6 +5223,7 @@
     <Content Include="Views\News\DetailNew.cshtml" />
     <Content Include="Views\ChatUser\Partial_Chat.cshtml" />
     <Content Include="Views\News\Partial_Comment.cshtml" />
+    <Content Include="Views\Home\Partial_Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
