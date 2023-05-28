@@ -85,7 +85,6 @@ namespace Web_Hutech_Gear.Controllers
             var code = new { Success = false, msg = "", code = -1, Count = 0 };
             var db = new ApplicationDbContext();
             var checkProduct = db.Products.FirstOrDefault(x => x.Id == id);
-            var findPr = db.Products.FirstOrDefault(p => p.Id == id);
             if (checkProduct != null)
             {
                 ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -102,7 +101,13 @@ namespace Web_Hutech_Gear.Controllers
                     SupplierName = checkProduct.Supplier.Title,
                     Quantity = quantity,
                 };
-                item.Price = checkProduct.Price;
+                if(checkProduct.IsSale)
+                {
+                    item.Price = (decimal)checkProduct.PriceSale;
+                }else
+                {
+                    item.Price = checkProduct.Price;
+                }    
                 item.TotalPrice = item.Quantity * item.Price;
                 cart.AddToCart(item, quantity);
                 Session["Cart"] = cart;

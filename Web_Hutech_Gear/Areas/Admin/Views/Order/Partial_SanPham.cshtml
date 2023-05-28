@@ -19,7 +19,7 @@
                 <tr>
                     <td>@i</td>
                     <td>@item.Product.Title</td>
-                    <td>@item.Price</td>
+                    <td>@Web_Hutech_Gear.Models.Support.Common.FormatNumber(item.Price, 0)</td>
                     <td>@item.Quantity</td>
                     <td>@Web_Hutech_Gear.Models.Support.Common.FormatNumber((item.Price * item.Quantity), 0)</td>
                 </tr>
