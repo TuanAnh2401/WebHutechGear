@@ -2,12 +2,6 @@
     ViewBag.Title = "Confirm Email";
 }
 
-<h2>@ViewBag.Title.</h2>
-@*<div>
-        <p>
-            Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-        </p>
-    </div>*@
 <!DOCTYPE html>
 <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 
@@ -15,7 +9,6 @@
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-AZ95sNJ/Zf4FotG1N/oJcngL+Pp7kpCfWIFxg7vJ9hbH+FDzAi1ONwRmJ7m1Lwh51yGmVU+J6P8vjVq3GzZ5vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         * {
@@ -82,7 +75,7 @@
 
 <body style="background-color: #fff0e3; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
     <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff0e3;">
-        <tbody>
+        <tbody style="display: flex; align-items: center; justify-content: center;">
             <tr>
                 <td>
                     <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
@@ -192,7 +185,7 @@
                                                                         <p style="margin: 0; font-size: 14px; text-align: left; margin-left: 100px;">Hãy bấm vào @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</p>
                                                                     </div>
                                                                 </div>
-                                                               
+
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -231,7 +224,7 @@
                             </tr>
                         </tbody>
                     </table>
-                  
+
                     <table class="row row-8" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                         <tbody>
                             <tr>

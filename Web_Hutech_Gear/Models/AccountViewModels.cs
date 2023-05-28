@@ -9,15 +9,16 @@ namespace Web_Hutech_Gear.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Xin vui lòng nhập tên của bạn")]
-        [Display(Name = "FullName")]
+        [Display(Name = "Họ Tên")]
         public string FullName { get; set; }
         [Required(ErrorMessage = "Xin vui lòng nhập địa chỉ của bạn")]
-        [Display(Name = "Address")]
+        [Display(Name = "Địa Chỉ")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Xin vui lòng nhập số điện thoại của bạn")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^(0|84)([0-9]{9})$", ErrorMessage = "Xin vui lòng nhập đúng định dạng số điện thoại")]
+        [Display(Name ="Số điện thoại")]
         public string PhoneNumber { get; set; }
     }
 

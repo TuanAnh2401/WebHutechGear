@@ -258,7 +258,7 @@ namespace Web_Hutech_Gear.Controllers
             string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
 
             PayLib pay = new PayLib();
-            int thanhToan = (int)cart.Items.Sum(p => p.Quantity * p.Price);
+            long thanhToan = (int)cart.Items.Sum(p => p.Quantity * p.Price);
             pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối. Phiên bản hiện tại là 2.1.0
             pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
             pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY (khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)

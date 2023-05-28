@@ -175,7 +175,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, Address = model.Address,EmailConfirmed = true, Avatar= "avt.jpg" };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

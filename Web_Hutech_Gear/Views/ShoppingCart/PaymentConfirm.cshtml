@@ -6,7 +6,27 @@
 </head>
 @if (@ViewBag.Message != null)
 {
-    <h2>@ViewBag.Message</h2>
+    <div class="container">
+        <section class="cart-page-success pt-5 pb-5">
+            <h1 class="page-title text-center">@ViewBag.Message</h1>
+            <div class="text-center pt-5 pb-5">
+                <noscript><img src="https://dieukhacdamynghe.vn/wp-content/themes/dkmn/img/icons/success.png" alt="Success" style="width: 100px; height: auto" /></noscript>
+                <img class=" lazyloaded" src="https://dieukhacdamynghe.vn/wp-content/themes/dkmn/img/icons/success.png" data-src="https://dieukhacdamynghe.vn/wp-content/themes/dkmn/img/icons/success.png" alt="Success" style="width: 100px; height: auto">
+            </div>
+            <div class="content py-3 mt-3">
+                <p style="text-align: center;">
+                    <strong>@ViewBag.Message</strong>
+                </p>
+                <p>
+                    <strong>Địa chỉ</strong>: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh<br>
+                    <strong>Điện thoại</strong>: 0935 xxx 874<br> <strong>Email</strong>: hutechgear@gmail.com<br>
+                    <strong>Facebook</strong>:&nbsp;<strong><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">fb.com/&nbsp;</a></strong>
+                </p>
+                <p>Xin cảm ơn quý khách!</p><p>&nbsp;</p>
+                <a href="/home/index"><button class="success-button">Quay lại trang chủ</button></a>
+            </div>
+        </section>
+    </div>
 
 }
 else

@@ -58,11 +58,6 @@ namespace Web_Hutech_Gear.Controllers
             }
             return View(model);
         }
-        [HttpGet]
-        public ActionResult Partial_Contact()
-        {
-            return PartialView();
-        }
 
         [HttpPost]
         public ActionResult Partial_Contact(string email)
