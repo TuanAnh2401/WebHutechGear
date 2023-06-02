@@ -152,8 +152,8 @@
                 strHtml += "<tr>";
                 strHtml += "<td>"+(i+1)+"</td>";
                 strHtml += "<td>" + strDate+"</td>";
-                strHtml += "<td>"+item.DoanhThu+"</td>";
-                strHtml += "<td>"+item.LoiNhuan+"</td>";
+                strHtml += "<td>" + item.DoanhThu.toLocaleString('en') + "</td>";
+                strHtml += "<td>" + item.LoiNhuan.toLocaleString('en') + "</td>";
                 strHtml += "</tr>";
             });
             $('#load_data').html(strHtml);

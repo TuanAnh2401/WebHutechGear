@@ -33,7 +33,7 @@ namespace Web_Hutech_Gear.Controllers
         {
             ViewBag.ActiveMenu = "Sale";
 
-            var items = db.Products.Where(p=>p.IsSale).ToList();
+            var items = db.Products.Where(p=>p.IsSale && !(p.IsStatus) && !(p.IsActivate)).ToList();
 
             return View(items);
         }

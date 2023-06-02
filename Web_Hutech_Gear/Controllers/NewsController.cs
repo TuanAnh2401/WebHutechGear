@@ -24,7 +24,7 @@ namespace Web_Hutech_Gear.Controllers
         {
             searchString = searchString ?? currentFilter;
 
-            var items = db.News.AsQueryable();
+            var items = db.News.Where(p=>!(p.IsActivate)).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {

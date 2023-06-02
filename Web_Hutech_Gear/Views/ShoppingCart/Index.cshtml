@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12">
-                <div class="product-table" >
+                <div class="product-table">
                     <div class="load_data">
                         @Html.Action("Partial_Item_Cart_Detail", "ShoppingCart")
                     </div>
@@ -39,10 +39,15 @@
                                     <div class="coupon">
                                         <a href="/products/index" class="button">Tiếp tục mua sắm</a>
                                     </div>
+
                                     @if (ViewBag.CheckCart != null)
                                     {
+                                        <div class="coupon" style="padding-left:20px">
+                                            <input name="coupon_code" class="input-text" id="coupon_code" placeholder="Mã giảm giá" type="text">
+                                            <input class="button" name="apply_coupon" value="Áp dụng" type="button">
+                                        </div>
                                         <div class="text-right">
-                                            <div class="button btnDeleteAll"> <i class="fa fa-trash"></i>Xóa tất cả</div>
+                                            <div class="button btnDeleteAll"> <i class="fa fa-trash" style="padding-right:10px"></i>Xóa tất cả</div>
                                             <a href="/ShoppingCart/CheckOut" style="margin-right:10px" class="button">Đặt hàng</a>
                                         </div>
                                     }
@@ -50,9 +55,44 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>      
+                </div>
             </div>
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện click nút "Áp dụng"
+            $("input[name='apply_coupon']").click(function () {
+                // Lấy giá trị mã giảm giá từ trường input
+                var couponCode = $("input[name='coupon_code']").val();
+
+                // Tạo yêu cầu AJAX
+                $.ajax({
+                    url: "/ShoppingCart/ApplyCoupon", // Đường dẫn tới phương thức xử lý mã giảm giá trên máy chủ
+                    type: "POST",
+                    data: { couponCode: couponCode }, // Dữ liệu gửi đi, trong trường hợp này là mã giảm giá
+                    success: function (data) {
+                        // Xử lý dữ liệu phản hồi từ máy chủ
+
+                        // Ví dụ: Cập nhật lại giỏ hàng
+                        $(".load_data").html(data); // Giả sử id "cart-details" là id của phần hiển thị chi tiết giỏ hàng
+
+                        // Các xử lý khác nếu cần
+
+                        console.log("Mã giảm giá đã được áp dụng thành công.");
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý lỗi nếu có
+
+                        console.log("Đã xảy ra lỗi khi áp dụng mã giảm giá: " + error);
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
 

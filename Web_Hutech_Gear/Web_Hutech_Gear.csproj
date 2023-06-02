@@ -280,6 +280,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RestoreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SaleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
@@ -332,9 +333,18 @@
     <Compile Include="Migrations\202305271830025_deleteStatus.designer.cs">
       <DependentUpon>202305271830025_deleteStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305311850481_updateSale.cs" />
+    <Compile Include="Migrations\202305311850481_updateSale.designer.cs">
+      <DependentUpon>202305311850481_updateSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306010116557_update_Sale.cs" />
+    <Compile Include="Migrations\202306010116557_update_Sale.designer.cs">
+      <DependentUpon>202306010116557_update_Sale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Comment.cs" />
+    <Compile Include="Models\EF\Coupon.cs" />
     <Compile Include="Models\EF\Rated.cs" />
     <Compile Include="Models\EF\Contact.cs" />
     <Compile Include="Models\EF\Messages.cs" />
@@ -4148,6 +4158,9 @@
     <Content Include="Areas\Admin\Views\Restore\Partial_Status.cshtml" />
     <Content Include="Content\excel\News.xlsx" />
     <Content Include="Content\excel\Product.xlsx" />
+    <Content Include="Areas\Admin\Views\Sale\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sale\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Sale\Edit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -5276,6 +5289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305271830025_deleteStatus.resx">
       <DependentUpon>202305271830025_deleteStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305311850481_updateSale.resx">
+      <DependentUpon>202305311850481_updateSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306010116557_update_Sale.resx">
+      <DependentUpon>202306010116557_update_Sale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

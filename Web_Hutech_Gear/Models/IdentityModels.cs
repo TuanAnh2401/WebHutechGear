@@ -57,6 +57,7 @@ namespace Web_Hutech_Gear.Models
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Coupon> Coupon { get; set; }
 
 
         public static ApplicationDbContext Create()

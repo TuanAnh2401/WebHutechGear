@@ -38,7 +38,7 @@ namespace Web_Hutech_Gear.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
             ViewBag.PageSize = pageSize;
             ViewBag.Page = page;
-            return View(items.ToPagedList(pageIndex, pageSize));
+            return View(items);
         }
         public ActionResult Detail(int id)
         {

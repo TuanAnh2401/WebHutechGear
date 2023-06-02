@@ -5,6 +5,7 @@
 @if (Model != null && Model.Any())
 {
     var tongtien = decimal.Zero;
+    var khuyenmai = decimal.Zero;
     <div class="shopping-cart-cart" style="float:initial; max-width:600px">
         <table>
             <tbody>
@@ -16,17 +17,18 @@
                 @foreach (var item in Model)
                 {
                     tongtien += item.TotalPrice;
+                    khuyenmai += item.TotalPriceSale;
                     <tr>
                         <td><div style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:170px"><h4>@item.ProductName</h4></div></td>
                         <td><h4>@item.Quantity</h4></td>
-                        <td class="text-right"><h4>@Common.FormatNumber(item.Price * item.Quantity, 0)</h4></td>
+                        <td class="text-right"><h4>@Common.FormatNumber(item.TotalPrice-item.TotalPriceSale, 0)</h4></td>
                     </tr>
                 }
 
                 <tr>
                     <td><h3>Tổng tiền</h3></td>
                     <td></td>
-                    <td class="text-right"><h3>@Common.FormatNumber(tongtien, 0)</h3></td>
+                    <td class="text-right"><h3>@Common.FormatNumber(tongtien- khuyenmai, 0)</h3></td>
                 </tr>
             </tbody>
         </table>

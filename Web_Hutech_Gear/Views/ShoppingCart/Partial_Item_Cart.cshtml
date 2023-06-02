@@ -16,10 +16,12 @@
         {
             var i = 0;
             var tongtien = decimal.Zero;
+            var khuyenmai = decimal.Zero;
             <ul class="header-cart-wrapitem w-full">
                 @foreach (var item in Model)
                 {
                     tongtien += item.TotalPrice;
+                    khuyenmai += item.TotalPriceSale;
                     <li class="header-cart-item flex-w flex-t m-b-12" id="trow_@item.ProductId">
                         <div class="header-cart-item-img btnDelete" data-id="@item.ProductId">
                             <img src="@item.ProductImg" alt="IMG">
@@ -39,7 +41,7 @@
             </ul>
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Tổng cộng: @Common.FormatNumber(tongtien, 0)
+                    Tổng cộng: @Common.FormatNumber(tongtien - khuyenmai, 0)
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">

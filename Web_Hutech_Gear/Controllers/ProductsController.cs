@@ -39,7 +39,7 @@ namespace Web_Hutech_Gear.Controllers
             min = min ?? currentMin;
             max = max ?? currentMax;
 
-            var items = db.Products.Where(p=>!(p.IsStatus)).AsQueryable();
+            var items = db.Products.Where(p=>!(p.IsStatus) && !(p.IsActivate)).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {

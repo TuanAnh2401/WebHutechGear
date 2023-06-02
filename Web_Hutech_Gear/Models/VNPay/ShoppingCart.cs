@@ -43,6 +43,10 @@ namespace Web_Hutech_Gear.Models.VNPay
             {
                 checkExits.Quantity = quantity;
                 checkExits.TotalPrice = checkExits.Price * checkExits.Quantity;
+                if (checkExits.PriceSale > 0)
+                {
+                    checkExits.TotalPriceSale = checkExits.PriceSale* checkExits.Quantity;
+                }
             }
         }
 
@@ -71,5 +75,8 @@ namespace Web_Hutech_Gear.Models.VNPay
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal PriceSale { get; set; }
+        public decimal TotalPriceSale { get; set; }
+
     }
 }
