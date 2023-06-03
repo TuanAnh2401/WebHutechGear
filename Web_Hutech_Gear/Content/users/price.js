@@ -1,7 +1,7 @@
 ﻿const rangeInput = document.querySelectorAll(".range-input input"),
     priceInput = document.querySelectorAll(".price-input input"),
     progress = document.querySelector(".sliders .progresss");
-let priceGap = 1000;
+let priceGap = 1000000;
 priceInput.forEach(input => {
     input.addEventListener("input", e => { 
         let minVal = parseInt(priceInput[0].value),

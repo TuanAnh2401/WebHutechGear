@@ -2,6 +2,7 @@
 @using PagedList.Mvc
 @using Web_Hutech_Gear.Models.Support
 @using Web_Hutech_Gear.Models
+@using Newtonsoft.Json
 <div class="row">
     @{
         ApplicationDbContext db = new ApplicationDbContext();
@@ -62,7 +63,7 @@
 <!--Phân trang-->
 <div class="row" style="justify-content: center">
     <div class="col-6" style="text-align:right;">
-        @Html.PagedListPager(Model, page => Url.Action("Partial_Procducts", new { page, currentFilter = ViewBag.CurrentFilter, currentId = ViewBag.CurrentId, supplierId = ViewBag.currentSpId, min = ViewBag.currentMin, max = ViewBag.currentMax }), new PagedListRenderOptions { DisplayLinkToIndividualPages = true })
+        @Html.PagedListPager(Model, page => Url.Action("Partial_Procducts", new { page, currentFilter = ViewBag.CurrentFilter, currentId = ViewBag.CurrentId, currentSpId = ViewBag.CurrentSpId, currentMin = ViewBag.CurrentMin, currentMax = ViewBag.CurrentMax }), new PagedListRenderOptions { DisplayLinkToIndividualPages = true })
     </div>
 </div>
 <head>

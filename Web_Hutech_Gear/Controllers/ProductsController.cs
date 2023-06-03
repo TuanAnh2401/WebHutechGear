@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -31,15 +32,15 @@ namespace Web_Hutech_Gear.Controllers
             var listSupplier = db.Suppliers.ToList();
             return PartialView("Partial_GetSupplier", listSupplier);
         }
-        public ActionResult Partial_Procducts(int? page, string searchString, List<int> categoryIds, List<int> supplierIds, int? min, int? max, string currentFilter, List<int> currentId, List<int> currentSpId, int? currentMin, int? currentMax)
+        public ActionResult Partial_Procducts(int? page, string searchString, List<int> categoryIds, List<int> supplierIds, int? min, int? max, string currentFilter, string currentId, string currentSpId, int? currentMin, int? currentMax)
         {
             searchString = searchString ?? currentFilter;
-            categoryIds = categoryIds ?? currentId;
-            supplierIds = supplierIds ?? currentSpId;
+            categoryIds = categoryIds ?? (string.IsNullOrEmpty(currentId) ? new List<int>() : currentId.Split(',').Select(int.Parse).ToList());
+            supplierIds = supplierIds ?? (string.IsNullOrEmpty(currentSpId) ? new List<int>() : currentSpId.Split(',').Select(int.Parse).ToList());
             min = min ?? currentMin;
             max = max ?? currentMax;
 
-            var items = db.Products.Where(p=>!(p.IsStatus) && !(p.IsActivate)).AsQueryable();
+            var items = db.Products.Where(p => !(p.IsStatus) && !(p.IsActivate)).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -67,8 +68,8 @@ namespace Web_Hutech_Gear.Controllers
             var pagedList = items.ToList().ToPagedList(pageIndex, pageSize);
 
             ViewBag.CurrentFilter = searchString;
-            ViewBag.CurrentId = categoryIds;
-            ViewBag.CurrentSpId = supplierIds;
+            ViewBag.CurrentId = string.Join(",", categoryIds);
+            ViewBag.CurrentSpId = string.Join(",", supplierIds);
             ViewBag.CurrentMin = min;
             ViewBag.CurrentMax = max;
             ViewBag.PageSize = pageSize;
@@ -76,6 +77,7 @@ namespace Web_Hutech_Gear.Controllers
 
             return PartialView("Partial_Procducts", pagedList);
         }
+
         public ActionResult Detail(int id)
         {
             var detailProduct = db.Products.SingleOrDefault(n => n.Id == id);

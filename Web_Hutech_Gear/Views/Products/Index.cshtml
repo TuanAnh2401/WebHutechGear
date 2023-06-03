@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Web_Hutech_Gear.Models.Support
+@{
     ViewBag.Title = "Trang sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -63,15 +64,15 @@
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
-                                <input type="number" class="input-max" id="myInput" value="100000000" />
+                                <input type="number" class="input-max" id="myInput" value="50000000" />
                             </div>
                         </div>
                         <div class="sliders">
                             <div class="progresss"></div>
                         </div>
                         <div class="range-input">
-                            <input type="range" class="range-min" min="0" max="100000000" value="0" step="100000" />
-                            <input type="range" class="range-max" min="0" max="100000000" value="100000000" step="100000" />
+                            <input type="range" class="range-min" min="0" max="50000000" value="0" step="1000000" />
+                            <input type="range" class="range-max" min="0" max="50000000" value="50000000" step="1000000" />
                         </div>
                     </div>
                     <div class="side_bar_blog">
@@ -97,7 +98,6 @@
 @section scripts{
     <!-- js range price -->
     <script src="~/Content/users/price.js"></script>
-
     <!-- ajax Tìm kiếm -->
     <script>
         $(document).ready(function () {
@@ -175,7 +175,7 @@
                     $('.product-list').show();
                     // Cập nhật lại nội dung của phần tử chứa dữ liệu
                     $(".product-list").html(result);
-                   
+
                 },
                 error: function () {
                     alert('Đã có lỗi xảy ra!');
@@ -207,3 +207,15 @@
 
     </script>
 }
+<style>
+    .price-input .field {
+        background: none;
+        display: flex; /* Sử dụng flexbox để căn giữa */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        background: none;
+    }
+    .field input {
+        font-size: 15px
+    }
+</style>
