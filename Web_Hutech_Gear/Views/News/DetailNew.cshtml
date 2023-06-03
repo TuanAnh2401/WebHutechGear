@@ -7,9 +7,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     int idCurrent = ViewBag.idCurrent;
-    int first = idCurrent - 1;
-    int last = idCurrent + 1;
+    int first = 0 ;
+    int last = 0;
     int idMax = ViewBag.idMaxTmp;
+
+    ApplicationDbContext db = new ApplicationDbContext();
+
+    // Tìm id phía trước trong danh sách
+    for (int i = idCurrent - 1; i >= 1; i--)
+    {
+        if (db.News.Any(x => x.Id == i))
+        {
+            first = i;
+            break;
+        }
+    }
+
+    // Tìm id phía sau trong danh sách
+    for (int i = idCurrent + 1; i <= idMax; i++)
+    {
+        if (db.News.Any(x => x.Id == i))
+        {
+            last = i;
+            break;
+        }
+    }
 
     if (0 >= first)
     {
@@ -20,7 +42,6 @@
         last = 0;
     }
     IEnumerable<Comment> listComment = ViewBag.listComment as IEnumerable<Comment>;
-    ApplicationDbContext db = new ApplicationDbContext();
 }
 
 <div id="inner_banner" class="section inner_banner_section">

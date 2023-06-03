@@ -55,19 +55,14 @@ namespace Web_Hutech_Gear.Controllers
             // Tìm kiếm bài viết
             var news = db.News.SingleOrDefault(x => x.Id == id);
 
-            //Lấy id hiện tại
-            int idCurrent = news.Id;
-
             //id nhỏ nhất là 1 max là tmp
-            int idMaxTmp = db.News.Count();
+            int idMaxTmp = db.News.OrderByDescending(x => x.Id).First().Id;
+
             // Hiển thị danh sách bình luận
             ViewBag.listComment = db.Comments.Where(n => n.NewsId == id).ToList();
             // Truyền dữ liệu sang view bằng Viewbag
-            ViewBag.idCurrent = idCurrent;
+            ViewBag.idCurrent = id;
             ViewBag.idMaxTmp = idMaxTmp;
-            var aaaa = db.Comments.ToList();
-            // Hiển thị danh sách bình luận hiện có
-            ViewBag.comments = db.Comments.Where(x => x.NewsId == id).ToList();
 
             return View(news);
         }
