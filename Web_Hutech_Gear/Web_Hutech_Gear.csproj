@@ -3438,6 +3438,7 @@
     <Content Include="Content\Images\arrow-left.png" />
     <Content Include="Content\Images\arrow-right.png" />
     <Content Include="Content\Images\avt.jpg" />
+    <Content Include="Content\Images\reset-password.png" />
     <Content Include="Content\Images\th.jpg" />
     <Content Include="Content\login\css\helpUser.css" />
     <Content Include="Content\login\css\main.css" />
