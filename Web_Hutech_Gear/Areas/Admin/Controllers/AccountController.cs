@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web_Hutech_Gear.Models;
-using Web_Hutech_Gear.Models.EF;
 using Web_Hutech_Gear.Models.Support;
 
 namespace Web_Hutech_Gear.Areas.Admin.Controllers

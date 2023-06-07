@@ -1,12 +1,6 @@
-﻿using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
-using PagedList;
-using System;
+﻿using System;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
 using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.EF;
 namespace Web_Hutech_Gear.Controllers

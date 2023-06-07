@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNet.SignalR;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Web_Hutech_Gear.Models.EF;
 using Web_Hutech_Gear.Models.Support;
 using Web_Hutech_Gear.Models;
 using Microsoft.AspNet.Identity;
-using System.Web.Security;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 using System.Data.Entity;
 using System.Collections.Concurrent;

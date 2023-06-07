@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Configuration;
 using System.Data.Entity;
@@ -9,9 +8,7 @@ using Web_Hutech_Gear.Models;
 using Web_Hutech_Gear.Models.VNPay;
 using Web_Hutech_Gear.Models.Support;
 using Web_Hutech_Gear.Models.EF;
-using System.Collections.Generic;
 using System.Text;
-using Microsoft.Owin.Security.DataHandler.Encoder;
 
 namespace Web_Hutech_Gear.Controllers
 {
@@ -79,10 +76,10 @@ namespace Web_Hutech_Gear.Controllers
                 if (!string.IsNullOrEmpty(couponCode))
                 {
                     var find = db.Coupon.FirstOrDefault(p => p.Code == couponCode && !(p.IsActivate));
-                    // Giả sử mã giảm giá 5% là "DISCOUNT5"
+                    // Giả sử mã giảm giá 
                     if (find != null)
                     {
-                        decimal discountRate = find.discount/100; // Phần trăm giảm giá (5%)
+                        decimal discountRate = find.discount/100; // Phần trăm giảm giá
 
                         foreach (var item in cart.Items)
                         {

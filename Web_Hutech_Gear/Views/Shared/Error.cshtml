@@ -4,6 +4,85 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="site-content" id="content">
+    <style>
+    .site-content{
+	    display: block;
+    }
+    .page_404{ padding:20px 0; background:#fff;
+    }
+
+    .container_404{max-width:900px; margin:0 auto;}
+
+    .page_404  img{ width:100%;}
+
+    .four_zero_four_bg{
+     background-image: url("https://bloggerspassion.com/wp-content/themes/bloggerspassion/assets/img/404_error.gif");
+        height: 500px;
+        background-position: center;
+    }
+
+    h1{
+     font-size:70px;
+     text-align:center;
+     margin:0;
+     }
+
+    h2{
+	    font-size:27px;
+	    line-height:40px;
+	    margin:0;
+	    margin-bottom:5px;
+    }
+
+    .link_404{
+	    color: #fff!important;
+        padding: 10px 20px;
+        background: #39ac31;
+        display: inline-block;
+	    margin-bottom:20px;
+    }
+    .contant_box_404{ margin-top:-70px;text-align:center;}
+
+    #footer{
+	    background:#f9f9f9;
+	    color:#000!important;
+    }
+
+    #footer .widget ul li {
+        color: #000;
+    }
+
+    #footer a{
+	    color:#085387!important;
+	    font-weight:400!important;
+    }
+    #footer a:hover{
+	    color:#000!important;
+    }
+
+    #footer .widget-title{
+	    color:#333!important;
+	    margin-bottom:15px;
+    }
+        .four_zero_four_bg {
+            background-image: url(https://bloggerspassion.com/wp-content/themes/bloggerspassion/assets/img/404_error.gif);
+            height: 500px;
+            background-position: center;
+        }
+
+    </style>
+    <section class="page_404">
+        <div class="container_404">
+            <div class="four_zero_four_bg">
+                <h1>404</h1>
+            </div>
+            <div class="contant_box_404">
+                <h2>TRONG NHƯ BẠN BỊ LẠC</h2>
+                <p>Trang bạn đang tìm kiếm không có sẵn!</p>
+                <a href="/home" class="link_404">Đi tới Trang chủ</a>
+            </div>
+        </div>
+    </section>
+</div>
 
