@@ -32,9 +32,6 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 news-list">
                 @Html.Action("Partial_News", "News")
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right" id="loading" style="display: none;">
-                <img src="~/Content/users/images/loading.gif" style="background-color: transparent" alt="Loading..." />
-            </div>
         </div>
     </div>
 </div>
@@ -61,11 +58,6 @@
                 error: function () {
                     alert('Đã có lỗi xảy ra!');
                 }
-            });
-        });
-        $(function () {
-            $('form').on('submit', function () {
-                $('#loading').show(); // Hiển thị hình đang load
             });
         });
     </script>

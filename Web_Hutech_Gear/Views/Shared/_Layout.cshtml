@@ -143,12 +143,26 @@
     </div>
     <!-- End Cart -->
     <!-- Mess -->
-    <a href="#" class="chat-logo js-show-mess">
-        <img src="~/Content/users/images/messenger-logo-png-6.png" alt="Tin nhắn" class="logo-icon">
-        <div class="chat-view">
-            <!-- Nội dung view chat -->
-        </div>
-    </a>
+    @if (Request.IsAuthenticated)
+    {
+        <a href="#" class="chat-logo js-show-mess">
+            <img src="~/Content/users/images/messenger-logo-png-6.png" alt="Tin nhắn" class="logo-icon">
+            <div class="chat-view">
+                <!-- Nội dung view chat -->
+            </div>
+        </a>
+    }
+    else
+    {
+        <!--Lấy đường dẫn URL sau local-->
+        string returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
+        <!--Mã hóa đường dãn encode %-->
+        string encodedReturnUrl = HttpUtility.UrlEncode(returnUrl);
+        string loginUrl = "/Account/Login?ReturnUrl=" + encodedReturnUrl;
+        <a href="@loginUrl" class="chat-logo">
+            <img src="~/Content/users/images/messenger-logo-png-6.png" alt="Đăng Nhập" class="logo-icon">
+        </a>
+    }
     <div class="wrap-header-mess js-panel-mess ">
         @Html.Action("Partial_Chat", "ChatUser")
     </div>

@@ -22,7 +22,7 @@ namespace Web_Hutech_Gear.Models.Support
                 SenderId = sender,
                 ReceiverId = receiver,
                 Message = message,
-                Timestamp = DateTime.UtcNow
+                Timestamp = DateTime.Now
             };
             using (var db = new ApplicationDbContext())
             {
