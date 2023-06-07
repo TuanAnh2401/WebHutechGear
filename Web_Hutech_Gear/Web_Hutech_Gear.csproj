@@ -3785,6 +3785,7 @@
     <Content Include="Content\users\revolution\js\jquery.themepunch.tools.min.js" />
     <Content Include="Content\users\MessShow.js" />
     <Content Include="Content\users\status.css" />
+    <Content Include="Content\users\supplier.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -5245,7 +5246,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
