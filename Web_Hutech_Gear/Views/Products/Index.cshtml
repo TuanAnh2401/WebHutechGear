@@ -76,14 +76,20 @@
                         </div>
                     </div>
                     <div class="side_bar_blog">
-                        <h4>Loại sản phẩm</h4>
-                        <div class="categary">
+                        <h4 onclick="toggleCategory()" style="cursor: pointer;">
+                            Loại sản phẩm
+                            <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
+                        </h4>
+                        <div class="categary" id="categoryContainer">
                             @Html.Action("Partial_GetCategory", "Products")
                         </div>
                     </div>
                     <div class="side_bar_blog">
-                        <h4>Nhà cung cấp</h4>
-                        <div class="categary">
+                        <h4 onclick="toggleSupplier()" style="cursor: pointer;">
+                            Nhà cung cấp
+                            <i class="fas fa-chevron-down" style="margin-left: 5px;"></i>
+                        </h4>
+                        <div class="categary" id="supplierContainer">
                             @Html.Action("Partial_GetSupplier", "Products")
                         </div>
                     </div>
@@ -206,6 +212,19 @@
         });
 
     </script>
+    <script>
+        function toggleCategory() {
+            var categoryContainer = document.getElementById("categoryContainer");
+            categoryContainer.style.display = categoryContainer.style.display === "none" ? "block" : "none";
+        }
+    </script>
+
+    <script>
+        function toggleSupplier() {
+            var supplierContainer = document.getElementById("supplierContainer");
+            supplierContainer.style.display = supplierContainer.style.display === "none" ? "block" : "none";
+        }
+    </script>
 }
 <style>
     .price-input .field {
@@ -215,7 +234,12 @@
         justify-content: center; /* Căn giữa theo chiều ngang */
         background: none;
     }
+
     .field input {
         font-size: 15px
     }
+
 </style>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>

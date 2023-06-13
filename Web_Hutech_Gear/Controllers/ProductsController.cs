@@ -56,7 +56,7 @@ namespace Web_Hutech_Gear.Controllers
                 items = items.Where(p => p.Price >= min && p.Price <= max);
             }
 
-            var pageSize = 12;
+            var pageSize = 9;
             if (page == null)
             {
                 page = 1;

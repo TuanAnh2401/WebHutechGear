@@ -3689,6 +3689,7 @@
     <Content Include="Content\users\css\style.css" />
     <Content Include="Content\users\custom.css" />
     <Content Include="Content\users\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\users\images\empty-product.png" />
     <Content Include="Content\users\images\fevicon\fevicon.png" />
     <Content Include="Content\users\images\gradian_black.png" />
     <Content Include="Content\users\images\gradian_blue.png" />
