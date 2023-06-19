@@ -3787,7 +3787,6 @@
     <Content Include="Content\users\MessShow.js" />
     <Content Include="Content\users\status.css" />
     <Content Include="Content\users\supplier.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -4167,6 +4166,7 @@
     <Content Include="Areas\Admin\Views\Sale\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Sale\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Sale\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\hutechgear-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -4187,6 +4187,7 @@
     <Content Include="Scripts\jsShopping.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Uploads\files\deal_ofthe_week.png" />
+    <Content Include="Uploads\files\HUTECHGEAR.ico" />
     <Content Include="Uploads\files\IT%281%29.gif" />
     <Content Include="Uploads\files\IT.gif" />
     <Content Include="Uploads\files\laptop-fujitsu-sieu-nhe-vnexpress-DSC07789-1615386112.jpg" />

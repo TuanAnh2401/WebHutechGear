@@ -56,13 +56,12 @@
                 <tbody>
                     @{
                         IdentityDbContext<ApplicationUser> context = new IdentityDbContext<ApplicationUser>();
-                        var ID = User.Identity.GetUserId();
-                        var find = context.Users.FirstOrDefault(p => p.Id == ID);
                         if (Model != null && Model.Any())
                         {
                             var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
                             foreach (var item in Model)
                             {
+                                var find = context.Users.FirstOrDefault(p => p.Id == item.UserId);
                                 <tr>
                                     <td>@i</td>
                                     <td>HD:@item.Id</td>
